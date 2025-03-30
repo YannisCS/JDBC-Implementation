@@ -1,4 +1,4 @@
-package blog.model;
+package CS5200_Project.model;
 
 import java.util.Objects;
 
