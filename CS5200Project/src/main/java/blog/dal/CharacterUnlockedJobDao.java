@@ -1,72 +1,77 @@
-package CS5200Project.dal;
+package CS5200Project.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.Objects;
 
-import CS5200Project.model.*;
-
-public class CharacterUnlockedJobDao{
-  protected CharacterUnlockedJobDao() {};
+public class CharacterUnlockedJob{
+	private Characters character;
+	private String jobName;
+	private int jobLevel;
+	private int xP;
 	
-  /**
-   * Save the CharacterUnlockedJob instance by storing it in MySQL instance.
-   * This runs a INSERT statement.
-   * This returns a CharacterUnlockedJob instance.
-   */
-  public static CharacterUnlockedJob create(
-	Connection cxn,
-	Characters character,
-	String jobName,
-	int jobLevel,
-	int xP
-	) throws SQLException {
-	  final String insertCharacterUnlockedJob =
-	    "INSERT INTO CharacterUnlockedJob (charID, jobName, jobLevel, XP) VALUES (?, ?, ?, ?);";
-
-      try (PreparedStatement insertStmt = cxn.prepareStatement(insertCharacterUnlockedJob)) {
-    	insertStmt.setInt(1, character.getCharID());
-        insertStmt.setString(2, jobName);
-        insertStmt.setInt(3, jobLevel);
-        insertStmt.setInt(4, xP);
-        insertStmt.executeUpdate();
-        return new CharacterUnlockedJob(character, jobName, jobLevel, xP);
-      }
+	public CharacterUnlockedJob(Characters character, String jobName, int jobLevel, int xP) {
+		super();
+		this.character = character;
+		this.jobName = jobName;
+		this.jobLevel = jobLevel;
+		this.xP = xP;
 	}
-  
-  /**
-   * Get the CharacterUnlockedJob record by fetching it from MySQL instance.
-   * This runs a SELECT statement and returns a single CharacterUnlockedJob instance based on charID and jobName.
-   */
-  public static CharacterUnlockedJob getCharacterUnlockedJobByID(
-	Connection cxn,
-    int charID
-  )  throws SQLException {
-     final String selectCharacterUnlockedJob =
-       """
-       SELECT charID, jobName, jobLevel, XP
-       FROM CharacterUnlockedJob 
-       WHERE charID = ? AND jobName = ?;
-       """;
 
-     try (PreparedStatement selectStmt = cxn.prepareStatement(selectCharacterUnlockedJob)) {
-    	  selectStmt.setInt(1, charID);
+	public Characters getCharacter() {
+		return character;
+	}
 
-     try (ResultSet results = selectStmt.executeQuery()) {
-        if (results.next()) {
-          return new CharacterUnlockedJob(
-            CharactersDao.getCharacterByCharID(cxn, results.getInt("charID")),
-            results.getString("jobName"),
-            results.getInt("jobLevel"),
-            results.getInt("XP")
-          );
-        } else {
-          return null;
-        }
+	public void setCharacter(Characters character) {
+		this.character = character;
+	}
+
+	public String getJob() {
+		return jobName;
+	}
+
+	public void setJob(String jobName) {
+		this.jobName = jobName;
+	}
+
+	public int getJobLevel() {
+		return jobLevel;
+	}
+
+	public void setJobLevel(int jobLevel) {
+		this.jobLevel = jobLevel;
+	}
+
+	public int getxP() {
+		return xP;
+	}
+
+	public void setxP(int xP) {
+		this.xP = xP;
+	}
+	
+	
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) {
+        return false;
       }
+      CharacterUnlockedJob characterUnlockedJob = (CharacterUnlockedJob) o;
+      return
+    	Objects.equals(character, characterUnlockedJob.character) &&
+    	Objects.equals(jobName, characterUnlockedJob.jobName) &&
+    	jobLevel == characterUnlockedJob.jobLevel &&
+    	xP == characterUnlockedJob.xP;
     }
-  }
-  
+
+    @Override
+    public int hashCode() {
+      throw new UnsupportedOperationException("hashing not supported");
+    }
+
+	@Override
+	public String toString() {
+		return "CharacterUnlockedJob [character=" + character + ", jobName=" + jobName + ", jobLevel=" + jobLevel + ", xP=" + xP
+				+ "]";
+	}
+	
 }

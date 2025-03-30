@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import CS5200Project.model.*;
 
@@ -93,6 +95,38 @@ public class PlayersDao{
 	}
   
   /**
+   * Get the Players record by fetching it from MySQL instance.
+   * This runs a SELECT statement and returns a list of Players based on firstName.
+   */
+  public static List<Players> getPlayersFromFirstName(
+    Connection cxn,
+    String firstName
+  ) throws SQLException {
+    List<Players> players = new ArrayList<>();
+    String selectPlayers = """
+      SELECT playerID, firstName, lastName, emailAddress
+      FROM Players 
+      WHERE firstName = ?""";
+
+    try (PreparedStatement selectStmt = cxn.prepareStatement(selectPlayers)) {
+      selectStmt.setString(1, firstName);
+      try (ResultSet results = selectStmt.executeQuery()) {
+        while (results.next()) {
+          players.add(
+            new Players(
+              results.getInt("playersID"),
+              firstName,
+              results.getString("lastName"),
+              results.getString("emailAddress")
+            )
+          );
+        }
+        return players;
+      }
+    }
+  }
+  
+  /**
    * Update the emailAddress of the Player instance.
    * This runs a UPDATE statement.
    */
@@ -163,4 +197,5 @@ public class PlayersDao{
       return player;
     }
   }
+  
 }
