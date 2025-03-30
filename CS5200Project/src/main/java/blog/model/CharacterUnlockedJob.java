@@ -28,7 +28,7 @@ public class CharacterUnlockedJob{
 		return jobName;
 	}
 
-	public void setJob(String job) {
+	public void setJob(String jobName) {
 		this.jobName = jobName;
 	}
 
@@ -55,10 +55,12 @@ public class CharacterUnlockedJob{
       if (o == null || getClass() != o.getClass()) {
         return false;
       }
-      JobsForGear jobsForGear = (JobsForGear) o;
+      CharacterUnlockedJob characterUnlockedJob = (CharacterUnlockedJob) o;
       return
-    	Objects.equals(gear, jobsForGear.gear) &&
-    	Objects.equals(jobName, jobsForGear.jobName);
+    	Objects.equals(character, characterUnlockedJob.character) &&
+    	Objects.equals(jobName, characterUnlockedJob.jobName) &&
+    	jobLevel == characterUnlockedJob.jobLevel &&
+    	xP == characterUnlockedJob.xP;
     }
 
     @Override
