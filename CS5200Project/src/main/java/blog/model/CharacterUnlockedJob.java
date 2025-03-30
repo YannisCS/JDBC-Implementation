@@ -1,17 +1,17 @@
-package blog.model;
+package CS5200Project.model;
 
 import java.util.Objects;
 
 public class CharacterUnlockedJob{
 	private Characters character;
-	private AvailableJobs job;
+	private String jobName;
 	private int jobLevel;
 	private int xP;
 	
-	public CharacterUnlockedJob(Characters character, AvailableJobs job, int jobLevel, int xP) {
+	public CharacterUnlockedJob(Characters character, String jobName, int jobLevel, int xP) {
 		super();
 		this.character = character;
-		this.job = job;
+		this.jobName = jobName;
 		this.jobLevel = jobLevel;
 		this.xP = xP;
 	}
@@ -24,12 +24,12 @@ public class CharacterUnlockedJob{
 		this.character = character;
 	}
 
-	public AvailableJobs getJob() {
-		return job;
+	public String getJob() {
+		return jobName;
 	}
 
-	public void setJob(AvailableJobs job) {
-		this.job = job;
+	public void setJob(String job) {
+		this.jobName = jobName;
 	}
 
 	public int getJobLevel() {
@@ -58,7 +58,7 @@ public class CharacterUnlockedJob{
       JobsForGear jobsForGear = (JobsForGear) o;
       return
     	Objects.equals(gear, jobsForGear.gear) &&
-    	Objects.equals(job, jobsForGear.job);
+    	Objects.equals(jobName, jobsForGear.jobName);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class CharacterUnlockedJob{
 
 	@Override
 	public String toString() {
-		return "CharacterUnlockedJob [character=" + character + ", job=" + job + ", jobLevel=" + jobLevel + ", xP=" + xP
+		return "CharacterUnlockedJob [character=" + character + ", jobName=" + jobName + ", jobLevel=" + jobLevel + ", xP=" + xP
 				+ "]";
 	}
 	

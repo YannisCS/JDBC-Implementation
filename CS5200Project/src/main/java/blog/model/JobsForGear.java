@@ -1,12 +1,12 @@
-package blog.model;
+package CS5200Project.model;
 
 import java.util.Objects;
 
 public class JobsForGear {
 	private Gears gear;
-	private AvailableJobs job;
+	private String job;
 	
-	public JobsForGear(Gears gear, AvailableJobs job) {
+	public JobsForGear(Gears gear, String job) {
 		super();
 		this.gear = gear;
 		this.job = job;
@@ -20,11 +20,11 @@ public class JobsForGear {
 		this.gear = gear;
 	}
 
-	public AvailableJobs getJob() {
+	public String getJob() {
 		return job;
 	}
 
-	public void setJob(AvailableJobs job) {
+	public void setJob(String job) {
 		this.job = job;
 	}
 	
@@ -47,7 +47,7 @@ public class JobsForGear {
     
 	@Override
 	public String toString() {
-		return "JobsForGear [job=" + job + "]";
+		return "JobsForGear [job=" + job + "gear: " + gear + "]";
 	}
 	
 }
