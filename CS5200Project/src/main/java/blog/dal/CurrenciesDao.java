@@ -1,11 +1,11 @@
-package blog.dal;
+package CS5200_Project.dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import blog.model.Currencies;
+import CS5200_Project.model.Currencies;
 
 public class CurrenciesDao {
 
