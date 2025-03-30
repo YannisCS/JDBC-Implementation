@@ -1,11 +1,11 @@
-package CS5200_Project.dal;
+package blog.dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import CS5200_Project.model.Statistics;
+import blog.model.Statistics;
 
 public class StatisticsDao {
 
