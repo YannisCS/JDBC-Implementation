@@ -32,6 +32,40 @@ public class ConsumablesDao {
 		}
 	}
 	
+	
+	/**
+	 * retrieves a single record based on pk(itemID)
+	 * return an Consumables object or null if not found
+	 */
+	public static Consumables getConsumableByItemID(
+			Connection cxn,
+			int itemID
+	) throws SQLException {
+		String query_Consumable = """
+				SELECT *
+				FROM Consumables
+				WHERE itemID = ? ;
+				""";
+		try (PreparedStatement pstmt = cxn.prepareStatement(query_Consumable)) {
+			pstmt.setInt(1, itemID);
+			
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return new Consumables(
+							itemID,
+							rs.getString("itemName"),
+							rs.getInt("level"),
+							rs.getInt("maxStackSize"),
+							rs.getBigDecimal("price"),
+							rs.getString("description")
+							);
+				} else {
+					return null;
+				}
+			}
+		}
+	}
+
 	/**
 	 * update an existing Consumables record (description) in the database
 	 */
@@ -62,6 +96,5 @@ public class ConsumablesDao {
 					);
 		}
 	}
-	
 
 }

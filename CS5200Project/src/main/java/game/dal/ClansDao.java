@@ -28,6 +28,36 @@ public class ClansDao {
 	}
 	
 	/**
+	 * retrieves a single record based on pk(clanName)
+	 * return an Clans object or null if not found
+	 */
+	public static Clans getClanRacebyClanName(
+			Connection cxn,
+			String clanName
+	) throws SQLException {
+		String query_ClanName = """
+				SELECT *
+				FROM Clans
+				WHERE clanName = ? ;
+				""";
+		try (PreparedStatement pstmt = cxn.prepareStatement(query_ClanName)) {
+			pstmt.setString(1, clanName);
+			
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return new Clans(
+							clanName,
+							Clans.Races.valueOf(rs.getString("race").toUpperCase())
+							);
+				} else {
+					return null;
+				}
+			}
+		}
+	}
+	
+	
+	/**
 	 * update an existing Clans record (clanName) in the database
 	 * since race cannot be changed for an existing clan
 	 */
