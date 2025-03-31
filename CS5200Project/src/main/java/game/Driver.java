@@ -24,27 +24,84 @@ public class Driver {
 		try (Connection cxn = ConnectionManager.getConnection()) {
 			/*Insert records*/
 			
-			// Create items
-			Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,1500.00,10,"Warrior",50);
-			int swordID = sword.getItemID();
-			Equipments swordEquip = EquipmentsDao.getEquipmentByItemID(cxn, swordID);
-			Gears helmet = GearsDao.create(cxn,"Iron Helmet",1,1,200.00,5);
+			//Insert Players
+			Players P1 = PlayersDao.create(cxn, "Alice", "Smith", "alice@example.com");
+			Players P2 = PlayersDao.create(cxn, "Bob", "Johnson", "bob@example.com");
+			Players P3 = PlayersDao.create(cxn, "Charlie", "Williams", "charlie@example.com");
+			Players P4 = PlayersDao.create(cxn, "Diana", "Brown", "diana@example.com");
+			Players P5 = PlayersDao.create(cxn, "Ethan", "Jones", "ethan@example.com");
 			
-			// Create stats
-			Statistics strength = StatisticsDao.create(cxn, "Strength", null);
-			
-			// Create bonuse
-			EquipmentBonuse swordStrength = EquipmentBonuseDao.create(cxn, swordEquip, strength, 5);
-			
-			// create clan
+			//Insert Clans
 			Clans clan1 = ClansDao.create(cxn, "Lionhearts", Clans.Races.HUMAN);
 			Clans clan2 = ClansDao.create(cxn, "ElvenGuardians", Clans.Races.ELF);
 			Clans clan3 = ClansDao.create(cxn, "MountainHammers", Clans.Races.DWARF);
 			Clans clan4 = ClansDao.create(cxn, "BloodFury", Clans.Races.ORC);
 			Clans clan5 = ClansDao.create(cxn, "ShadowStalkers", Clans.Races.GOBLIN);
 			
+			//Insert Items: 15 items: 5 Weapons, 5 Gears, and 5 Consumables.
+			//Insert Weapons
+			Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,1500.00,10,"Warrior",50);
+			int swordID = sword.getItemID();
+			Equipments swordEquip = EquipmentsDao.getEquipmentByItemID(cxn, swordID);
+			
+			//Insert Gears
+			Gears helmet = GearsDao.create(cxn,"Iron Helmet",1,1,200.00,5);
+			
+			//Insert Consumables
+			
+			//Insert Statistics
+			Statistics strength = StatisticsDao.create(cxn, "Strength", null);
+			
+			//Insert Currencies
+			
+			//Insert Characters
+			//TODO: Update Weapon once they are created
+			Characters Char1 = CharactersDao.create(cxn, P1, "Alicia", "Storm", "Lionhearts", 1); //Weapon needs to be updated
+			Characters Char2 = CharactersDao.create(cxn, P2, "Boris", "Flame", "ElvenGuardians", 2); //Weapon needs to be updated
+			Characters Char3 = CharactersDao.create(cxn, P3, "Cecilia", "Wind", "MountainHammers", 3); //Weapon needs to be updated
+			Characters Char4 = CharactersDao.create(cxn, P4, "Derek", "Stone", "BloodFury", 4); //Weapon needs to be updated
+			Characters Char5 = CharactersDao.create(cxn, P5, "Eva", "Night", "ShadowStalkers", 5); //Weapon needs to be updated
+			
+		    //Insert CharacterStatistics
+				
+			//Insert EquipmentBonuse
+			EquipmentBonuse swordStrength = EquipmentBonuseDao.create(cxn, swordEquip, strength, 5);
+
+			//Insert ConsumableItemBonuse
+			
+			//Insert JobsForGear
+			//TODO: Update gears below once gears are created
+			JobsForGear JFG1 = JobsForGearDao.create(cxn, helmet, "Warrior");
+			JobsForGear JFG2 = JobsForGearDao.create(cxn, helmet, "Mage");
+			JobsForGear JFG3 = JobsForGearDao.create(cxn, helmet, "Archer");
+			JobsForGear JFG4 = JobsForGearDao.create(cxn, helmet, "Thief");
+			JobsForGear JFG5 = JobsForGearDao.create(cxn, helmet, "Healer");
+			
+			//Insert CharacterUnlockedJob
+			//TODO: Update CharacterUnlockedJob create to allow for null inputs
+			CharacterUnlockedJob CUJ1 = CharacterUnlockedJobDao.create(cxn, Char1, "Warrior", 1, 100);
+			CharacterUnlockedJob CUJ2 = CharacterUnlockedJobDao.create(cxn, Char1, "Mage", null, null);
+			CharacterUnlockedJob CUJ3 = CharacterUnlockedJobDao.create(cxn, Char1, "Mage", 2, 200);
+			CharacterUnlockedJob CUJ4 = CharacterUnlockedJobDao.create(cxn, Char1, "Archer", 3, 300);
+			CharacterUnlockedJob CUJ5 = CharacterUnlockedJobDao.create(cxn, Char1, "Thief", 4, 400);
+			CharacterUnlockedJob CUJ6 = CharacterUnlockedJobDao.create(cxn, Char1, "Healer", 5, 500);
+			
+			//Insert CharacterWealth
+			
+			//Insert Inventory
+			
+			//Insert EquippedItems
+			
+			
+			/*Read records*/
+			
+			/*Update records*/
+			
+			/*Delete records*/
+			
 		}
 	}
+
 	
 	public static void resetSchema() throws SQLException {
 		try (Connection cxn = ConnectionManager.getConnection()) {

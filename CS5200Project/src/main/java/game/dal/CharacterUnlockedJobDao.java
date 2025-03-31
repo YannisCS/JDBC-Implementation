@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import game.model.*;
 
@@ -19,8 +20,8 @@ public class CharacterUnlockedJobDao{
 	Connection cxn,
 	Characters character,
 	String jobName,
-	int jobLevel,
-	int xP
+	Integer jobLevel,
+	Integer xP
 	) throws SQLException {
 	  final String insertCharacterUnlockedJob =
 	    "INSERT INTO CharacterUnlockedJob (charID, jobName, jobLevel, XP) VALUES (?, ?, ?, ?);";
@@ -28,8 +29,20 @@ public class CharacterUnlockedJobDao{
       try (PreparedStatement insertStmt = cxn.prepareStatement(insertCharacterUnlockedJob)) {
     	insertStmt.setInt(1, character.getCharID());
         insertStmt.setString(2, jobName);
-        insertStmt.setInt(3, jobLevel);
-        insertStmt.setInt(4, xP);
+        
+        // Handle null for jobLevel
+        if (jobLevel != null) {
+            insertStmt.setInt(3, jobLevel);
+        } else {
+            insertStmt.setNull(3, Types.INTEGER);
+        }
+
+        // Handle null for xP
+        if (xP != null) {
+            insertStmt.setInt(4, xP);
+        } else {
+            insertStmt.setNull(4, Types.INTEGER);
+        }
         insertStmt.executeUpdate();
         return new CharacterUnlockedJob(character, jobName, jobLevel, xP);
       }
@@ -41,7 +54,8 @@ public class CharacterUnlockedJobDao{
    */
   public static CharacterUnlockedJob getCharacterUnlockedJobByID(
 	Connection cxn,
-    int charID
+    int charID,
+    String jobName
   )  throws SQLException {
      final String selectCharacterUnlockedJob =
        """
@@ -52,14 +66,17 @@ public class CharacterUnlockedJobDao{
 
      try (PreparedStatement selectStmt = cxn.prepareStatement(selectCharacterUnlockedJob)) {
     	  selectStmt.setInt(1, charID);
+    	  selectStmt.setString(2, jobName);
 
      try (ResultSet results = selectStmt.executeQuery()) {
         if (results.next()) {
+          Integer jobLevel = (Integer) results.getObject("jobLevel");
+          Integer xP = (Integer) results.getObject("XP");
           return new CharacterUnlockedJob(
             CharactersDao.getCharacterByCharID(cxn, results.getInt("charID")),
             results.getString("jobName"),
-            results.getInt("jobLevel"),
-            results.getInt("XP")
+            jobLevel,
+            xP
           );
         } else {
           return null;
