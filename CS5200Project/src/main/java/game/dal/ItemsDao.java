@@ -17,7 +17,8 @@ public class ItemsDao {
 		    Connection cxn,
 		    String itemName, 
 		    int level, 
-		    int maxStackSize
+		    int maxStackSize,
+		    double price
 			) throws SQLException{
 		
 	    final String insertItems = """
@@ -28,6 +29,8 @@ public class ItemsDao {
 	        insertStmt.setString(1, itemName);
 	        insertStmt.setInt(2, level);
 	        insertStmt.setInt(3, maxStackSize);
+	        insertStmt.setDouble(4, price);
+
 	        insertStmt.executeUpdate();
 	        
 	        try (ResultSet rs = insertStmt.getGeneratedKeys()) {

@@ -10,6 +10,9 @@ import game.model.EquipmentSlot;
 
 public class EquipmentSlotDao {
 	
+	private EquipmentSlotDao() { }
+
+	
 	public static EquipmentSlot create( Connection cxn,
 	        String bodyPartName
 	      ) throws SQLException{
@@ -23,6 +26,7 @@ public class EquipmentSlotDao {
 	        return new EquipmentSlot(bodyPartName);
 	      }
 	}
+	
 	
 	public static void delete(Connection cxn, String bodyPartName) throws SQLException{
 	    String deletePerson = "DELETE FROM EquipmentSlot WHERE bodyPartName = ?;";
