@@ -1,5 +1,6 @@
 package game;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -48,6 +49,11 @@ public class Driver {
 			Gears helmet = GearsDao.create(cxn,"Iron Helmet",1,1,200.00,5);
 			
 			//Insert Consumables
+			Consumables smallHealthPotion = ConsumablesDao.create(cxn, "Small Health Potion", 1, 20, new BigDecimal("50.00"), "Restores 50 HP.");
+			Consumables largeHealthPotion = ConsumablesDao.create(cxn, "Large Health Potion", 1, 20, new BigDecimal("75.00"), "Restores 100 HP.");
+			Consumables manaPotion = ConsumablesDao.create(cxn, "Mana Potion", 1, 20, new BigDecimal("65.00"), "Restores 30 MP.");
+			Consumables staminaPotion = ConsumablesDao.create(cxn, "Stamina Potion", 1, 20, new BigDecimal("55.00"), "Boosts stamina temporarily.");
+			Consumables antidote = ConsumablesDao.create(cxn, "Antidote", 1, 15, new BigDecimal("40.00"), "Cures poison.");
 			
 			//Insert Statistics
 			Statistics strength = StatisticsDao.create(cxn, "Strength", null);
