@@ -59,7 +59,7 @@ public class ClansDao {
 	/**
 	 * delete an existing Clans record
 	 */
-	public static void delete(
+	public static void deleteClan(
 			Connection cxn,
 			Clans clan
 	) throws SQLException {
