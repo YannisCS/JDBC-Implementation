@@ -140,18 +140,21 @@ public class Driver {
 					    CONSTRAINT pk_clans PRIMARY KEY (clanName)
 					);
 							""");
+			/*
 			cxn.createStatement().executeUpdate("""
 					CREATE TABLE AvailableJobs (
 						jobName VARCHAR(255),
 					    CONSTRAINT pk_AvailableJobs PRIMARY KEY (jobName)
 					);
 							""");
+							
 			cxn.createStatement().executeUpdate("""
 					CREATE TABLE EquipmentSlot (
 					    bodyPartName VARCHAR(255) NOT NULL, 
 						CONSTRAINT pk_EquipmentSlot PRIMARY KEY (bodyPartName)
 					);
 							""");
+							*/
 			cxn.createStatement().executeUpdate("""
 					CREATE TABLE `Items` (
 					    `itemID` INTEGER AUTO_INCREMENT,
