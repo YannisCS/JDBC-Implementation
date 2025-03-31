@@ -121,7 +121,7 @@ public class Driver {
 			
 			//Read Weapons
 			
-			//Reade Characters
+			//Read Characters
 			
 			//Read Statistics
 			
