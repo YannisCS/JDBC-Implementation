@@ -23,8 +23,9 @@ public class Driver {
 	
 	public static void insertRecords() throws SQLException {
 		try (Connection cxn = ConnectionManager.getConnection()) {
-			/*Insert records*/
-			
+			/**
+			 * Insert records
+			 */			
 			//Insert Players
 			Players P1 = PlayersDao.create(cxn, "Alice", "Smith", "alice@example.com");
 			Players P2 = PlayersDao.create(cxn, "Bob", "Johnson", "bob@example.com");
@@ -40,15 +41,15 @@ public class Driver {
 			Clans clan5 = ClansDao.create(cxn, "ShadowStalkers", Clans.Races.GOBLIN);
 			
 			//Insert Items: 15 items: 5 Weapons, 5 Gears, and 5 Consumables.
-			//Insert Weapons
+			/*Insert Weapons*/
 			Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,1500.00,10,"Warrior",50);
 			int swordID = sword.getItemID();
 			Equipments swordEquip = EquipmentsDao.getEquipmentByItemID(cxn, swordID);
 			
-			//Insert Gears
+			/*Insert Gears*/
 			Gears helmet = GearsDao.create(cxn,"Iron Helmet",1,1,200.00,5);
 			
-			//Insert Consumables
+			/*Insert Consumables*/
 			Consumables smallHealthPotion = ConsumablesDao.create(cxn, "Small Health Potion", 1, 20, new BigDecimal("50.00"), "Restores 50 HP.");
 			Consumables largeHealthPotion = ConsumablesDao.create(cxn, "Large Health Potion", 1, 20, new BigDecimal("75.00"), "Restores 100 HP.");
 			Consumables manaPotion = ConsumablesDao.create(cxn, "Mana Potion", 1, 20, new BigDecimal("65.00"), "Restores 30 MP.");
@@ -74,6 +75,12 @@ public class Driver {
 			EquipmentBonuse swordStrength = EquipmentBonuseDao.create(cxn, swordEquip, strength, 5);
 
 			//Insert ConsumableItemBonuse
+			ConsumableItemBonuse sHealthPotionBonuse = ConsumableItemBonuseDao.create(cxn, smallHealthPotion, strength, 10, 15);
+			ConsumableItemBonuse lHealthPotionBonuse = ConsumableItemBonuseDao.create(cxn, largeHealthPotion, intelligence, 8, 10);
+			ConsumableItemBonuse manaPotionBonuse = ConsumableItemBonuseDao.create(cxn, manaPotion, endurance, 5, 8);
+			ConsumableItemBonuse staminaPotionBonuse = ConsumableItemBonuseDao.create(cxn, staminaPotion, agility, 12, 18);
+			ConsumableItemBonuse antidoteBonuse = ConsumableItemBonuseDao.create(cxn, antidote, luck, 20, 25);
+			
 			
 			//Insert JobsForGear
 			//TODO: Update gears below once gears are created
