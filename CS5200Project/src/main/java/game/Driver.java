@@ -43,11 +43,17 @@ public class Driver {
 			//Insert Items: 15 items: 5 Weapons, 5 Gears, and 5 Consumables.
 			/*Insert Weapons*/
 			Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,1500.00,10,"Warrior",50);
-			int swordID = sword.getItemID();
-			Equipments swordEquip = EquipmentsDao.getEquipmentByItemID(cxn, swordID);
+			Weapons axe = WeaponsDao.create(cxn,"Axe of Fury",12,1,1700.00,12,"Mage", 45);
+			Weapons spear = WeaponsDao.create(cxn,"Spear of Destiny",11,1,1600.00,11,"Archer",40);
+			Weapons bow = WeaponsDao.create(cxn,"Bow of Eternity",9,1,1400.00,9,"Thief",35);
+			Weapons dagger = WeaponsDao.create(cxn,"Dagger of Stealth",8,1,1300.00,8,"Healer",30);
 			
 			/*Insert Gears*/
 			Gears helmet = GearsDao.create(cxn,"Iron Helmet",1,1,200.00,5);
+			Gears armor = GearsDao.create(cxn,"Steel Armor",10,1,2000.00,10);
+			Gears boots = GearsDao.create(cxn,"Leather Boots",4,1,450.00,4);
+			Gears gloves = GearsDao.create(cxn,"Chainmail Gloves",6,1,600.00,6);
+			Gears legging = GearsDao.create(cxn,"Plate Leggings",7,1,800.00,7);
 			
 			/*Insert Consumables*/
 			Consumables smallHealthPotion = ConsumablesDao.create(cxn, "Small Health Potion", 1, 20, new BigDecimal("50.00"), "Restores 50 HP.");
@@ -57,7 +63,7 @@ public class Driver {
 			Consumables antidote = ConsumablesDao.create(cxn, "Antidote", 1, 15, new BigDecimal("40.00"), "Cures poison.");
 			
 			//Insert Statistics
-			Statistics strength = StatisticsDao.create(cxn, "Strength", null);
+			Statistics strength = StatisticsDao.create(cxn, "Strength", "Determines physical power.");
 			
 			//Insert Currencies
 			
@@ -72,7 +78,11 @@ public class Driver {
 		    //Insert CharacterStatistics
 				
 			//Insert EquipmentBonuse
-			EquipmentBonuse swordStrength = EquipmentBonuseDao.create(cxn, swordEquip, strength, 5);
+			EquipmentBonuse swordStrength = EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, sword.getItemID()), strength, 5);
+			EquipmentBonuse bootsAgility = EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, boots.getItemID()), agility, 3);
+			EquipmentBonuse spearIntelligence = EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, spear.getItemID()), intelligence, 4);
+			EquipmentBonuse helmetEndurance = EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, helmet.getItemID()), endurance, 11);
+			EquipmentBonuse axeStrength = EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, axe.getItemID()), strength, 10);
 
 			//Insert ConsumableItemBonuse
 			ConsumableItemBonuse sHealthPotionBonuse = ConsumableItemBonuseDao.create(cxn, smallHealthPotion, strength, 10, 15);
@@ -108,6 +118,9 @@ public class Driver {
 			
 			/*Read records*/
 			//Read Players
+			Players player1Test = PlayersDao.getPlayerByPlayerID(cxn, P1.getPlayerID());
+		      System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		        player1Test.getPlayerID(), player1Test.getFirstName(), player1Test.getLastName(), player1Test.getEmailAddress());
 			
 			//Read Races
 			
