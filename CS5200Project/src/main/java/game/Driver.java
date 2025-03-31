@@ -3,6 +3,7 @@ package game;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import game.dal.*;
 import game.model.*;
@@ -99,7 +100,6 @@ public class Driver {
 			JobsForGear JFG5 = JobsForGearDao.create(cxn, legging, "Healer");
 			
 			//Insert CharacterUnlockedJob
-			//TODO: Update CharacterUnlockedJob create to allow for null inputs
 			CharacterUnlockedJob CUJ1 = CharacterUnlockedJobDao.create(cxn, Char1, "Warrior", 1, 100);
 			CharacterUnlockedJob CUJ2 = CharacterUnlockedJobDao.create(cxn, Char1, "Mage", null, null);
 			CharacterUnlockedJob CUJ3 = CharacterUnlockedJobDao.create(cxn, Char2, "Mage", 2, 200);
@@ -115,10 +115,18 @@ public class Driver {
 			
 			
 			/*Read records*/
+			
 			//Read Players
 			Players player1Test = PlayersDao.getPlayerByPlayerID(cxn, P1.getPlayerID());
 		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
 		      player1Test.getPlayerID(), player1Test.getFirstName(), player1Test.getLastName(), player1Test.getEmailAddress());
+			
+		    //Read a list of Players
+		    List<Players> playersList = PlayersDao.getPlayersFromFirstName(cxn, "Ethan");
+		    for (Players player : playersList) {
+		        System.out.format("Looping Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		        		player.getPlayerID(), player.getFirstName(), player.getLastName(), player.getEmailAddress());
+		      }
 			
 			//Read Races
 			
@@ -168,7 +176,36 @@ public class Driver {
 			
 			/*Update records*/
 			
-			
+		    //Update Players firstName
+		    System.out.println("Updating Players firstName: ");
+		    System.out.println("Before updating: ");
+		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
+		    PlayersDao.updatePlayerFirstName(cxn, P1, "Harry");
+		    System.out.println("After updating: ");
+		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
+		    
+		    //Update Players lastName
+		    System.out.println("Updating Players lastName: ");
+		    System.out.println("Before updating: ");
+		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
+		    PlayersDao.updatePlayerLastName(cxn, P1, "Potter");
+		    System.out.println("After updating: ");
+		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
+		   
+		    //Update Players emailAddress
+		    System.out.println("Updating Players emailAddress: ");
+		    System.out.println("Before updating: ");
+		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
+		    PlayersDao.updatePlayerEmailAddress(cxn, P1, "harry@example.com");
+		    System.out.println("After updating: ");
+		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
+		   
 			/*Delete records*/
 			
 		}
