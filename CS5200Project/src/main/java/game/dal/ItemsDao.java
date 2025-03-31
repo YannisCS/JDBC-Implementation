@@ -1,5 +1,6 @@
 package game.dal;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ public class ItemsDao {
 		    String itemName, 
 		    int level, 
 		    int maxStackSize,
-		    double price
+		    BigDecimal price
 			) throws SQLException{
 		
 	    final String insertItems = """
