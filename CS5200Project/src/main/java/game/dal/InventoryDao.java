@@ -9,6 +9,7 @@ import java.util.List;
 
 import game.model.Characters;
 import game.model.Inventory;
+import game.model.Items;
 
 
 public class InventoryDao {
@@ -16,9 +17,9 @@ public class InventoryDao {
 	private InventoryDao() { }
 
 	public static Inventory create( Connection cxn,
-	           int charID,
+	           Characters character,
 	           int slotID,
-	           int instance,
+	           Items items,
 	           int quantity
 	         ) throws SQLException{
 		
@@ -28,14 +29,14 @@ public class InventoryDao {
             """;
 
             try (PreparedStatement ps = cxn.prepareStatement(insertInventorySQL)) {
-                ps.setInt(1, charID); 
+                ps.setInt(1, character.getCharID()); 
                 ps.setInt(2, slotID);
-                ps.setInt(3, instance);
+                ps.setInt(3, items.getItemID());
                 ps.setInt(4, quantity);
                 ps.executeUpdate();
             }
 
-            return new Inventory(charID, slotID, instance, quantity);
+            return new Inventory(character.getCharID(), slotID, items.getItemID(), quantity);
 	}
 	
 	public static Inventory getInventoryByCharactersAndSlot( Connection cxn,
@@ -101,7 +102,7 @@ public class InventoryDao {
 	        }
 	    }
 	
-	public static Inventory updateRating(Connection cxn, Inventory inventory, int newQuantity) throws SQLException {
+	public static Inventory updateInventory(Connection cxn, Inventory inventory, int newQuantity) throws SQLException {
 
 		String updateInventorySQL = """
 				    UPDATE Inventory
