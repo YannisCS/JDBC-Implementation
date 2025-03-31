@@ -4,26 +4,26 @@ import java.util.Objects;
 
 public class EquipmentBonuse {
 	
-	private int equipmentID;
+	private Equipments equipment;
 	private Statistics statistics;
 	private int value;
 	
 	public EquipmentBonuse (
-			int equipmentID,
+			Equipments equipment,
 			Statistics statistics,
 			int value
 			) {
-		this.equipmentID = equipmentID;
+		this.equipment = equipment;
 		this.statistics = statistics;
 		this.value = value;
 	}
 	
-	public int getEquipmentID() {
-		return equipmentID;
+	public Equipments getEquipment() {
+		return equipment;
 	}
 	
-	public void setEquipmentID(int equipmentID) {
-		this.equipmentID = equipmentID;
+	public void setEquipment(Equipments equipment) {
+		this.equipment = equipment;
 	}
 	
 	public Statistics getStatistics() {
@@ -50,7 +50,7 @@ public class EquipmentBonuse {
     }
     EquipmentBonuse that = (EquipmentBonuse) o;
     return
-    		equipmentID == that.equipmentID
+    		Objects.equals(equipment, that.equipment)
     		&& Objects.equals(statistics, that.statistics)
     		&& value == that.value;
   }
@@ -67,8 +67,8 @@ public class EquipmentBonuse {
 
   protected String fieldsToString() {
     return String.format(
-      "Equipment Bonuse(%s, %s, %d)",
-      equipmentID,
+      "Equipment Bonuse(%d, %s, %d)",
+      equipment,
       statistics,
       value
     );
