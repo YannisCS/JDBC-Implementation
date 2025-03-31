@@ -80,7 +80,7 @@ public class Driver {
 			//Insert CharacterUnlockedJob
 			//TODO: Update CharacterUnlockedJob create to allow for null inputs
 			CharacterUnlockedJob CUJ1 = CharacterUnlockedJobDao.create(cxn, Char1, "Warrior", 1, 100);
-			CharacterUnlockedJob CUJ2 = CharacterUnlockedJobDao.create(cxn, Char1, "Mage");
+			CharacterUnlockedJob CUJ2 = CharacterUnlockedJobDao.create(cxn, Char1, "Mage", null, null);
 			CharacterUnlockedJob CUJ3 = CharacterUnlockedJobDao.create(cxn, Char1, "Mage", 2, 200);
 			CharacterUnlockedJob CUJ4 = CharacterUnlockedJobDao.create(cxn, Char1, "Archer", 3, 300);
 			CharacterUnlockedJob CUJ5 = CharacterUnlockedJobDao.create(cxn, Char1, "Thief", 4, 400);
