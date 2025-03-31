@@ -42,18 +42,18 @@ public class Driver {
 			
 			//Insert Items: 15 items: 5 Weapons, 5 Gears, and 5 Consumables.
 			/*Insert Weapons*/
-			Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,1500.00,10,"Warrior",50);
-			Weapons axe = WeaponsDao.create(cxn,"Axe of Fury",12,1,1700.00,12,"Mage", 45);
-			Weapons spear = WeaponsDao.create(cxn,"Spear of Destiny",11,1,1600.00,11,"Archer",40);
-			Weapons bow = WeaponsDao.create(cxn,"Bow of Eternity",9,1,1400.00,9,"Thief",35);
-			Weapons dagger = WeaponsDao.create(cxn,"Dagger of Stealth",8,1,1300.00,8,"Healer",30);
+			Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,new BigDecimal(1500.00),10,"Warrior",50);
+			Weapons axe = WeaponsDao.create(cxn,"Axe of Fury",12,1,new BigDecimal(1700.00),12,"Mage", 45);
+			Weapons spear = WeaponsDao.create(cxn,"Spear of Destiny",11,1,new BigDecimal(1600.00),11,"Archer",40);
+			Weapons bow = WeaponsDao.create(cxn,"Bow of Eternity",9,1,new BigDecimal(1400.00),9,"Thief",35);
+			Weapons dagger = WeaponsDao.create(cxn,"Dagger of Stealth",8,1,new BigDecimal(1300.00),8,"Healer",30);
 			
 			/*Insert Gears*/
-			Gears helmet = GearsDao.create(cxn,"Iron Helmet",1,1,200.00,5);
-			Gears armor = GearsDao.create(cxn,"Steel Armor",10,1,2000.00,10);
-			Gears boots = GearsDao.create(cxn,"Leather Boots",4,1,450.00,4);
-			Gears gloves = GearsDao.create(cxn,"Chainmail Gloves",6,1,600.00,6);
-			Gears legging = GearsDao.create(cxn,"Plate Leggings",7,1,800.00,7);
+			Gears helmet = GearsDao.create(cxn,"Iron Helmet",1,1,null,5);
+			Gears armor = GearsDao.create(cxn,"Steel Armor",10,1,null,10);
+			Gears boots = GearsDao.create(cxn,"Leather Boots",4,1,null,4);
+			Gears gloves = GearsDao.create(cxn,"Chainmail Gloves",6,1,new BigDecimal(600.00),6);
+			Gears legging = GearsDao.create(cxn,"Plate Leggings",7,1,new BigDecimal(800.00),7);
 			
 			/*Insert Consumables*/
 			Consumables smallHealthPotion = ConsumablesDao.create(cxn, "Small Health Potion", 1, 20, new BigDecimal("50.00"), "Restores 50 HP.");
