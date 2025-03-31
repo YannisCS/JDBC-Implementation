@@ -30,7 +30,7 @@ public class ItemsDao {
 	        insertStmt.setString(1, itemName);
 	        insertStmt.setInt(2, level);
 	        insertStmt.setInt(3, maxStackSize);
-	        insertStmt.setDouble(4, price);
+	        insertStmt.setBigDecimal(4, price);
 
 	        insertStmt.executeUpdate();
 	        
