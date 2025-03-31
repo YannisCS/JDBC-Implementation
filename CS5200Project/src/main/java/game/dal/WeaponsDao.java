@@ -1,5 +1,6 @@
 package game.dal;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ public class WeaponsDao {
 			String itemName,
 			int level,
 			int maxStackSize,
-			double price,
+			BigDecimal price,
 			int requiredLevel,
 			String job,
 			int damage
@@ -71,7 +72,7 @@ public class WeaponsDao {
 							result.getString("itemName"),
 							result.getInt("level"),
 							result.getInt("maxStackSize"),
-							result.getDouble("price"),
+							result.getBigDecimal("price"),
 							result.getInt("requiredLevel"),
 							result.getString("wearableJob"),
 							result.getInt("damage"));

@@ -69,11 +69,11 @@ public class Driver {
 			
 			//Insert Characters
 			//TODO: Update Weapon once they are created
-			Characters Char1 = CharactersDao.create(cxn, P1, "Alicia", "Storm", "Lionhearts", 1); //Weapon needs to be updated
-			Characters Char2 = CharactersDao.create(cxn, P2, "Boris", "Flame", "ElvenGuardians", 2); //Weapon needs to be updated
-			Characters Char3 = CharactersDao.create(cxn, P3, "Cecilia", "Wind", "MountainHammers", 3); //Weapon needs to be updated
-			Characters Char4 = CharactersDao.create(cxn, P4, "Derek", "Stone", "BloodFury", 4); //Weapon needs to be updated
-			Characters Char5 = CharactersDao.create(cxn, P5, "Eva", "Night", "ShadowStalkers", 5); //Weapon needs to be updated
+			Characters Char1 = CharactersDao.create(cxn, P1, "Alicia", "Storm", "Lionhearts", 1);
+			Characters Char2 = CharactersDao.create(cxn, P2, "Boris", "Flame", "ElvenGuardians", 2);
+			Characters Char3 = CharactersDao.create(cxn, P3, "Cecilia", "Wind", "MountainHammers", 3);
+			Characters Char4 = CharactersDao.create(cxn, P4, "Derek", "Stone", "BloodFury", 4);
+			Characters Char5 = CharactersDao.create(cxn, P5, "Eva", "Night", "ShadowStalkers", 5);
 			
 		    //Insert CharacterStatistics
 				
@@ -117,8 +117,48 @@ public class Driver {
 			
 			
 			/*Read records*/
+			//Read Players
+			
+			//Read Races
+			
+			//Read Clans
+			
+			//Read Items
+			
+			//Read Equipments
+			
+			//Read Gears
+			
+			//Read Weapons
+			
+			//Reade Characters
+			
+			//Read Statistics
+			
+			//Read Currencies
+			
+			//Read CharacterStatistics
+			
+			//Read EquipmentBonuse
+			
+			//Read Consumables
+			
+			//Read ConsumableItemBonuse
+			
+			//Read JobsForGear
+			
+			//Read CharacterUnlockedJob
+			
+			//Read CharacterWealth
+			
+			//Read Inventory
+			
+			//Read EquippedItems
+			
+			
 			
 			/*Update records*/
+			
 			
 			/*Delete records*/
 			
@@ -150,18 +190,21 @@ public class Driver {
 					    CONSTRAINT pk_clans PRIMARY KEY (clanName)
 					);
 							""");
+			/*
 			cxn.createStatement().executeUpdate("""
 					CREATE TABLE AvailableJobs (
 						jobName VARCHAR(255),
 					    CONSTRAINT pk_AvailableJobs PRIMARY KEY (jobName)
 					);
 							""");
+							
 			cxn.createStatement().executeUpdate("""
 					CREATE TABLE EquipmentSlot (
 					    bodyPartName VARCHAR(255) NOT NULL, 
 						CONSTRAINT pk_EquipmentSlot PRIMARY KEY (bodyPartName)
 					);
 							""");
+							*/
 			cxn.createStatement().executeUpdate("""
 					CREATE TABLE `Items` (
 					    `itemID` INTEGER AUTO_INCREMENT,

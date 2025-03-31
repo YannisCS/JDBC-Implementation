@@ -1,5 +1,7 @@
 package game.model;
 
+import java.math.BigDecimal;
+
 public class Equipments extends Items {
 	
 	private int requiredLevel;
@@ -9,7 +11,7 @@ public class Equipments extends Items {
 			String itemName,
 			int level,
 			int maxStackSize,
-			double price,
+			BigDecimal price,
 			int requiredLevel
 			) {
 		super(itemID, itemName, level, maxStackSize, price);

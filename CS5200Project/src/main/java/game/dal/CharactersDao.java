@@ -71,7 +71,7 @@ public class CharactersDao{
             PlayersDao.getPlayerByPlayerID(cxn, results.getInt("playerID")),
             results.getString("firstName"),
             results.getString("lastName"),
-            ClansDao.getClanByClanName(cxn, results.getString("clan")),
+            ClansDao.getClanRacebyClanName(cxn, results.getString("clan")),
             WeaponsDao.getWeaponByItemID(cxn, results.getInt("weaponWeared"))
           );
         } else {

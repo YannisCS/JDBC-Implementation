@@ -11,7 +11,7 @@ public class Consumables extends Items{
 			String itemName,
 			int level,
 			int maxStackSize,
-			double price,
+			BigDecimal price,
 			String description) {
 		super(itemID, itemName, level, maxStackSize, price);
 		this.description = description;

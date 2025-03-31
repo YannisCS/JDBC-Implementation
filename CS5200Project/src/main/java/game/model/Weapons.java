@@ -1,5 +1,6 @@
 package game.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Weapons extends Equipments {
@@ -12,7 +13,7 @@ public class Weapons extends Equipments {
 			String itemName,
 			int level,
 			int maxStackSize,
-			double price,
+			BigDecimal price,
 			int requiredLevel,
 			String wearableJob,
 			int damage
