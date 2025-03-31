@@ -7,7 +7,7 @@ public class Gears extends Equipments {
 			String itemName,
 			int level,
 			int maxStackSize,
-			float price,
+			double price,
 			int requiredLevel
 			) {
 		super(itemID, itemName, level, maxStackSize, price, requiredLevel);

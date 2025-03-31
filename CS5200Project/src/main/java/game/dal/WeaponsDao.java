@@ -15,7 +15,7 @@ public class WeaponsDao {
 			String itemName,
 			int level,
 			int maxStackSize,
-			float price,
+			double price,
 			int requiredLevel,
 			String job,
 			int damage
@@ -71,7 +71,7 @@ public class WeaponsDao {
 							result.getString("itemName"),
 							result.getInt("level"),
 							result.getInt("maxStackSize"),
-							result.getFloat("price"),
+							result.getDouble("price"),
 							result.getInt("requiredLevel"),
 							result.getString("wearableJob"),
 							result.getInt("damage"));

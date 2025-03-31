@@ -12,7 +12,7 @@ public class Weapons extends Equipments {
 			String itemName,
 			int level,
 			int maxStackSize,
-			float price,
+			double price,
 			int requiredLevel,
 			String wearableJob,
 			int damage

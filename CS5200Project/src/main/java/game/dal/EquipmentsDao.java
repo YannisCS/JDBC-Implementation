@@ -15,7 +15,7 @@ public class EquipmentsDao {
 			String itemName,
 			int level,
 			int maxStackSize,
-			float price,
+			double price,
 			int requiredLevel
 			) throws SQLException {
 		String insertEquipments = """
@@ -56,7 +56,7 @@ public class EquipmentsDao {
 							result.getString("itemName"),
 							result.getInt("level"),
 							result.getInt("maxStackSize"),
-							result.getFloat("price"),
+							result.getDouble("price"),
 							result.getInt("requiredLevel"));
 				} else {
 					return null;

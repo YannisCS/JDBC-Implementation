@@ -15,7 +15,7 @@ public class GearsDao {
 			String itemName,
 			int level,
 			int maxStackSize,
-			float price,
+			double price,
 			int requiredLevel
 			) throws SQLException {
 		String insertGears = """
@@ -63,7 +63,7 @@ public class GearsDao {
 							result.getString("itemName"),
 							result.getInt("level"),
 							result.getInt("maxStackSize"),
-							result.getFloat("price"),
+							result.getDouble("price"),
 							result.getInt("requiredLevel"));
 				} else {
 					return null;
@@ -71,5 +71,4 @@ public class GearsDao {
 			}
 		}
 	}
-
 }
