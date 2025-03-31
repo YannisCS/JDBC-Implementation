@@ -24,5 +24,15 @@ public class EquipmentSlotDao {
 	      }
 	}
 	
+	public static void delete(Connection cxn, String bodyPartName) throws SQLException{
+	    String deletePerson = "DELETE FROM EquipmentSlot WHERE bodyPartName = ?;";
+
+	    try (PreparedStatement deleteStmt = cxn.prepareStatement(deletePerson)) {
+	      deleteStmt.setString(1, bodyPartName);
+	      deleteStmt.executeUpdate();
+	    }
+		
+	}
+	
 
 }
