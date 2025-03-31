@@ -1,8 +1,8 @@
-package blog.dal;
+package game.dal;
 
 import java.sql.*;
 
-import blog.model.*;
+import game.model.*;
 
 public class ClansDao {
 	/**

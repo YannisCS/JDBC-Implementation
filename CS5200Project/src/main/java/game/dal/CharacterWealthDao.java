@@ -1,4 +1,4 @@
-package CS5200_Project.dal;
+package game.dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import CS5200_Project.model.CharacterWealth;
-import CS5200_Project.model.Characters;
-import CS5200_Project.model.Currencies;
+import game.model.*;
 
 public class CharacterWealthDao {
 	

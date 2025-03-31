@@ -1,4 +1,4 @@
-package CS5200Project.model;
+package game.model;
 
 import java.util.Objects;
 
@@ -52,11 +52,11 @@ public class Characters {
 		this.lastName = lastName;
 	}
 
-	public Clan getClan() {
+	public Clans getClan() {
 		return clan;
 	}
 
-	public void setClan(Clan clan) {
+	public void setClan(Clans clan) {
 		this.clan = clan;
 	}
 

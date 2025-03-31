@@ -1,4 +1,4 @@
-package blog.model;
+package game.model;
 
 import java.util.Objects;
 

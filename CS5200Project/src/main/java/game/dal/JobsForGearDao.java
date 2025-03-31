@@ -1,4 +1,4 @@
-package CS5200Project.dal;
+package game.dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import CS5200Project.model.*;
+import game.model.*;
 
 public class JobsForGearDao{
   protected JobsForGearDao() {};

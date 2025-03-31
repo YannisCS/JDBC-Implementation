@@ -1,4 +1,4 @@
-package CS5200Project.dal;
+package game.dal;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

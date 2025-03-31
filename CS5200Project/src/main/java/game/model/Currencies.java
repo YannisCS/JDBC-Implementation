@@ -1,4 +1,4 @@
-package CS5200_Project.model;
+package game.model;
 
 import java.util.Objects;
 
