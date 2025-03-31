@@ -31,12 +31,12 @@ public class EquippedItemsDao {
 
             try (PreparedStatement ps = cxn.prepareStatement(insertInventorySQL)) {
                 ps.setInt(1, character.getCharID()); 
-                ps.setString(2, equipmentSlot.getBodyPartName());
+                ps.setString(2, equipmentSlot.name());
                 ps.setInt(3, gears.getItemID());
                 ps.executeUpdate();
             }
 
-            return new EquippedItems(character.getCharID(), equipmentSlot.getBodyPartName(), gears.getItemID());
+            return new EquippedItems(character.getCharID(), equipmentSlot, gears.getItemID());
 	}
 	
 	
@@ -55,13 +55,13 @@ public class EquippedItemsDao {
 	    try (PreparedStatement selectStmt = cxn.prepareStatement(query)) {
 	    	
 	      selectStmt.setInt(1, character.getCharID()); 
-	      selectStmt.setString(2, equipmentSlot.getBodyPartName());  
+	      selectStmt.setString(2, equipmentSlot.name());  
 
 	      try (ResultSet results = selectStmt.executeQuery()) {
 	        if (results.next()) {
 	          return new EquippedItems(
 	            results.getInt("charID"),
-	            results.getString("equipPosition"),
+	            EquipmentSlot.valueOf(results.getString("equipPosition")),
 	            results.getInt("itemID")
 
 	          );
@@ -92,7 +92,7 @@ public class EquippedItemsDao {
 	                while (rs.next()) {
 	                	EquippedItems equippedItem = new EquippedItems(
 	                        rs.getInt("charID"),
-	                        rs.getString("equipPosition"),
+	        	            EquipmentSlot.valueOf(rs.getString("equipPosition")),
 	                        rs.getInt("itemID")
 	                        );
 	                	equippedItems.add(equippedItem);
@@ -113,7 +113,7 @@ public class EquippedItemsDao {
 		try (PreparedStatement ps = cxn.prepareStatement(updateInventorySQL)) {
 			ps.setInt(1, newItemID);
 			ps.setInt(2, equippedItems.getCharID());
-			ps.setString(3, equippedItems.getEquipPosition());
+			ps.setString(3, equippedItems.getEquipPosition().name());
 		    ps.executeUpdate();
 		    equippedItems.setItemID(newItemID);
 		    
@@ -127,7 +127,7 @@ public class EquippedItemsDao {
 
 	    try (PreparedStatement deleteStmt = cxn.prepareStatement(deletePerson)) {
 	      deleteStmt.setInt(1, equippedItems.getCharID());
-	      deleteStmt.setString(2, equippedItems.getEquipPosition());
+	      deleteStmt.setString(2, equippedItems.getEquipPosition().name());
 	      deleteStmt.executeUpdate();
 	    }
 	}
