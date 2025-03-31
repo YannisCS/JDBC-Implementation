@@ -1,6 +1,5 @@
 package game.model;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Items {
@@ -9,9 +8,9 @@ public class Items {
 	private String itemName;
 	private int level;
 	private int maxStackSize;
-	private BigDecimal price;
+	private double price;
 	
-	public Items(int itemID, String itemName, int level, int maxStackSize, BigDecimal price) {
+	public Items(int itemID, String itemName, int level, int maxStackSize, double price) {
 		super();
 		this.itemID = itemID;
 		this.itemName = itemName;
@@ -52,11 +51,11 @@ public class Items {
 		this.maxStackSize = maxStackSize;
 	}
 
-	public BigDecimal getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
@@ -88,9 +87,5 @@ public class Items {
 				maxStackSize, 
 				price);
 	}
-
-	
-	
-	
 
 }

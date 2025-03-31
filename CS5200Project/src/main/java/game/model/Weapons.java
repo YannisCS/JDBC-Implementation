@@ -61,7 +61,7 @@ public class Weapons extends Equipments {
   public String toString() {
     return String.format(
       "Equipment(%s, %s, %d)",
-      super.fieldsToString(),
+      super.toString(),
       wearableJob,
       damage
     );
