@@ -5,8 +5,8 @@ import java.util.Objects;
 public class CharacterUnlockedJob{
 	private Characters character;
 	private String jobName;
-	private int jobLevel;
-	private int xP;
+	private Integer jobLevel;
+	private Integer xP;
 	
 	public CharacterUnlockedJob(Characters character, String jobName, int jobLevel, int xP) {
 		super();
@@ -20,8 +20,8 @@ public class CharacterUnlockedJob{
 		super();
 		this.character = character;
 		this.jobName = jobName;
-		this.jobLevel = 0;
-		this.xP = 0;
+		this.jobLevel = null;
+		this.xP = null;
 	}
 	
 	public Characters getCharacter() {
@@ -67,8 +67,8 @@ public class CharacterUnlockedJob{
       return
     	Objects.equals(character, characterUnlockedJob.character) &&
     	Objects.equals(jobName, characterUnlockedJob.jobName) &&
-    	jobLevel == characterUnlockedJob.jobLevel &&
-    	xP == characterUnlockedJob.xP;
+    	Objects.equals(jobLevel, characterUnlockedJob.jobLevel) &&
+        Objects.equals(xP, characterUnlockedJob.xP);
     }
 
     @Override
