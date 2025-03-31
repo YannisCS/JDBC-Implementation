@@ -118,6 +118,9 @@ public class Driver {
 			
 			/*Read records*/
 			//Read Players
+			Players player1Test = PlayersDao.getPlayerByPlayerID(cxn, P1.getPlayerID());
+		      System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		        player1Test.getPlayerID(), player1Test.getFirstName(), player1Test.getLastName(), player1Test.getEmailAddress());
 			
 			//Read Races
 			
@@ -131,7 +134,7 @@ public class Driver {
 			
 			//Read Weapons
 			
-			//Reade Characters
+			//Read Characters
 			
 			//Read Statistics
 			
