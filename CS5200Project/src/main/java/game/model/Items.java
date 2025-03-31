@@ -1,6 +1,5 @@
 package game.model;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Items {
