@@ -46,7 +46,7 @@ public class Equipments extends Items {
   public String toString() {
     return String.format(
       "Equipment(%s, %d)",
-      super.fieldsToString(),
+      super.toString(),
       requiredLevel
     );
   }

@@ -22,7 +22,7 @@ public class Gears extends Equipments {
   public String toString() {
     return String.format(
       "Gear(%s)",
-      super.fieldsToString()
+      super.toString()
     );
   }
 
