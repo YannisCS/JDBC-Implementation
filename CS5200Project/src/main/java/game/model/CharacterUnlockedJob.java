@@ -16,6 +16,14 @@ public class CharacterUnlockedJob{
 		this.xP = xP;
 	}
 
+	public CharacterUnlockedJob(Characters character, String jobName) {
+		super();
+		this.character = character;
+		this.jobName = jobName;
+		this.jobLevel = 0;
+		this.xP = 0;
+	}
+	
 	public Characters getCharacter() {
 		return character;
 	}
