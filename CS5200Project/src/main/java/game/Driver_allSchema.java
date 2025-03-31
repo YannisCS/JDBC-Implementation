@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import game.dal.*;
 import game.model.*;
 
-public class Driver {
+public class Driver_allSchema {
 	
 	public static void main(String[] args) {
 		try {
