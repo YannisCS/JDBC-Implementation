@@ -40,6 +40,7 @@ public class Driver {
 			Clans clan3 = ClansDao.create(cxn, "MountainHammers", Clans.Races.DWARF);
 			Clans clan4 = ClansDao.create(cxn, "BloodFury", Clans.Races.ORC);
 			Clans clan5 = ClansDao.create(cxn, "ShadowStalkers", Clans.Races.GOBLIN);
+			Clans clan6 = ClansDao.create(cxn, "StarFall", Clans.Races.ELF);
 			
 			//Insert Items: 15 items: 5 Weapons, 5 Gears, and 5 Consumables.
 			/*Insert Weapons*/
@@ -131,6 +132,16 @@ public class Driver {
 			//Read Races
 			
 			//Read Clans
+		    /* get clan and its race by a specific clanName */
+		    Clans clanrace = ClansDao.getClanRacebyClanName(cxn, "Lionhearts");
+		    System.out.format("%n%n%s", clanrace.toString());
+		    
+		    /* get clans of a specific race */
+		    List<Clans> clans = ClansDao.getClansbyRace(cxn, Clans.Races.ELF);
+		    System.out.print("%n%nclans of elf:");
+		    for (Clans c : clans) {
+		    	System.out.format("%n	%s", c.getClanName());
+		    }
 			
 			//Read Items
 			
@@ -154,8 +165,11 @@ public class Driver {
 			//Read EquipmentBonuse
 			
 			//Read Consumables
+		    Consumables cons = ConsumablesDao.getConsumableByItemID(cxn, 13);
+		    System.out.format("%n%nConsumable item with itemID=13: %s", cons.toString());
 			
 			//Read ConsumableItemBonuse
+		    
 			
 			//Read JobsForGear
 		    JobsForGear jfg1Test = JobsForGearDao.getJobsForGearByID(cxn, helmet, "Warrior");
