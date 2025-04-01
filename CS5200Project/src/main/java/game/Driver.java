@@ -33,6 +33,7 @@ public class Driver {
 			Players P3 = PlayersDao.create(cxn, "Charlie", "Williams", "charlie@example.com");
 			Players P4 = PlayersDao.create(cxn, "Diana", "Brown", "diana@example.com");
 			Players P5 = PlayersDao.create(cxn, "Ethan", "Jones", "ethan@example.com");
+			Players P6 = PlayersDao.create(cxn, "Ethan", "Potter", "ethan@example.com");
 			
 			//Insert Clans
 			Clans clan1 = ClansDao.create(cxn, "Lionhearts", Clans.Races.HUMAN);
@@ -245,6 +246,26 @@ public class Driver {
 		    		);
 		    
 			/*Delete records*/
+		    // Delete Players
+		    System.out.println("Deleting Players 'Ethan Potter': ");
+		    System.out.println("Before deleting: ");
+		    Players playToDelete = PlayersDao.getPlayerByPlayerID(cxn, P6.getPlayerID());
+		    if (playToDelete != null) {
+	    	  System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+	    			  playToDelete.getPlayerID(), playToDelete.getFirstName(), playToDelete.getLastName(), playToDelete.getEmailAddress());
+		    } else {
+	          System.out.println("No player found \n");
+		    }
+		    PlayersDao.deletePlayerByPlayerID(cxn, P6.getPlayerID());
+		    System.out.println("After deleting: ");
+		    Players playDeleted = PlayersDao.getPlayerByPlayerID(cxn, P6.getPlayerID());
+		    if (playDeleted != null) {
+	    	  System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+	    			  playDeleted.getPlayerID(), playDeleted.getFirstName(), playDeleted.getLastName(), playDeleted.getEmailAddress());
+		    } else {
+	          System.out.println("No player found \n");
+		    }
+		    
 			
 		    // delete Clans clan6
 		    String clan6Name = clan6.getClanName();  //for check
