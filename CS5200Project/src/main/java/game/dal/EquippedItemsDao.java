@@ -10,7 +10,6 @@ import java.util.List;
 import game.model.Characters;
 import game.model.EquippedItems;
 import game.model.Gears;
-import game.model.EquipmentSlot;
 
 
 public class EquippedItemsDao {
@@ -20,7 +19,7 @@ public class EquippedItemsDao {
 
 	public static EquippedItems create( Connection cxn,
 	           Characters character,
-	           EquipmentSlot equipmentSlot,
+	           String equipmentSlot,
 	           Gears gears
 	           ) throws SQLException{
 		
@@ -31,19 +30,19 @@ public class EquippedItemsDao {
 
             try (PreparedStatement ps = cxn.prepareStatement(insertInventorySQL)) {
                 ps.setInt(1, character.getCharID()); 
-                ps.setString(2, equipmentSlot.getBodyPartName());
+                ps.setString(2, equipmentSlot);
                 ps.setInt(3, gears.getItemID());
                 ps.executeUpdate();
             }
 
-            return new EquippedItems(character.getCharID(), equipmentSlot.getBodyPartName(), gears.getItemID());
+            return new EquippedItems(character.getCharID(), equipmentSlot, gears.getItemID());
 	}
 	
 	
 	
 	public static EquippedItems getEquippedItemsByCharactersAndSlot( Connection cxn,
 			Characters character,
-			EquipmentSlot equipmentSlot
+			String equipmentSlot
 	         ) throws SQLException{
 		
        String query = """
@@ -55,7 +54,7 @@ public class EquippedItemsDao {
 	    try (PreparedStatement selectStmt = cxn.prepareStatement(query)) {
 	    	
 	      selectStmt.setInt(1, character.getCharID()); 
-	      selectStmt.setString(2, equipmentSlot.getBodyPartName());  
+	      selectStmt.setString(2, equipmentSlot);  
 
 	      try (ResultSet results = selectStmt.executeQuery()) {
 	        if (results.next()) {
@@ -92,7 +91,7 @@ public class EquippedItemsDao {
 	                while (rs.next()) {
 	                	EquippedItems equippedItem = new EquippedItems(
 	                        rs.getInt("charID"),
-	                        rs.getString("equipPosition"),
+	        	            rs.getString("equipPosition"),
 	                        rs.getInt("itemID")
 	                        );
 	                	equippedItems.add(equippedItem);

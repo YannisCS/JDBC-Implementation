@@ -3,6 +3,7 @@ package game;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import game.dal.*;
 import game.model.*;
@@ -68,12 +69,11 @@ public class Driver {
 			//Insert Currencies
 			
 			//Insert Characters
-			//TODO: Update Weapon once they are created
-			Characters Char1 = CharactersDao.create(cxn, P1, "Alicia", "Storm", "Lionhearts", 1);
-			Characters Char2 = CharactersDao.create(cxn, P2, "Boris", "Flame", "ElvenGuardians", 2);
-			Characters Char3 = CharactersDao.create(cxn, P3, "Cecilia", "Wind", "MountainHammers", 3);
-			Characters Char4 = CharactersDao.create(cxn, P4, "Derek", "Stone", "BloodFury", 4);
-			Characters Char5 = CharactersDao.create(cxn, P5, "Eva", "Night", "ShadowStalkers", 5);
+			Characters Char1 = CharactersDao.create(cxn, P1, "Alicia", "Storm", clan1, sword);
+			Characters Char2 = CharactersDao.create(cxn, P2, "Boris", "Flame", clan2, axe);
+			Characters Char3 = CharactersDao.create(cxn, P3, "Cecilia", "Wind", clan3, spear);
+			Characters Char4 = CharactersDao.create(cxn, P4, "Derek", "Stone", clan4, bow);
+			Characters Char5 = CharactersDao.create(cxn, P5, "Eva", "Night", clan5, dagger);
 			
 		    //Insert CharacterStatistics
 				
@@ -93,21 +93,19 @@ public class Driver {
 			
 			
 			//Insert JobsForGear
-			//TODO: Update gears below once gears are created
 			JobsForGear JFG1 = JobsForGearDao.create(cxn, helmet, "Warrior");
-			JobsForGear JFG2 = JobsForGearDao.create(cxn, helmet, "Mage");
-			JobsForGear JFG3 = JobsForGearDao.create(cxn, helmet, "Archer");
-			JobsForGear JFG4 = JobsForGearDao.create(cxn, helmet, "Thief");
-			JobsForGear JFG5 = JobsForGearDao.create(cxn, helmet, "Healer");
+			JobsForGear JFG2 = JobsForGearDao.create(cxn, armor, "Mage");
+			JobsForGear JFG3 = JobsForGearDao.create(cxn, boots, "Archer");
+			JobsForGear JFG4 = JobsForGearDao.create(cxn, gloves, "Thief");
+			JobsForGear JFG5 = JobsForGearDao.create(cxn, legging, "Healer");
 			
 			//Insert CharacterUnlockedJob
-			//TODO: Update CharacterUnlockedJob create to allow for null inputs
 			CharacterUnlockedJob CUJ1 = CharacterUnlockedJobDao.create(cxn, Char1, "Warrior", 1, 100);
 			CharacterUnlockedJob CUJ2 = CharacterUnlockedJobDao.create(cxn, Char1, "Mage", null, null);
-			CharacterUnlockedJob CUJ3 = CharacterUnlockedJobDao.create(cxn, Char1, "Mage", 2, 200);
-			CharacterUnlockedJob CUJ4 = CharacterUnlockedJobDao.create(cxn, Char1, "Archer", 3, 300);
-			CharacterUnlockedJob CUJ5 = CharacterUnlockedJobDao.create(cxn, Char1, "Thief", 4, 400);
-			CharacterUnlockedJob CUJ6 = CharacterUnlockedJobDao.create(cxn, Char1, "Healer", 5, 500);
+			CharacterUnlockedJob CUJ3 = CharacterUnlockedJobDao.create(cxn, Char2, "Mage", 2, 200);
+			CharacterUnlockedJob CUJ4 = CharacterUnlockedJobDao.create(cxn, Char3, "Archer", 3, 300);
+			CharacterUnlockedJob CUJ5 = CharacterUnlockedJobDao.create(cxn, Char4, "Thief", 4, 400);
+			CharacterUnlockedJob CUJ6 = CharacterUnlockedJobDao.create(cxn, Char5, "Healer", 5, 500);
 			
 			//Insert CharacterWealth
 			
@@ -117,10 +115,18 @@ public class Driver {
 			
 			
 			/*Read records*/
+			
 			//Read Players
 			Players player1Test = PlayersDao.getPlayerByPlayerID(cxn, P1.getPlayerID());
-		      System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
-		        player1Test.getPlayerID(), player1Test.getFirstName(), player1Test.getLastName(), player1Test.getEmailAddress());
+		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		      player1Test.getPlayerID(), player1Test.getFirstName(), player1Test.getLastName(), player1Test.getEmailAddress());
+			
+		    //Read a list of Players
+		    List<Players> playersList = PlayersDao.getPlayersFromFirstName(cxn, "Ethan");
+		    for (Players player : playersList) {
+		        System.out.format("Looping Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		        		player.getPlayerID(), player.getFirstName(), player.getLastName(), player.getEmailAddress());
+		      }
 			
 			//Read Races
 			
@@ -135,6 +141,9 @@ public class Driver {
 			//Read Weapons
 			
 			//Read Characters
+		    Characters char1Test = CharactersDao.getCharacterByCharID(cxn, Char1.getCharID());
+		    System.out.format("Reading Characters: charID:%s playerID:%s firstName:%s lastName:%s clan:%s weaponWeared:%s \n",
+		      char1Test.getCharID(), char1Test.getPlayers().getPlayerID(), char1Test.getFirstName(), char1Test.getLastName(), char1Test.getClan(), char1Test.getWeaponWeared());
 			
 			//Read Statistics
 			
@@ -149,8 +158,13 @@ public class Driver {
 			//Read ConsumableItemBonuse
 			
 			//Read JobsForGear
+		    JobsForGear jfg1Test = JobsForGearDao.getJobsForGearByID(cxn, helmet, "Warrior");
+		    System.out.format("Reading JobsForGear: gear:%s jobName:%s", jfg1Test.getGear().getItemID(), jfg1Test.getJob());
 			
 			//Read CharacterUnlockedJob
+		    CharacterUnlockedJob cuj1Test = CharacterUnlockedJobDao.getCharacterUnlockedJobByID(cxn, Char1.getCharID(), "Warrior");
+		    System.out.format("Reading CharacterUnlockedJob: charID:%s jobName:%s jobLevel:%s XP:%s", 
+		    		          cuj1Test.getCharacter().getCharID(), cuj1Test.getJob(), cuj1Test.getJobLevel(), cuj1Test.getxP());
 			
 			//Read CharacterWealth
 			
@@ -162,7 +176,36 @@ public class Driver {
 			
 			/*Update records*/
 			
-			
+		    //Update Players firstName
+		    System.out.println("Updating Players firstName: ");
+		    System.out.println("Before updating: ");
+		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
+		    PlayersDao.updatePlayerFirstName(cxn, P1, "Harry");
+		    System.out.println("After updating: ");
+		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
+		    
+		    //Update Players lastName
+		    System.out.println("Updating Players lastName: ");
+		    System.out.println("Before updating: ");
+		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
+		    PlayersDao.updatePlayerLastName(cxn, P1, "Potter");
+		    System.out.println("After updating: ");
+		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
+		   
+		    //Update Players emailAddress
+		    System.out.println("Updating Players emailAddress: ");
+		    System.out.println("Before updating: ");
+		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
+		    PlayersDao.updatePlayerEmailAddress(cxn, P1, "harry@example.com");
+		    System.out.println("After updating: ");
+		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
+		   
 			/*Delete records*/
 			
 		}
