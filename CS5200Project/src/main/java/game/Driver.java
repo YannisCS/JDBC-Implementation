@@ -169,7 +169,8 @@ public class Driver {
 		    System.out.format("%n%nConsumable item with itemID=13: %s", cons.toString());
 			
 			//Read ConsumableItemBonuse
-		    
+		    ConsumableItemBonuse consBonuse = ConsumableItemBonuseDao.getBonuseByItemAndStatistics(cxn, 13, "strength");
+		    System.out.format("%nstrength for Consumable item with itemID=13: bonusePercent=%f | valueCap=%d", consBonuse.getBonusePercent(), consBonuse.getValueCap());
 			
 			//Read JobsForGear
 		    JobsForGear jfg1Test = JobsForGearDao.getJobsForGearByID(cxn, helmet, "Warrior");
@@ -220,8 +221,43 @@ public class Driver {
 		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
 		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
 		   
+		    
+		    //Update Clans clanName
+		    System.out.format(
+		    		"%n%nUpdating Clans clanName %nBefore updating: %s", 
+		    		clan6.toString()
+		    		);
+		    ClansDao.updateClanName(cxn, clan6, "StarWars");
+		    System.out.format(
+		    		"%nAfter updating: %s", 
+		    		clan6.toString()
+		    		);
+		    
+		    //Update Consumables description
+		    System.out.format(
+		    		"%n%nUpdating Consumables description %nBefore updating: %s", 
+		    		antidote.toString()
+		    		);
+		    ConsumablesDao.updateConsumablesDescription(cxn, antidote, "A potion that cures poison effects, restoring the user’s health and vitality.");
+		    System.out.format(
+		    		"%nAfter updating: %s", 
+		    		antidote.toString()
+		    		);
+		    
 			/*Delete records*/
 			
+		    // delete Clans clan6
+		    String clan6Name = clan6.getClanName();  //for check
+		    ClansDao.deleteClan(cxn, clan6);
+		    	//check
+		    if (ClansDao.getClanRacebyClanName(cxn, clan6Name) == null) {
+		    	System.out.format(
+		    			"%n%nclan6 with clanName=%s has been successfully deleted.", 
+		    			clan6Name
+		    			);
+		    } else {
+		    	System.out.println("%n%nError: clan6 still exists in the database.");
+		    }
 		}
 	}
 
