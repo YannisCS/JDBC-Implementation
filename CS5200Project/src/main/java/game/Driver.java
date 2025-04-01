@@ -198,6 +198,7 @@ public class Driver {
 		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
 		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
 		    PlayersDao.updatePlayerFirstName(cxn, P1, "Harry");
+		    P1 = PlayersDao.getPlayerByPlayerID(cxn, P1.getPlayerID());
 		    System.out.println("After updating: ");
 		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
 		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
@@ -208,6 +209,7 @@ public class Driver {
 		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
 		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
 		    PlayersDao.updatePlayerLastName(cxn, P1, "Potter");
+		    P1 = PlayersDao.getPlayerByPlayerID(cxn, P1.getPlayerID());
 		    System.out.println("After updating: ");
 		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
 		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
@@ -218,6 +220,7 @@ public class Driver {
 		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
 		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
 		    PlayersDao.updatePlayerEmailAddress(cxn, P1, "harry@example.com");
+		    P1 = PlayersDao.getPlayerByPlayerID(cxn, P1.getPlayerID());
 		    System.out.println("After updating: ");
 		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
 		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
