@@ -1,13 +1,14 @@
 package game.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Currencies {
 	private String currencyName;
-	private float cap; 
-	private float weeklyCap;
+	private BigDecimal cap; 
+	private BigDecimal weeklyCap;
 	
-	public Currencies(String currencyName, float cap, float weeklyCap) {
+	public Currencies(String currencyName, BigDecimal cap, BigDecimal weeklyCap) {
 		this.currencyName = currencyName;
 		this.cap = cap;
 		this.weeklyCap = weeklyCap;
@@ -21,19 +22,19 @@ public class Currencies {
 		this.currencyName = currencyName;
 	}
 
-	public float getCap() {
+	public BigDecimal getCap() {
 		return cap;
 	}
 
-	public void setCap(float cap) {
+	public void setCap(BigDecimal cap) {
 		this.cap = cap;
 	}
 
-	public float getWeeklyCap() {
+	public BigDecimal getWeeklyCap() {
 		return weeklyCap;
 	}
 
-	public void setWeeklyCap(float weeklyCap) {
+	public void setWeeklyCap(BigDecimal weeklyCap) {
 		this.weeklyCap = weeklyCap;
 	}
 
@@ -41,6 +42,7 @@ public class Currencies {
 	public int hashCode() {
 		return Objects.hash(cap, currencyName, weeklyCap);
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -51,9 +53,8 @@ public class Currencies {
 		if (getClass() != obj.getClass())
 			return false;
 		Currencies other = (Currencies) obj;
-		return Float.floatToIntBits(cap) == Float.floatToIntBits(other.cap)
-				&& Objects.equals(currencyName, other.currencyName)
-				&& Float.floatToIntBits(weeklyCap) == Float.floatToIntBits(other.weeklyCap);
+		return Objects.equals(cap, other.cap) && Objects.equals(currencyName, other.currencyName)
+				&& Objects.equals(weeklyCap, other.weeklyCap);
 	}
 
 	@Override
