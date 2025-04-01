@@ -3,9 +3,9 @@ package game.model;
 public class EquippedItems {
 	
 	private int charID;
-	private EquipmentSlot equipPosition;
+	private String equipPosition;
 	private int itemID;
-	public EquippedItems(int charID, EquipmentSlot equipPosition, int itemID) {
+	public EquippedItems(int charID, String equipPosition, int itemID) {
 		super();
 		this.charID = charID;
 		this.equipPosition = equipPosition;
@@ -17,10 +17,10 @@ public class EquippedItems {
 	public void setCharID(int charID) {
 		this.charID = charID;
 	}
-	public EquipmentSlot getEquipPosition() {
+	public String getEquipPosition() {
 		return equipPosition;
 	}
-	public void setEquipPosition(EquipmentSlot equipPosition) {
+	public void setEquipPosition(String equipPosition) {
 		this.equipPosition = equipPosition;
 	}
 	public int getItemID() {

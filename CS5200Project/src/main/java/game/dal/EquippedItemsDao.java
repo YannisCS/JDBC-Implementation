@@ -10,7 +10,6 @@ import java.util.List;
 import game.model.Characters;
 import game.model.EquippedItems;
 import game.model.Gears;
-import game.model.EquipmentSlot;
 
 
 public class EquippedItemsDao {
@@ -20,7 +19,7 @@ public class EquippedItemsDao {
 
 	public static EquippedItems create( Connection cxn,
 	           Characters character,
-	           EquipmentSlot equipmentSlot,
+	           String equipmentSlot,
 	           Gears gears
 	           ) throws SQLException{
 		
@@ -31,7 +30,7 @@ public class EquippedItemsDao {
 
             try (PreparedStatement ps = cxn.prepareStatement(insertInventorySQL)) {
                 ps.setInt(1, character.getCharID()); 
-                ps.setString(2, equipmentSlot.name());
+                ps.setString(2, equipmentSlot);
                 ps.setInt(3, gears.getItemID());
                 ps.executeUpdate();
             }
@@ -43,7 +42,7 @@ public class EquippedItemsDao {
 	
 	public static EquippedItems getEquippedItemsByCharactersAndSlot( Connection cxn,
 			Characters character,
-			EquipmentSlot equipmentSlot
+			String equipmentSlot
 	         ) throws SQLException{
 		
        String query = """
@@ -55,13 +54,13 @@ public class EquippedItemsDao {
 	    try (PreparedStatement selectStmt = cxn.prepareStatement(query)) {
 	    	
 	      selectStmt.setInt(1, character.getCharID()); 
-	      selectStmt.setString(2, equipmentSlot.name());  
+	      selectStmt.setString(2, equipmentSlot);  
 
 	      try (ResultSet results = selectStmt.executeQuery()) {
 	        if (results.next()) {
 	          return new EquippedItems(
 	            results.getInt("charID"),
-	            EquipmentSlot.valueOf(results.getString("equipPosition")),
+	            results.getString("equipPosition"),
 	            results.getInt("itemID")
 
 	          );
@@ -92,7 +91,7 @@ public class EquippedItemsDao {
 	                while (rs.next()) {
 	                	EquippedItems equippedItem = new EquippedItems(
 	                        rs.getInt("charID"),
-	        	            EquipmentSlot.valueOf(rs.getString("equipPosition")),
+	        	            rs.getString("equipPosition"),
 	                        rs.getInt("itemID")
 	                        );
 	                	equippedItems.add(equippedItem);
@@ -113,7 +112,7 @@ public class EquippedItemsDao {
 		try (PreparedStatement ps = cxn.prepareStatement(updateInventorySQL)) {
 			ps.setInt(1, newItemID);
 			ps.setInt(2, equippedItems.getCharID());
-			ps.setString(3, equippedItems.getEquipPosition().name());
+			ps.setString(3, equippedItems.getEquipPosition());
 		    ps.executeUpdate();
 		    equippedItems.setItemID(newItemID);
 		    
@@ -127,7 +126,7 @@ public class EquippedItemsDao {
 
 	    try (PreparedStatement deleteStmt = cxn.prepareStatement(deletePerson)) {
 	      deleteStmt.setInt(1, equippedItems.getCharID());
-	      deleteStmt.setString(2, equippedItems.getEquipPosition().name());
+	      deleteStmt.setString(2, equippedItems.getEquipPosition());
 	      deleteStmt.executeUpdate();
 	    }
 	}
