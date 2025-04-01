@@ -25,8 +25,8 @@ public class CurrenciesDao {
 		try (PreparedStatement insertStmt = cxn.prepareStatement(insertCurrencies)){
 
 			insertStmt.setString(1, currencyName);
-			insertStmt.setDouble(2,  cap.doubleValue()); 
-			insertStmt.setDouble(3, weeklyCap.doubleValue()); 
+			insertStmt.setBigDecimal(2,  cap); 
+			insertStmt.setBigDecimal(3, weeklyCap); 
 			insertStmt.executeUpdate();
 
 			return new Currencies(currencyName,cap,weeklyCap);

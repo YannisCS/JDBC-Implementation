@@ -1,14 +1,15 @@
 package game.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class CharacterWealth {
 	private Characters character;
 	private Currencies currency;
-	private float amount;
-	private float weeklyAcquired;
+	private BigDecimal amount;
+	private BigDecimal weeklyAcquired;
 	
-	public CharacterWealth(Characters character, Currencies currency, float amount, float weeklyAcquired) {
+	public CharacterWealth(Characters character, Currencies currency, BigDecimal amount, BigDecimal weeklyAcquired) {
 		this.character = character;
 		this.currency = currency;
 		this.amount = amount;
@@ -31,27 +32,29 @@ public class CharacterWealth {
 		this.currency = currency;
 	}
 
-	public float getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
-	public void setAmount(float amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 
-	public float getWeeklyAcquired() {
+	public BigDecimal getWeeklyAcquired() {
 		return weeklyAcquired;
 	}
 
-	public void setWeeklyAcquired(float weeklyAcquired) {
+	public void setWeeklyAcquired(BigDecimal weeklyAcquired) {
 		this.weeklyAcquired = weeklyAcquired;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(amount, currency, character, weeklyAcquired);
+		return Objects.hash(amount, character, currency, weeklyAcquired);
 	}
 
+
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -61,9 +64,8 @@ public class CharacterWealth {
 		if (getClass() != obj.getClass())
 			return false;
 		CharacterWealth other = (CharacterWealth) obj;
-		return Float.floatToIntBits(amount) == Float.floatToIntBits(other.amount)
-				&& Objects.equals(currency, other.currency) && Objects.equals(character, other.character)
-				&& Float.floatToIntBits(weeklyAcquired) == Float.floatToIntBits(other.weeklyAcquired);
+		return Objects.equals(amount, other.amount) && Objects.equals(character, other.character)
+				&& Objects.equals(currency, other.currency) && Objects.equals(weeklyAcquired, other.weeklyAcquired);
 	}
 
 	@Override
