@@ -90,6 +90,11 @@ public class Driver {
 			Characters Char5 = CharactersDao.create(cxn, P5, "Eva", "Night", clan5, dagger);
 			
 		    //Insert CharacterStatistics
+			CharacterStatistics charStat1 = CharacterStatisticsDao.create(cxn, Char1, strength, 10);
+			CharacterStatistics charStat2 = CharacterStatisticsDao.create(cxn, Char2, agility, 12);
+			CharacterStatistics charStat3 = CharacterStatisticsDao.create(cxn, Char3, intelligence, 15);
+			CharacterStatistics charStat4 = CharacterStatisticsDao.create(cxn, Char4, endurance, 11);
+			CharacterStatistics charStat5 = CharacterStatisticsDao.create(cxn, Char5, luck, 8);
 				
 			//Insert EquipmentBonuse
 			EquipmentBonuse swordStrength = EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, sword.getItemID()), strength, 5);
@@ -189,10 +194,16 @@ public class Driver {
 		      char1Test.getCharID(), char1Test.getPlayers().getPlayerID(), char1Test.getFirstName(), char1Test.getLastName(), char1Test.getClan(), char1Test.getWeaponWeared());
 			
 			//Read Statistics
+		    Statistics readStatTest = StatisticsDao.getStatisticsByName(cxn, "Strength");
+		    System.out.println("Reading statistics of strength: " + readStatTest.toString());
 			
 			//Read Currencies
+		    Currencies readCurrencyTest = CurrenciesDao.getCurrenciesByName(cxn, "Gold");
+		    System.out.println("Reading currency: Gold, " + readCurrencyTest.toString());
 			
 			//Read CharacterStatistics
+		    CharacterStatistics readCharStat1 = CharacterStatisticsDao.getCharacterStatByCharacterAndStat(cxn, Char1, strength);
+		    System.out.println("Reading strength value of char1" + readCharStat1.toString());
 			
 			//Read EquipmentBonuse
 			
@@ -214,6 +225,8 @@ public class Driver {
 		    		          cuj1Test.getCharacter().getCharID(), cuj1Test.getJob(), cuj1Test.getJobLevel(), cuj1Test.getxP());
 			
 			//Read CharacterWealth
+		    CharacterWealth readCharWealth = CharacterWealthDao.getCharacterWealthByCharacterAndCurrency(cxn, Char1, gold);
+		    System.out.println("Reading character1 gold stats: " + readCharWealth.toString());
 			
 			//Read Inventory
 		    Inventory inv1 = InventoryDao.getInventoryByCharactersAndSlot(cxn, Char1, 1);
