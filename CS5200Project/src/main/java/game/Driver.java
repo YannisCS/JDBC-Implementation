@@ -82,11 +82,11 @@ public class Driver {
 		    //Insert CharacterStatistics
 				
 			//Insert EquipmentBonuse
-			EquipmentBonuse swordStrength = EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, sword.getItemID()), strength, 5);
-			EquipmentBonuse bootsAgility = EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, boots.getItemID()), agility, 3);
-			EquipmentBonuse spearIntelligence = EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, spear.getItemID()), intelligence, 4);
-			EquipmentBonuse helmetEndurance = EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, helmet.getItemID()), endurance, 11);
-			EquipmentBonuse axeStrength = EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, axe.getItemID()), strength, 10);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, sword.getItemID()), strength, 5);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, boots.getItemID()), agility, 3);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, spear.getItemID()), intelligence, 4);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, helmet.getItemID()), endurance, 11);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, axe.getItemID()), strength, 10);
 
 			//Insert ConsumableItemBonuse
 			ConsumableItemBonuse sHealthPotionBonuse = ConsumableItemBonuseDao.create(cxn, smallHealthPotion, strength, 10, 15);
@@ -160,10 +160,16 @@ public class Driver {
 			//Read Items
 			
 			//Read Equipments
+		    Equipments equip1 = EquipmentsDao.getEquipmentByItemID(cxn, 1);
+		    System.out.format("Reading equipment one: \n", equip1.toString());
 			
 			//Read Gears
+		    Gears gear1 = GearsDao.getGearByItemID(cxn,6);
+		    System.out.format("Reading gear one: \n", gear1.toString());
 			
 			//Read Weapons
+		    Weapons weapon1 = WeaponsDao.getWeaponByItemID(cxn, 1);
+		    System.out.format("Reading weapon one: \n", weapon1.toString());
 			
 			//Read Characters
 		    Characters char1Test = CharactersDao.getCharacterByCharID(cxn, Char1.getCharID());
@@ -177,6 +183,8 @@ public class Driver {
 			//Read CharacterStatistics
 			
 			//Read EquipmentBonuse
+		    EquipmentBonuse  swordStrength = EquipmentBonuseDao.getEquipmengBonuseByEquipmentAndStats(cxn, sword, strength);
+		    System.out.format("Reading strength of sword: \n",swordStrength.toString());
 			
 			//Read Consumables
 		    Consumables cons = ConsumablesDao.getConsumableByItemID(cxn, 13);
