@@ -36,23 +36,38 @@ public class ConsumableItemBonuseDao {
 	 */
 	public static ConsumableItemBonuse getBonuseByItemAndStatistics(
 			Connection cxn,
-			Items item,
-			Statistics statistics
+			int itemID,
+			String statistics
 	) throws SQLException {
 		String query_BonuseByItemAndStatistics = """
-				SELECT *
-				FROM ConsumableItemBonuse
+				SELECT cb.*, s.*, i.itemName, i.level, i.maxStackSize, i.price
+				FROM ConsumableItemBonuse cb
+				JOIN Statistics s ON cb.statistics = s.statsName
+				JOIN Items i ON cb.itemID = i.itemID
 				WHERE itemID = ? AND statistics = ?;
 				""";
 		try (PreparedStatement pstmt = cxn.prepareStatement(query_BonuseByItemAndStatistics)) {
-			pstmt.setInt(1, item.getItemID());
-			pstmt.setString(2, statistics.getStatsName());
+			pstmt.setInt(1, itemID);
+			pstmt.setString(2, statistics);
 			
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
+					Items item = new Items(
+							rs.getInt("itemID"),
+							rs.getString("itemName"),
+							rs.getInt("level"),
+							rs.getInt("maxStackSize"),
+							rs.getBigDecimal("price")
+							);
+					
+					Statistics stat = new Statistics(
+							rs.getString("statsName"),
+							rs.getString("description")
+							);
+					
 					return new ConsumableItemBonuse(
 							item, 
-							statistics, 
+							stat, 
 							rs.getFloat("bonusePercent"),
 							rs.getInt("valueCap")
 							);

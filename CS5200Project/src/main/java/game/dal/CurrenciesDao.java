@@ -1,5 +1,6 @@
 package game.dal;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,16 +17,16 @@ public class CurrenciesDao {
 	public static Currencies create(
 			Connection cxn, 
 			String currencyName, 
-			float cap, 
-			float weeklyCap
+			BigDecimal cap, 
+			BigDecimal weeklyCap
 			) throws SQLException{
 		final String insertCurrencies = "INSERT INTO currencies (currencyName, cap, weeklyCap) VALUES (?, ?, ?);";
 
 		try (PreparedStatement insertStmt = cxn.prepareStatement(insertCurrencies)){
 
 			insertStmt.setString(1, currencyName);
-			insertStmt.setFloat(2,  cap); 
-			insertStmt.setFloat(3, weeklyCap); 
+			insertStmt.setBigDecimal(2,  cap); 
+			insertStmt.setBigDecimal(3, weeklyCap); 
 			insertStmt.executeUpdate();
 
 			return new Currencies(currencyName,cap,weeklyCap);
@@ -47,7 +48,7 @@ public class CurrenciesDao {
 
 			try(ResultSet rs = getStmt.executeQuery()){		
 				if(rs.next()) {
-					return new Currencies(currencyName,rs.getFloat("cap"),rs.getFloat("weeklyCap"));			
+					return new Currencies(currencyName,rs.getBigDecimal("cap"),rs.getBigDecimal("weeklyCap"));			
 				}else {
 					return null;
 				}

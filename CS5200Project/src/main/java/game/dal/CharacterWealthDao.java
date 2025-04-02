@@ -1,5 +1,6 @@
 package game.dal;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,8 +20,8 @@ public class CharacterWealthDao {
 			Connection cxn, 
 			Characters character,
 			Currencies currency,
-			float amount,
-			float weeklyAcquired
+			BigDecimal amount,
+			BigDecimal weeklyAcquired
 			) throws SQLException{
 		final String insertCharacterWealth = "INSERT INTO characterWealth (charID, currencyName, amount, weeklyAcquired) VALUES (?, ?, ?, ?);";
 
@@ -28,8 +29,8 @@ public class CharacterWealthDao {
 
 			insertStmt.setInt(1, character.getCharID());
 			insertStmt.setString(2,  currency.getCurrencyName()); 
-			insertStmt.setFloat(3, amount); 
-			insertStmt.setFloat(4, weeklyAcquired);
+			insertStmt.setBigDecimal(3, amount); 
+			insertStmt.setBigDecimal(4, weeklyAcquired);
 			insertStmt.executeUpdate();
 
 			return new CharacterWealth(character,currency,amount,weeklyAcquired);
@@ -52,7 +53,7 @@ public class CharacterWealthDao {
 			
 			try(ResultSet rs = getStmt.executeQuery()){		
 				if(rs.next()) {
-					return new CharacterWealth(character, currency, rs.getFloat("amount"), rs.getFloat("weeklyAcquired"));			
+					return new CharacterWealth(character, currency, rs.getBigDecimal("amount"), rs.getBigDecimal("weeklyAcquired"));			
 				}else {
 					return null;
 				}
@@ -80,7 +81,7 @@ public class CharacterWealthDao {
                 while (rs.next()) {
                 	Currencies currency = CurrenciesDao.getCurrenciesByName(cxn, rs.getString("currencyName"));
                 	
-                    characterWealthList.add(new CharacterWealth(character, currency, rs.getFloat("amount"), rs.getFloat("weeklyAcquired")));
+                    characterWealthList.add(new CharacterWealth(character, currency, rs.getBigDecimal("amount"), rs.getBigDecimal("weeklyAcquired")));
                 }
             }
         }
