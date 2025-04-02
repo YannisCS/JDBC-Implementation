@@ -23,7 +23,7 @@ public class ItemsDao {
 			) throws SQLException{
 		
 	    final String insertItems = """
-	    	      INSERT INTO Items (itemName, level, maxStackSize) VALUES (?, ?, ?);
+	    	      INSERT INTO Items (itemName, level, maxStackSize, price) VALUES (?, ?, ?, ?);
 	    		""";
 	    try(PreparedStatement insertStmt = cxn.prepareStatement(insertItems, Statement.RETURN_GENERATED_KEYS)){
 	    	

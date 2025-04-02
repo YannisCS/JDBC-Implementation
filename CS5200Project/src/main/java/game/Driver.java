@@ -45,18 +45,20 @@ public class Driver {
 			
 			//Insert Items: 15 items: 5 Weapons, 5 Gears, and 5 Consumables.
 			/*Insert Weapons*/
-			Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,1500.00,10,"Warrior",50);
-			Weapons axe = WeaponsDao.create(cxn,"Axe of Fury",12,1,1700.00,12,"Mage", 45);
-			Weapons spear = WeaponsDao.create(cxn,"Spear of Destiny",11,1,1600.00,11,"Archer",40);
-			Weapons bow = WeaponsDao.create(cxn,"Bow of Eternity",9,1,1400.00,9,"Thief",35);
-			Weapons dagger = WeaponsDao.create(cxn,"Dagger of Stealth",8,1,1300.00,8,"Healer",30);
+//			Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,1500.00,10,"Warrior",50);
+			
+			Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,BigDecimal.valueOf(1500.00),10,"Warrior",50);
+			Weapons axe = WeaponsDao.create(cxn,"Axe of Fury",12,1,BigDecimal.valueOf(1700.00),12,"Mage", 45);
+			Weapons spear = WeaponsDao.create(cxn,"Spear of Destiny",11,1,BigDecimal.valueOf(1600.00),11,"Archer",40);
+			Weapons bow = WeaponsDao.create(cxn,"Bow of Eternity",9,1,BigDecimal.valueOf(1400.00),9,"Thief",35);
+			Weapons dagger = WeaponsDao.create(cxn,"Dagger of Stealth",8,1,BigDecimal.valueOf(1300.00),8,"Healer",30);
 			
 			/*Insert Gears*/
-			Gears helmet = GearsDao.create(cxn,"Iron Helmet",1,1,200.00,5);
-			Gears armor = GearsDao.create(cxn,"Steel Armor",10,1,2000.00,10);
-			Gears boots = GearsDao.create(cxn,"Leather Boots",4,1,450.00,4);
-			Gears gloves = GearsDao.create(cxn,"Chainmail Gloves",6,1,600.00,6);
-			Gears legging = GearsDao.create(cxn,"Plate Leggings",7,1,800.00,7);
+			Gears helmet = GearsDao.create(cxn,"Iron Helmet",1,1,BigDecimal.valueOf(200.00),5);
+			Gears armor = GearsDao.create(cxn,"Steel Armor",10,1,BigDecimal.valueOf(2000.00),10);
+			Gears boots = GearsDao.create(cxn,"Leather Boots",4,1,BigDecimal.valueOf(450.00),4);
+			Gears gloves = GearsDao.create(cxn,"Chainmail Gloves",6,1,BigDecimal.valueOf(600.00),6);
+			Gears legging = GearsDao.create(cxn,"Plate Leggings",7,1,BigDecimal.valueOf(800.00),7);
 			
 			/*Insert Consumables*/
 			Consumables smallHealthPotion = ConsumablesDao.create(cxn, "Small Health Potion", 1, 20, new BigDecimal("50.00"), "Restores 50 HP.");
@@ -111,10 +113,21 @@ public class Driver {
 			
 			//Insert CharacterWealth
 			
+			
 			//Insert Inventory
-			
+			Inventory inven1 = InventoryDao.create(cxn, Char1, 1, armor, 2);
+			Inventory inven2 = InventoryDao.create(cxn, Char2, 2, boots, 2);
+			Inventory inven3 = InventoryDao.create(cxn, Char3, 3, spear, 3);
+			Inventory inven4 = InventoryDao.create(cxn, Char4, 4, gloves, 4);
+			Inventory inven5 = InventoryDao.create(cxn, Char5, 5, helmet, 2);
+
+
 			//Insert EquippedItems
-			
+			EquippedItems equippedItem1 = EquippedItemsDao.create(cxn, Char1, "HEAD", helmet);
+			EquippedItems equippedItem2 = EquippedItemsDao.create(cxn, Char2, "BODY", armor);
+			EquippedItems equippedItem3 = EquippedItemsDao.create(cxn, Char3, "FOOT", boots);
+			EquippedItems equippedItem4 = EquippedItemsDao.create(cxn, Char4, "HAND", gloves);
+			EquippedItems equippedItem5 = EquippedItemsDao.create(cxn, Char5, "LEG", legging);
 			
 			/*Read records*/
 			
@@ -185,10 +198,26 @@ public class Driver {
 			//Read CharacterWealth
 			
 			//Read Inventory
-			
+		    Inventory inv1 = InventoryDao.getInventoryByCharactersAndSlot(cxn, Char1, 1);
+		    System.out.format("Reading Inventory1: charID:%s slotID:%s itemID:%s quantity:%s", inv1.getCharID(), inv1.getSlotID(),inv1.getInstance(),inv1.getQuantity());
+
+		    Inventory inv2 = InventoryDao.getInventoryByCharactersAndSlot(cxn, Char2, 2);
+		    System.out.format("Reading Inventory2: charID:%s slotID:%s itemID:%s quantity:%s", inv2.getCharID(), inv2.getSlotID(),inv2.getInstance(),inv2.getQuantity());
+
+		    Inventory inv3 = InventoryDao.getInventoryByCharactersAndSlot(cxn, Char3, 3);
+		    System.out.format("Reading Inventory3: charID:%s slotID:%s itemID:%s quantity:%s", inv3.getCharID(), inv3.getSlotID(),inv3.getInstance(),inv3.getQuantity());
+
+		    Inventory inv4 = InventoryDao.getInventoryByCharactersAndSlot(cxn, Char4, 4);
+		    System.out.format("Reading Inventory4: charID:%s slotID:%s itemID:%s quantity:%s", inv4.getCharID(), inv4.getSlotID(),inv4.getInstance(),inv4.getQuantity());
+
+		    Inventory inv5 = InventoryDao.getInventoryByCharactersAndSlot(cxn, Char5, 5);
+		    System.out.format("Reading Inventory5: charID:%s slotID:%s itemID:%s quantity:%s", inv5.getCharID(), inv5.getSlotID(),inv5.getInstance(),inv5.getQuantity());
+
+		    
 			//Read EquippedItems
-			
-			
+			EquippedItems equipedItem1 = EquippedItemsDao.getEquippedItemsByCharactersAndSlot(cxn, Char1, "HEAD");
+		    System.out.format("Reading EquippedItems1: charID:%s equipPosition:%s itemID:%s ", equipedItem1.getCharID(), equipedItem1.getEquipPosition(),equipedItem1.getItemID());
+
 			
 			/*Update records*/
 			
@@ -247,6 +276,12 @@ public class Driver {
 		    		"%nAfter updating: %s", 
 		    		antidote.toString()
 		    		);
+		    
+			//Update EquippedItems itemID
+		    
+		    
+		    
+
 		    
 			/*Delete records*/
 		    // Delete Players
