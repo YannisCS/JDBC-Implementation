@@ -69,7 +69,10 @@ public class Driver {
 			
 			//Insert Statistics
 			Statistics strength = StatisticsDao.create(cxn, "Strength", "Determines physical power.");
-			
+			Statistics agility = StatisticsDao.create(cxn, "Agility", "Determines speed and dexterity.");
+			Statistics intelligence = StatisticsDao.create(cxn, "Intelligence", "Determines magical ability.");
+			Statistics endurance = StatisticsDao.create(cxn, "Endurance", "Determines stamina and resilience.");
+			Statistics luck = StatisticsDao.create(cxn, "Luck", "Determines chance of critical hits.");			
 			//Insert Currencies
 			
 			//Insert Characters
