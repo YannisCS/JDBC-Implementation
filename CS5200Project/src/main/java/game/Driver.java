@@ -22,6 +22,7 @@ public class Driver {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	public static void insertRecords() throws SQLException {
 		try (Connection cxn = ConnectionManager.getConnection()) {
 			/**
@@ -73,6 +74,7 @@ public class Driver {
 			Statistics intelligence = StatisticsDao.create(cxn, "Intelligence", "Determines magical ability.");
 			Statistics endurance = StatisticsDao.create(cxn, "Endurance", "Determines stamina and resilience.");
 			Statistics luck = StatisticsDao.create(cxn, "Luck", "Determines chance of critical hits.");			
+			
 			//Insert Currencies
 			
 			//Insert Characters
@@ -132,8 +134,10 @@ public class Driver {
 			EquippedItems equippedItem4 = EquippedItemsDao.create(cxn, Char4, "HAND", gloves);
 			EquippedItems equippedItem5 = EquippedItemsDao.create(cxn, Char5, "LEG", legging);
 			
-			/*Read records*/
-			
+			/**
+			 * Read records
+			 */		
+			System.out.println("-------Testing Read Operations-------");
 			//Read Players
 			Players player1Test = PlayersDao.getPlayerByPlayerID(cxn, P1.getPlayerID());
 		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
@@ -153,7 +157,7 @@ public class Driver {
 		    Clans clanrace = ClansDao.getClanRacebyClanName(cxn, "Lionhearts");
 		    System.out.format("%n%n%s", clanrace.toString());
 		    
-		    /* get clans of a specific race */
+		    /* get a list of clans for a specific race */
 		    List<Clans> clans = ClansDao.getClansbyRace(cxn, Clans.Races.ELF);
 		    System.out.print("%n%nclans of elf:");
 		    for (Clans c : clans) {
@@ -222,8 +226,9 @@ public class Driver {
 		    System.out.format("Reading EquippedItems1: charID:%s equipPosition:%s itemID:%s ", equipedItem1.getCharID(), equipedItem1.getEquipPosition(),equipedItem1.getItemID());
 
 			
-			/*Update records*/
-			
+			/**
+			 * Update records
+			 */		
 		    //Update Players firstName
 		    System.out.println("Updating Players firstName: ");
 		    System.out.println("Before updating: ");
@@ -286,7 +291,9 @@ public class Driver {
 		    
 
 		    
-			/*Delete records*/
+			/**
+			 * Delete records
+			 */
 		    // Delete Players
 		    System.out.println("Deleting Players 'Ethan Potter': ");
 		    System.out.println("Before deleting: ");
@@ -309,9 +316,9 @@ public class Driver {
 		    
 			
 		    // delete Clans clan6
-		    String clan6Name = clan6.getClanName();  //for check
+		    String clan6Name = clan6.getClanName();  /* for check */
 		    ClansDao.deleteClan(cxn, clan6);
-		    	//check
+		    	/* check */
 		    if (ClansDao.getClanRacebyClanName(cxn, clan6Name) == null) {
 		    	System.out.format(
 		    			"%n%nclan6 with clanName=%s has been successfully deleted.", 
@@ -341,6 +348,13 @@ public class Driver {
 				    CONSTRAINT pk_players PRIMARY KEY (playerID)
 				);
 						""");
+			/* //remove the enum table
+			cxn.createStatement().executeUpdate("""
+					CREATE TABLE `Races` (
+					    `raceName` VARCHAR(255),
+					    CONSTRAINT pk_races PRIMARY KEY (raceName)
+					);
+							""");*/
 			cxn.createStatement().executeUpdate("""
 					CREATE TABLE `Clans` (
 					    `clanName` VARCHAR(255),
@@ -348,7 +362,7 @@ public class Driver {
 					    CONSTRAINT pk_clans PRIMARY KEY (clanName)
 					);
 							""");
-			/*
+			/* //remove the enum tables
 			cxn.createStatement().executeUpdate("""
 					CREATE TABLE AvailableJobs (
 						jobName VARCHAR(255),
