@@ -76,6 +76,11 @@ public class Driver {
 			Statistics luck = StatisticsDao.create(cxn, "Luck", "Determines chance of critical hits.");			
 			
 			//Insert Currencies
+			Currencies gold = CurrenciesDao.create(cxn, "Gold", new BigDecimal(1000.00), null);
+			Currencies silver = CurrenciesDao.create(cxn, "Silver", null, new BigDecimal("100.00"));
+			Currencies bronze = CurrenciesDao.create(cxn, "Bronze", null, null);
+			Currencies platinum = CurrenciesDao.create(cxn, "Platinum",new BigDecimal(300.00), new BigDecimal(30.00));
+			Currencies diamond = CurrenciesDao.create(cxn, "Diamond", new BigDecimal(50.00), new BigDecimal(5.00));
 			
 			//Insert Characters
 			Characters Char1 = CharactersDao.create(cxn, P1, "Alicia", "Storm", clan1, sword);
@@ -117,6 +122,12 @@ public class Driver {
 			CharacterUnlockedJob CUJ6 = CharacterUnlockedJobDao.create(cxn, Char5, "Healer", 5, 500);
 			
 			//Insert CharacterWealth
+			CharacterWealth CW1 = CharacterWealthDao.create(cxn, Char1, gold, new BigDecimal(500.00), new BigDecimal(50.00));
+			CharacterWealth CW2 = CharacterWealthDao.create(cxn, Char2, silver, new BigDecimal(1000.00), new BigDecimal(100.00));
+			CharacterWealth CW3 = CharacterWealthDao.create(cxn, Char3, bronze, new BigDecimal(300.00), new BigDecimal(30.00));
+			CharacterWealth CW4 = CharacterWealthDao.create(cxn, Char4, platinum, new BigDecimal(150.00), new BigDecimal(15.00));
+			CharacterWealth CW5 = CharacterWealthDao.create(cxn, Char5, diamond, new BigDecimal(20.00), null);
+
 			
 			
 			//Insert Inventory
