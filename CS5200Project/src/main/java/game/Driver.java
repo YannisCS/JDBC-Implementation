@@ -186,15 +186,15 @@ public class Driver {
 			//Read Equipments
 		    System.out.println();
 		    Equipments equip1 = EquipmentsDao.getEquipmentByItemID(cxn, sword.getItemID());
-		    System.out.println("\n* Reading equipment: " + equip1.toString());
+		    System.out.println("\n* Reading equipment: \n" + equip1.toString());
 			
 			//Read Gears
 		    Gears gear1 = GearsDao.getGearByItemID(cxn,helmet.getItemID());
-		    System.out.println("\n* Reading gear: " + gear1.toString());
+		    System.out.println("\n* Reading gear: \n" + gear1.toString());
 			
 			//Read Weapons
 		    Weapons weapon1 = WeaponsDao.getWeaponByItemID(cxn, sword.getItemID());
-		    System.out.println("\n* Reading weapon:" + weapon1.toString());
+		    System.out.println("\n* Reading weapon:\n" + weapon1.toString());
 			
 			//Read Characters
 		    Characters char1Test = CharactersDao.getCharacterByCharID(cxn, Char1.getCharID());
