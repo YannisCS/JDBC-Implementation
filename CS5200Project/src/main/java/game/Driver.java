@@ -422,8 +422,8 @@ public class Driver {
 	
 	public static void resetSchema() throws SQLException {
 		try (Connection cxn = ConnectionManager.getConnection()) {
-			cxn.createStatement().executeUpdate("DROP SCHEMA IF EXISTS PM3;");
-			cxn.createStatement().executeUpdate("CREATE SCHEMA PM3;");
+			cxn.createStatement().executeUpdate("DROP SCHEMA IF EXISTS CS5200Project;");
+			cxn.createStatement().executeUpdate("CREATE SCHEMA CS5200Project;");
 		}
 		
 		try (Connection cxn = ConnectionManager.getConnection()) {
@@ -507,11 +507,7 @@ public class Driver {
 					CONSTRAINT fk_weapon_itemID FOREIGN KEY (`itemID`)
 						REFERENCES Equipments(`itemID`)
 						ON UPDATE CASCADE
-						ON DELETE CASCADE,
-					CONSTRAINT fk_weapon_job FOREIGN KEY (`wearableJob`)
-						REFERENCES AvailableJobs(`jobName`)
-						ON UPDATE CASCADE
-						ON DELETE RESTRICT
+						ON DELETE CASCADE
 				);
 						""");
 			cxn.createStatement().executeUpdate("""
@@ -623,11 +619,7 @@ public class Driver {
 					    CONSTRAINT fk_JobsForGear_gear FOREIGN KEY (gear) 
 							REFERENCES Gears (itemID)
 					        ON UPDATE CASCADE 
-					        ON DELETE CASCADE,
-						CONSTRAINT fk_JobsForGear_jobName FOREIGN KEY (jobName)
-							REFERENCES AvailableJobs (jobName)
-					        ON UPDATE CASCADE 
-					        ON DELETE RESTRICT
+					        ON DELETE CASCADE
 					);
 								""");
 			cxn.createStatement().executeUpdate("""
@@ -639,10 +631,6 @@ public class Driver {
 					    CONSTRAINT pk_CharacterUnlockedJob PRIMARY KEY (charID, jobName),
 						CONSTRAINT fk_CharacterUnlockedJob_charID FOREIGN KEY (charID)
 							REFERENCES Characters (charID)
-					        ON UPDATE CASCADE 
-					        ON DELETE CASCADE,
-					    CONSTRAINT fk_CharacterUnlockedJob_jobName FOREIGN KEY (jobName)
-							REFERENCES AvailableJobs (jobName)
 					        ON UPDATE CASCADE 
 					        ON DELETE CASCADE
 					);
@@ -694,11 +682,7 @@ public class Driver {
 						CONSTRAINT fk_EquippedItems_Items FOREIGN KEY (itemID)
 					        REFERENCES Gears(itemID) 
 					        ON UPDATE CASCADE 
-					        ON DELETE RESTRICT,
-					   	CONSTRAINT fk_EquippedItems_Slot FOREIGN KEY (equipPosition)
-					        REFERENCES EquipmentSlot(bodyPartName) 
-					        ON UPDATE CASCADE 
-					        ON DELETE RESTRICT  
+					        ON DELETE RESTRICT
 					);
 								""");
 			

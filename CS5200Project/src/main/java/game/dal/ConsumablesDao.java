@@ -19,7 +19,7 @@ public class ConsumablesDao {
 			String description
 	) throws SQLException {
 		int itemID = ItemsDao.create(cxn, itemName, level, maxStackSize, price);
-		String insertConsumables = "INSERT INTO Consumables (itemID, description) VALUES (?, ?,);";
+		String insertConsumables = "INSERT INTO Consumables (itemID, description) VALUES (?, ?);";
 		
 		try (PreparedStatement pstmt = cxn.prepareStatement(insertConsumables)) {
 			pstmt.setInt(1, itemID);

@@ -44,7 +44,12 @@ public class CharacterUnlockedJobDao{
             insertStmt.setNull(4, Types.INTEGER);
         }
         insertStmt.executeUpdate();
-        return new CharacterUnlockedJob(character, jobName, jobLevel, xP);
+        
+        // Use the null constructor and set values
+        CharacterUnlockedJob cuj = new CharacterUnlockedJob(character, jobName);
+        if (jobLevel != null) cuj.setJobLevel(jobLevel);
+        if (xP != null) cuj.setxP(xP);
+        return cuj;
       }
 	}
   
