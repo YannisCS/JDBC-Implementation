@@ -351,6 +351,16 @@ public class Driver {
 		    		);
 			System.out.println();
 			System.out.println();
+			
+			// Update currencies
+			System.out.println("Updating currency cap");
+			System.out.println("Before update: " + gold.toString());
+			CurrenciesDao.updateCap(cxn, gold, new BigDecimal(2000.00));
+			gold = CurrenciesDao.getCurrenciesByName(cxn, "Gold");
+			System.out.println("After update: " + gold.toString());
+			System.out.println();
+			
+			
 		    
 			/**
 			 * Delete records

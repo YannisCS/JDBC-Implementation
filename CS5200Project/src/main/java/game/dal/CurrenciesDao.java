@@ -58,24 +58,22 @@ public class CurrenciesDao {
 
 	// update given currency's cap with new cap
 	public static Currencies updateCap(
-			Connection cxn,
-			Currencies currency,
-			float newCap
-			) throws SQLException{
-		final String updateCurrencyCap = "UPDATE currencies SET cap = ? WHERE currencyName = ?;";
+	        Connection cxn,
+	        Currencies currency,
+	        BigDecimal newCap
+	) throws SQLException {
+	    final String updateCurrencyCap = "UPDATE currencies SET cap = ? WHERE currencyName = ?;";
 
-		try(PreparedStatement updateStmt = cxn.prepareStatement(updateCurrencyCap)){
+	    try (PreparedStatement updateStmt = cxn.prepareStatement(updateCurrencyCap)) {
+	        updateStmt.setBigDecimal(1, newCap);
+	        updateStmt.setString(2, currency.getCurrencyName());
 
-			updateStmt.setFloat(1, newCap);
-			updateStmt.setString(2, currency.getCurrencyName());
-
-			try(ResultSet rs = updateStmt.executeQuery()){		
-				if(rs.next()) {
-					return new Currencies(currency.getCurrencyName(),currency.getCap(),currency.getWeeklyCap());			
-				}else {
-					return null;
-				}
-			}
-		}
+	        int rowsAffected = updateStmt.executeUpdate();
+	        if (rowsAffected > 0) {
+	            return new Currencies(currency.getCurrencyName(), newCap, currency.getWeeklyCap());
+	        } else {
+	            return null;
+	        }
+	    }
 	}
 }
