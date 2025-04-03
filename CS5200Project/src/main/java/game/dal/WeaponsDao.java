@@ -54,7 +54,7 @@ public class WeaponsDao {
 					   requiredLevel,
 					   wearableJob,
 					   damage
-				FROM Weapon W
+				FROM Weapons W
 				JOIN Equipments E
 				ON W.ItemID = E.ItemID
 				JOIN Items I

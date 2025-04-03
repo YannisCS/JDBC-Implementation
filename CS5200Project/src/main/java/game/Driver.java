@@ -155,13 +155,14 @@ public class Driver {
 			/**
 			 * Read records
 			 */		
-			System.out.println("-------Testing Read Operations-------");
+			System.out.println("-------Testing Read Records Operations-------");
 			//Read Players
 			Players player1Test = PlayersDao.getPlayerByPlayerID(cxn, P1.getPlayerID());
-		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		    System.out.format("Reading Single Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
 		      player1Test.getPlayerID(), player1Test.getFirstName(), player1Test.getLastName(), player1Test.getEmailAddress());
 			
 		    //Read a list of Players
+		    System.out.format("Reading a list of Players:");
 		    List<Players> playersList = PlayersDao.getPlayersFromFirstName(cxn, "Ethan");
 		    for (Players player : playersList) {
 		        System.out.format("Looping Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
@@ -222,7 +223,7 @@ public class Driver {
 		    System.out.format("%n%nConsumable item with itemID=13: %s", cons.toString());
 			
 			//Read ConsumableItemBonuse
-		    ConsumableItemBonuse consBonuse = ConsumableItemBonuseDao.getBonuseByItemAndStatistics(cxn, 13, "strength");
+		    ConsumableItemBonuse consBonuse = ConsumableItemBonuseDao.getBonuseByItemAndStatistics(cxn, largeHealthPotion.getItemID(), "intelligence");
 		    System.out.format("%nstrength for Consumable item with itemID=13: bonusePercent=%f | valueCap=%d", consBonuse.getBonusePercent(), consBonuse.getValueCap());
 			
 			//Read JobsForGear
@@ -260,12 +261,13 @@ public class Driver {
 		    System.out.format("Reading EquippedItems1: charID:%s equipPosition:%s itemID:%s ", equipedIte1.getCharID(), equipedIte1.getEquipPosition(),equipedIte1.getItemID());
 
 			EquippedItems equipedIte2 = EquippedItemsDao.getEquippedItemsByCharIDAndSlot(cxn, Char2.getCharID(), "BODY");
-		    System.out.format("Reading equipedIte2: charID:%s equipPosition:%s itemID:%s ", equipedIte2.getCharID(), equipedIte2.getEquipPosition(),equipedIte2.getItemID());
-
+		    System.out.format("Reading equipedIte2: charID:%s equipPosition:%s itemID:%s \n", equipedIte2.getCharID(), equipedIte2.getEquipPosition(),equipedIte2.getItemID());
+		    System.out.println();
 
 			/**
 			 * Update records
 			 */		
+			System.out.println("-------Testing Update Records Operations-------");
 		    //Update Players firstName
 		    System.out.println("Updating Players firstName: ");
 		    System.out.println("Before updating: ");
@@ -347,11 +349,13 @@ public class Driver {
 		    		"%nAfter updating: %s", 
 		    		inv1.toString()
 		    		);
-		    
+			System.out.println();
+			System.out.println();
 		    
 			/**
 			 * Delete records
 			 */
+			System.out.println("-------Testing Delete Records Operations-------");
 		    // Delete Players
 		    System.out.println("Deleting Players 'Ethan Potter': ");
 		    System.out.println("Before deleting: ");
@@ -385,7 +389,8 @@ public class Driver {
 		    } else {
 		    	System.out.println("%n%nError: clan6 still exists in the database.");
 		    }
-		    
+			System.out.println();
+			
 		    //delete EquippedItems 
 		    int charID =  equippedItem3.getCharID();
 		    String equipmentSlot = equippedItem3.getEquipPosition();
@@ -401,7 +406,7 @@ public class Driver {
 			    } else {
 		          System.out.println("equippedItem3 has been successfully deleted \n");
 			    }
-		    
+			System.out.println();
 		    
 		    //delete Inventory
 		    System.out.format("Before deleting Inventory1: charID:%s slotID:%s itemID:%s quantity:%s", inv1.getCharID(), inv1.getSlotID(),inv1.getInstance(),inv1.getQuantity());
