@@ -61,7 +61,7 @@ public class Weapons extends Equipments {
   @Override
   public String toString() {
     return String.format(
-      "Equipment(%s, %s, %d)",
+      "Weapon: [%s, Wearable Job=%s, Damage=%d]",
       super.toString(),
       wearableJob,
       damage

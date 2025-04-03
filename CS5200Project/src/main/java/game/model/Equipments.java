@@ -47,7 +47,7 @@ public class Equipments extends Items {
   @Override
   public String toString() {
     return String.format(
-      "Equipment(%s, %d)",
+      "Equipment: [%s, required level=%d]",
       super.toString(),
       requiredLevel
     );

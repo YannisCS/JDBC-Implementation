@@ -23,7 +23,7 @@ public class Gears extends Equipments {
   @Override
   public String toString() {
     return String.format(
-      "Gear(%s)",
+      "Gear: [%s]",
       super.toString()
     );
   }

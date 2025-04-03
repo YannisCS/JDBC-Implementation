@@ -62,12 +62,12 @@ public class EquipmentBonuse {
 
   @Override
   public String toString() {
-    return String.format("Persons(%s)", fieldsToString());
+    return String.format("Equipment Bonuse: [%s]", fieldsToString());
   }
 
   protected String fieldsToString() {
     return String.format(
-      "Equipment Bonuse(%s, %s, %d)",
+      "%s, %s, value=%d",
       equipment,
       statistics,
       value
