@@ -46,14 +46,14 @@ public class Driver {
 			
 			//Insert Items: 15 items: 5 Weapons, 5 Gears, and 5 Consumables.
 			/*Insert Weapons*/
-//			Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,1500.00,10,"Warrior",50);
-			
+			//Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,1500.00,10,"Warrior",50);
+
 			Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,BigDecimal.valueOf(1500.00),10,"Warrior",50);
 			Weapons axe = WeaponsDao.create(cxn,"Axe of Fury",12,1,BigDecimal.valueOf(1700.00),12,"Mage", 45);
 			Weapons spear = WeaponsDao.create(cxn,"Spear of Destiny",11,1,BigDecimal.valueOf(1600.00),11,"Archer",40);
 			Weapons bow = WeaponsDao.create(cxn,"Bow of Eternity",9,1,BigDecimal.valueOf(1400.00),9,"Thief",35);
 			Weapons dagger = WeaponsDao.create(cxn,"Dagger of Stealth",8,1,BigDecimal.valueOf(1300.00),8,"Healer",30);
-			
+
 			/*Insert Gears*/
 			Gears helmet = GearsDao.create(cxn,"Iron Helmet",1,1,BigDecimal.valueOf(200.00),5);
 			Gears armor = GearsDao.create(cxn,"Steel Armor",10,1,BigDecimal.valueOf(2000.00),10);
@@ -78,6 +78,11 @@ public class Driver {
 			Statistics luck = StatisticsDao.create(cxn, "Luck", "Determines chance of critical hits.");			
 			
 			//Insert Currencies
+			Currencies gold = CurrenciesDao.create(cxn, "Gold", new BigDecimal(1000.00), null);
+			Currencies silver = CurrenciesDao.create(cxn, "Silver", null, new BigDecimal("100.00"));
+			Currencies bronze = CurrenciesDao.create(cxn, "Bronze", null, null);
+			Currencies platinum = CurrenciesDao.create(cxn, "Platinum",new BigDecimal(300.00), new BigDecimal(30.00));
+			Currencies diamond = CurrenciesDao.create(cxn, "Diamond", new BigDecimal(50.00), new BigDecimal(5.00));
 			
 			//Insert Characters
 			Characters Char1 = CharactersDao.create(cxn, P1, "Alicia", "Storm", clan1, sword);
@@ -87,13 +92,18 @@ public class Driver {
 			Characters Char5 = CharactersDao.create(cxn, P5, "Eva", "Night", clan5, dagger);
 			
 		    //Insert CharacterStatistics
+			CharacterStatistics charStat1 = CharacterStatisticsDao.create(cxn, Char1, strength, 10);
+			CharacterStatistics charStat2 = CharacterStatisticsDao.create(cxn, Char2, agility, 12);
+			CharacterStatistics charStat3 = CharacterStatisticsDao.create(cxn, Char3, intelligence, 15);
+			CharacterStatistics charStat4 = CharacterStatisticsDao.create(cxn, Char4, endurance, 11);
+			CharacterStatistics charStat5 = CharacterStatisticsDao.create(cxn, Char5, luck, 8);
 				
 			//Insert EquipmentBonuse
-			EquipmentBonuse swordStrength = EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, sword.getItemID()), strength, 5);
-			EquipmentBonuse bootsAgility = EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, boots.getItemID()), agility, 3);
-			EquipmentBonuse spearIntelligence = EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, spear.getItemID()), intelligence, 4);
-			EquipmentBonuse helmetEndurance = EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, helmet.getItemID()), endurance, 11);
-			EquipmentBonuse axeStrength = EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, axe.getItemID()), strength, 10);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, sword.getItemID()), strength, 5);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, boots.getItemID()), agility, 3);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, spear.getItemID()), intelligence, 4);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, helmet.getItemID()), endurance, 11);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, axe.getItemID()), strength, 10);
 
 			//Insert ConsumableItemBonuse
 			ConsumableItemBonuse sHealthPotionBonuse = ConsumableItemBonuseDao.create(cxn, smallHealthPotion, strength, 10, 15);
@@ -119,6 +129,12 @@ public class Driver {
 			CharacterUnlockedJob CUJ6 = CharacterUnlockedJobDao.create(cxn, Char5, "Healer", 5, 500);
 			
 			//Insert CharacterWealth
+			CharacterWealth CW1 = CharacterWealthDao.create(cxn, Char1, gold, new BigDecimal(500.00), new BigDecimal(50.00));
+			CharacterWealth CW2 = CharacterWealthDao.create(cxn, Char2, silver, new BigDecimal(1000.00), new BigDecimal(100.00));
+			CharacterWealth CW3 = CharacterWealthDao.create(cxn, Char3, bronze, new BigDecimal(300.00), new BigDecimal(30.00));
+			CharacterWealth CW4 = CharacterWealthDao.create(cxn, Char4, platinum, new BigDecimal(150.00), new BigDecimal(15.00));
+			CharacterWealth CW5 = CharacterWealthDao.create(cxn, Char5, diamond, new BigDecimal(20.00), null);
+
 			
 			
 			//Insert Inventory
@@ -169,10 +185,16 @@ public class Driver {
 			//Read Items
 			
 			//Read Equipments
+		    Equipments equip1 = EquipmentsDao.getEquipmentByItemID(cxn, 1);
+		    System.out.format("Reading equipment one: \n", equip1.toString());
 			
 			//Read Gears
+		    Gears gear1 = GearsDao.getGearByItemID(cxn,6);
+		    System.out.format("Reading gear one: \n", gear1.toString());
 			
 			//Read Weapons
+		    Weapons weapon1 = WeaponsDao.getWeaponByItemID(cxn, 1);
+		    System.out.format("Reading weapon one: \n", weapon1.toString());
 			
 			//Read Characters
 		    Characters char1Test = CharactersDao.getCharacterByCharID(cxn, Char1.getCharID());
@@ -180,12 +202,20 @@ public class Driver {
 		      char1Test.getCharID(), char1Test.getPlayers().getPlayerID(), char1Test.getFirstName(), char1Test.getLastName(), char1Test.getClan(), char1Test.getWeaponWeared());
 			
 			//Read Statistics
+		    Statistics readStatTest = StatisticsDao.getStatisticsByName(cxn, "Strength");
+		    System.out.println("Reading statistics of strength: " + readStatTest.toString());
 			
 			//Read Currencies
+		    Currencies readCurrencyTest = CurrenciesDao.getCurrenciesByName(cxn, "Gold");
+		    System.out.println("Reading currency: Gold, " + readCurrencyTest.toString());
 			
 			//Read CharacterStatistics
+		    CharacterStatistics readCharStat1 = CharacterStatisticsDao.getCharacterStatByCharacterAndStat(cxn, Char1, strength);
+		    System.out.println("Reading strength value of char1" + readCharStat1.toString());
 			
 			//Read EquipmentBonuse
+		    EquipmentBonuse  swordStrength = EquipmentBonuseDao.getEquipmengBonuseByEquipmentAndStats(cxn, sword, strength);
+		    System.out.format("Reading strength of sword: \n",swordStrength.toString());
 			
 			//Read Consumables
 		    Consumables cons = ConsumablesDao.getConsumableByItemID(cxn, 13);
@@ -205,6 +235,8 @@ public class Driver {
 		    		          cuj1Test.getCharacter().getCharID(), cuj1Test.getJob(), cuj1Test.getJobLevel(), cuj1Test.getxP());
 			
 			//Read CharacterWealth
+		    CharacterWealth readCharWealth = CharacterWealthDao.getCharacterWealthByCharacterAndCurrency(cxn, Char1, gold);
+		    System.out.println("Reading character1 gold stats: " + readCharWealth.toString());
 			
 			//Read Inventory
 		    Inventory inv1 = InventoryDao.getInventoryByCharactersAndSlot(cxn, Char1, 1);
