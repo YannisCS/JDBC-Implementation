@@ -102,7 +102,7 @@ public class InventoryDao {
 	        }
 	    }
 	
-	public static Inventory updateInventory(Connection cxn, Inventory inventory, int newQuantity) throws SQLException {
+	public static Inventory updateInventoryQuantity(Connection cxn, Inventory inventory, int newQuantity) throws SQLException {
 
 		String updateInventorySQL = """
 				    UPDATE Inventory

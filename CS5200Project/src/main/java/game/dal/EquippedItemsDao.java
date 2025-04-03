@@ -40,8 +40,8 @@ public class EquippedItemsDao {
 	
 	
 	
-	public static EquippedItems getEquippedItemsByCharactersAndSlot( Connection cxn,
-			Characters character,
+	public static EquippedItems getEquippedItemsByCharIDAndSlot( Connection cxn,
+			int charID,
 			String equipmentSlot
 	         ) throws SQLException{
 		
@@ -53,7 +53,7 @@ public class EquippedItemsDao {
 
 	    try (PreparedStatement selectStmt = cxn.prepareStatement(query)) {
 	    	
-	      selectStmt.setInt(1, character.getCharID()); 
+	      selectStmt.setInt(1, charID); 
 	      selectStmt.setString(2, equipmentSlot);  
 
 	      try (ResultSet results = selectStmt.executeQuery()) {
@@ -101,7 +101,7 @@ public class EquippedItemsDao {
 	        }
 	    }
 	
-	public static EquippedItems updateEquippedItems(Connection cxn, EquippedItems equippedItems, int newItemID) throws SQLException {
+	public static EquippedItems updateEquippedItems(Connection cxn, EquippedItems equippedItems, Gears newGear) throws SQLException {
 
 		String updateInventorySQL = """
 				    UPDATE EquippedItems
@@ -110,11 +110,11 @@ public class EquippedItemsDao {
 				""";
 
 		try (PreparedStatement ps = cxn.prepareStatement(updateInventorySQL)) {
-			ps.setInt(1, newItemID);
+			ps.setInt(1, newGear.getItemID());
 			ps.setInt(2, equippedItems.getCharID());
 			ps.setString(3, equippedItems.getEquipPosition());
 		    ps.executeUpdate();
-		    equippedItems.setItemID(newItemID);
+		    equippedItems.setItemID(newGear.getItemID());
 		    
 		    return equippedItems;
 		}

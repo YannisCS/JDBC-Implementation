@@ -58,6 +58,8 @@ public class Driver {
 			Gears helmet = GearsDao.create(cxn,"Iron Helmet",1,1,BigDecimal.valueOf(200.00),5);
 			Gears armor = GearsDao.create(cxn,"Steel Armor",10,1,BigDecimal.valueOf(2000.00),10);
 			Gears boots = GearsDao.create(cxn,"Leather Boots",4,1,BigDecimal.valueOf(450.00),4);
+			Gears boots1 = GearsDao.create(cxn,"Leather Boots",4,5,BigDecimal.valueOf(550.00),3);
+
 			Gears gloves = GearsDao.create(cxn,"Chainmail Gloves",6,1,BigDecimal.valueOf(600.00),6);
 			Gears legging = GearsDao.create(cxn,"Plate Leggings",7,1,BigDecimal.valueOf(800.00),7);
 			
@@ -120,11 +122,11 @@ public class Driver {
 			
 			
 			//Insert Inventory
-			Inventory inven1 = InventoryDao.create(cxn, Char1, 1, armor, 2);
-			Inventory inven2 = InventoryDao.create(cxn, Char2, 2, boots, 2);
-			Inventory inven3 = InventoryDao.create(cxn, Char3, 3, spear, 3);
-			Inventory inven4 = InventoryDao.create(cxn, Char4, 4, gloves, 4);
-			Inventory inven5 = InventoryDao.create(cxn, Char5, 5, helmet, 2);
+			Inventory inven1 = InventoryDao.create(cxn, Char1, 1, armor, 1);
+			Inventory inven2 = InventoryDao.create(cxn, Char2, 2, boots, 1);
+			Inventory inven3 = InventoryDao.create(cxn, Char3, 3, spear, 1);
+			Inventory inven4 = InventoryDao.create(cxn, Char4, 4, gloves, 1);
+			Inventory inven5 = InventoryDao.create(cxn, Char5, 5, helmet, 1);
 
 
 			//Insert EquippedItems
@@ -222,10 +224,13 @@ public class Driver {
 
 		    
 			//Read EquippedItems
-			EquippedItems equipedItem1 = EquippedItemsDao.getEquippedItemsByCharactersAndSlot(cxn, Char1, "HEAD");
-		    System.out.format("Reading EquippedItems1: charID:%s equipPosition:%s itemID:%s ", equipedItem1.getCharID(), equipedItem1.getEquipPosition(),equipedItem1.getItemID());
+			EquippedItems equipedIte1 = EquippedItemsDao.getEquippedItemsByCharIDAndSlot(cxn, Char1.getCharID(), "HEAD");
+		    System.out.format("Reading EquippedItems1: charID:%s equipPosition:%s itemID:%s ", equipedIte1.getCharID(), equipedIte1.getEquipPosition(),equipedIte1.getItemID());
 
-			
+			EquippedItems equipedIte2 = EquippedItemsDao.getEquippedItemsByCharIDAndSlot(cxn, Char2.getCharID(), "BODY");
+		    System.out.format("Reading equipedIte2: charID:%s equipPosition:%s itemID:%s ", equipedIte2.getCharID(), equipedIte2.getEquipPosition(),equipedIte2.getItemID());
+
+
 			/**
 			 * Update records
 			 */		
@@ -285,11 +290,32 @@ public class Driver {
 		    		antidote.toString()
 		    		);
 		    
+		    
 			//Update EquippedItems itemID
+		    System.out.format(
+		    		"%n%nUpdating EquippedItems gear %nBefore updating: %s", 
+		    		equippedItem3.toString()
+		    		);
 		    
+			EquippedItemsDao.updateEquippedItems(cxn, equippedItem3, boots1);
+		    System.out.format(
+		    		"%nAfter updating: %s", 
+		    		equippedItem3.toString()
+		    		);
 		    
-		    
+			//Update Inventory quantity
+		    System.out.format(
+		    		"%n%nUpdating Inventory quantity %nBefore updating: %s", 
+		    		inv1.toString()
+		    		);
+//		    Inventory inv1 = InventoryDao.getInventoryByCharactersAndSlot(cxn, Char1, 1);
 
+		    InventoryDao.updateInventoryQuantity(cxn,inv1,5);
+		    System.out.format(
+		    		"%nAfter updating: %s", 
+		    		inv1.toString()
+		    		);
+		    
 		    
 			/**
 			 * Delete records
@@ -327,6 +353,22 @@ public class Driver {
 		    } else {
 		    	System.out.println("%n%nError: clan6 still exists in the database.");
 		    }
+		    
+		    //delete EquippedItems 
+		    int charID =  equippedItem3.getCharID();
+		    String equipmentSlot = equippedItem3.getEquipPosition();
+		    System.out.format("Before deleting EquippedItems:  charID:%s equipmentSlot:%s\\n",charID,equipmentSlot);
+		    
+		    EquippedItemsDao.delete(cxn, equippedItem3);
+		    EquippedItems deleteEquippedItem = EquippedItemsDao.getEquippedItemsByCharIDAndSlot(cxn, charID, equipmentSlot);
+		    if (deleteEquippedItem != null) {
+		    	
+		          System.out.println("equippedItem3 still exists in the database \n");
+				    System.out.format("Reading equippedItem3: charID:%s equipPosition:%s itemID:%s ", equippedItem3.getCharID(), equippedItem3.getEquipPosition(),equippedItem3.getItemID());
+
+			    } else {
+		          System.out.println("equippedItem3 has been successfully deleted \n");
+			    }
 		}
 	}
 
