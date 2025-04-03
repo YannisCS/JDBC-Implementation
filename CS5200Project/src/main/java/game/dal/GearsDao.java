@@ -46,7 +46,7 @@ public class GearsDao {
 					   maxStackSize,
 					   price,
 					   requiredLevel
-				FROM Gear G
+				FROM Gears G
 				JOIN Equipments E
 				ON G.ItemID = E.ItemID
 				JOIN Items I

@@ -114,7 +114,7 @@ public class PlayersDao{
         while (results.next()) {
           players.add(
             new Players(
-              results.getInt("playersID"),
+              results.getInt("playerID"),
               firstName,
               results.getString("lastName"),
               results.getString("emailAddress")
