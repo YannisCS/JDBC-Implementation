@@ -257,7 +257,7 @@ public class Driver {
 
 		    
 			//Read EquippedItems
-		    System.out.println("* Reading EquippedItems");
+		    System.out.println("\n * Reading EquippedItems");
 			EquippedItems equipedIte1 = EquippedItemsDao.getEquippedItemsByCharIDAndSlot(cxn, Char1.getCharID(), "HEAD");
 		    System.out.format("\nReading EquippedItems1: charID:%s equipPosition:%s itemID:%s ", equipedIte1.getCharID(), equipedIte1.getEquipPosition(),equipedIte1.getItemID());
 
