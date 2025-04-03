@@ -43,7 +43,9 @@ public class ConsumablesDao {
 		String query_Consumable = """
 				SELECT *
 				FROM Consumables
-				WHERE itemID = ? ;
+				JOIN Items
+				ON Consumables.itemID = Items.itemID
+				WHERE Consumables.itemID = ? ;
 				""";
 		try (PreparedStatement pstmt = cxn.prepareStatement(query_Consumable)) {
 			pstmt.setInt(1, itemID);

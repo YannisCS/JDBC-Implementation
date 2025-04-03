@@ -44,7 +44,7 @@ public class ConsumableItemBonuseDao {
 				FROM ConsumableItemBonuse cb
 				JOIN Statistics s ON cb.statistics = s.statsName
 				JOIN Items i ON cb.itemID = i.itemID
-				WHERE itemID = ? AND statistics = ?;
+				WHERE cb.itemID = ? AND statistics = ?;
 				""";
 		try (PreparedStatement pstmt = cxn.prepareStatement(query_BonuseByItemAndStatistics)) {
 			pstmt.setInt(1, itemID);

@@ -67,7 +67,7 @@ public class EquipmentBonuse {
 
   protected String fieldsToString() {
     return String.format(
-      "Equipment Bonuse(%d, %s, %d)",
+      "Equipment Bonuse(%s, %s, %d)",
       equipment,
       statistics,
       value

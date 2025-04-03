@@ -51,7 +51,7 @@ public class GearsDao {
 				ON G.ItemID = E.ItemID
 				JOIN Items I
 				ON E.itemID = I.itemID
-				WHERE W.itemID = ?;
+				WHERE G.itemID = ?;
 				""";
 		
 		try (PreparedStatement selectStmt = cxn.prepareStatement(selectGear)) {
