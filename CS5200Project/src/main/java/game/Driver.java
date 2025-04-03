@@ -401,6 +401,21 @@ public class Driver {
 			    } else {
 		          System.out.println("equippedItem3 has been successfully deleted \n");
 			    }
+		    
+		    
+		    //delete Inventory
+		    System.out.format("Before deleting Inventory1: charID:%s slotID:%s itemID:%s quantity:%s", inv1.getCharID(), inv1.getSlotID(),inv1.getInstance(),inv1.getQuantity());
+		    InventoryDao.delete(cxn, inven1);
+			//Read Inventory
+		    Inventory deletedInven = InventoryDao.getInventoryByCharactersAndSlot(cxn, Char1, 1);
+		    if (deletedInven != null) {
+		    	
+		          System.out.println("inven1 still exists in the database \n");
+				  System.out.format("Before deleting Inventory1: charID:%s slotID:%s itemID:%s quantity:%s", deletedInven.getCharID(), deletedInven.getSlotID(),deletedInven.getInstance(),deletedInven.getQuantity());
+
+			    } else {
+		          System.out.println("inven1 has been successfully deleted \n");
+			    }
 		}
 	}
 
