@@ -158,110 +158,112 @@ public class Driver {
 			System.out.println("-------Testing Read Records Operations-------");
 			//Read Players
 			Players player1Test = PlayersDao.getPlayerByPlayerID(cxn, P1.getPlayerID());
-		    System.out.format("Reading Single Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		    System.out.format("* Reading Players\nReading Single Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
 		      player1Test.getPlayerID(), player1Test.getFirstName(), player1Test.getLastName(), player1Test.getEmailAddress());
 			
 		    //Read a list of Players
 		    System.out.format("Reading a list of Players:");
 		    List<Players> playersList = PlayersDao.getPlayersFromFirstName(cxn, "Ethan");
 		    for (Players player : playersList) {
-		        System.out.format("Looping Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
+		        System.out.format("\n	Looping Players: PlayerId:%s FirstName:%s LastName:%s Email:%s",
 		        		player.getPlayerID(), player.getFirstName(), player.getLastName(), player.getEmailAddress());
 		      }
 			
-			//Read Races
-			
+		    System.out.println();
 			//Read Clans
+		    System.out.println("\n* Reading Clans");
 		    /* get clan and its race by a specific clanName */
 		    Clans clanrace = ClansDao.getClanRacebyClanName(cxn, "Lionhearts");
-		    System.out.format("%n%n%s", clanrace.toString());
+		    System.out.format("get Clans record by clanName=%s:%n	%s", "Lionhearts", clanrace.toString());
 		    
 		    /* get a list of clans for a specific race */
 		    List<Clans> clans = ClansDao.getClansbyRace(cxn, Clans.Races.ELF);
-		    System.out.print("%n%nclans of elf:");
+		    System.out.print("\n\nget a list of clans by Race = elf:");
 		    for (Clans c : clans) {
-		    	System.out.format("%n	%s", c.getClanName());
+		    	System.out.format("%n	clan=%s | race=%s", c.getClanName(), c.getRace());
 		    }
 			
-			//Read Items
-			
+			//Read Items			
 			//Read Equipments
+		    System.out.println();
 		    Equipments equip1 = EquipmentsDao.getEquipmentByItemID(cxn, 1);
-		    System.out.format("Reading equipment one: \n", equip1.toString());
+		    System.out.format("\n* Reading equipment one: \n", equip1.toString());
 			
 			//Read Gears
 		    Gears gear1 = GearsDao.getGearByItemID(cxn,6);
-		    System.out.format("Reading gear one: \n", gear1.toString());
+		    System.out.format("\n* Reading gear one: \n", gear1.toString());
 			
 			//Read Weapons
 		    Weapons weapon1 = WeaponsDao.getWeaponByItemID(cxn, 1);
-		    System.out.format("Reading weapon one: \n", weapon1.toString());
+		    System.out.format("\n* Reading weapon one: \n", weapon1.toString());
 			
 			//Read Characters
 		    Characters char1Test = CharactersDao.getCharacterByCharID(cxn, Char1.getCharID());
-		    System.out.format("Reading Characters: charID:%s playerID:%s firstName:%s lastName:%s clan:%s weaponWeared:%s \n",
+		    System.out.format("\n* Reading Characters: charID:%s playerID:%s firstName:%s lastName:%s clan:%s weaponWeared:%s \n",
 		      char1Test.getCharID(), char1Test.getPlayers().getPlayerID(), char1Test.getFirstName(), char1Test.getLastName(), char1Test.getClan(), char1Test.getWeaponWeared());
 			
 			//Read Statistics
 		    Statistics readStatTest = StatisticsDao.getStatisticsByName(cxn, "Strength");
-		    System.out.println("Reading statistics of strength: " + readStatTest.toString());
+		    System.out.println("\n* Reading statistics of strength: " + readStatTest.toString());
 			
 			//Read Currencies
 		    Currencies readCurrencyTest = CurrenciesDao.getCurrenciesByName(cxn, "Gold");
-		    System.out.println("Reading currency: Gold, " + readCurrencyTest.toString());
+		    System.out.println("\n* Reading currency: Gold, " + readCurrencyTest.toString());
 			
 			//Read CharacterStatistics
 		    CharacterStatistics readCharStat1 = CharacterStatisticsDao.getCharacterStatByCharacterAndStat(cxn, Char1, strength);
-		    System.out.println("Reading strength value of char1" + readCharStat1.toString());
+		    System.out.println("\n* Reading strength value of char1: " + readCharStat1.toString());
 			
 			//Read EquipmentBonuse
 		    EquipmentBonuse  swordStrength = EquipmentBonuseDao.getEquipmengBonuseByEquipmentAndStats(cxn, sword, strength);
-		    System.out.format("Reading strength of sword: \n",swordStrength.toString());
+		    System.out.format("\n* Reading strength of sword: \n",swordStrength.toString());
 			
 			//Read Consumables
 		    Consumables cons = ConsumablesDao.getConsumableByItemID(cxn, 13);
-		    System.out.format("%n%nConsumable item with itemID=13: %s", cons.toString());
+		    System.out.format("\n\n* Reading consumable item with itemID=13: \n%s", cons.toString());
 			
 			//Read ConsumableItemBonuse
 		    ConsumableItemBonuse consBonuse = ConsumableItemBonuseDao.getBonuseByItemAndStatistics(cxn, largeHealthPotion.getItemID(), "intelligence");
-		    System.out.format("%nstrength for Consumable item with itemID=13: bonusePercent=%f | valueCap=%d", consBonuse.getBonusePercent(), consBonuse.getValueCap());
+		    System.out.format("\n\n* Reading strength for Consumable item with itemID=13:\nbonusePercent=%f | valueCap=%d", consBonuse.getBonusePercent(), consBonuse.getValueCap());
 			
 			//Read JobsForGear
 		    JobsForGear jfg1Test = JobsForGearDao.getJobsForGearByID(cxn, helmet, "Warrior");
-		    System.out.format("Reading JobsForGear: gear:%s jobName:%s", jfg1Test.getGear().getItemID(), jfg1Test.getJob());
+		    System.out.format("\n\n* Reading JobsForGear: gear:%s jobName:%s", jfg1Test.getGear().getItemID(), jfg1Test.getJob());
 			
 			//Read CharacterUnlockedJob
 		    CharacterUnlockedJob cuj1Test = CharacterUnlockedJobDao.getCharacterUnlockedJobByID(cxn, Char1.getCharID(), "Warrior");
-		    System.out.format("Reading CharacterUnlockedJob: charID:%s jobName:%s jobLevel:%s XP:%s", 
+		    System.out.format("\n\n* Reading CharacterUnlockedJob: charID:%s jobName:%s jobLevel:%s XP:%s", 
 		    		          cuj1Test.getCharacter().getCharID(), cuj1Test.getJob(), cuj1Test.getJobLevel(), cuj1Test.getxP());
 			
 			//Read CharacterWealth
 		    CharacterWealth readCharWealth = CharacterWealthDao.getCharacterWealthByCharacterAndCurrency(cxn, Char1, gold);
-		    System.out.println("Reading character1 gold stats: " + readCharWealth.toString());
+		    System.out.println("\n\n* Reading character1 gold stats: " + readCharWealth.toString());
 			
 			//Read Inventory
+		    System.out.println("\n* Reading Inventories");
 		    Inventory inv1 = InventoryDao.getInventoryByCharactersAndSlot(cxn, Char1, 1);
 		    System.out.format("Reading Inventory1: charID:%s slotID:%s itemID:%s quantity:%s", inv1.getCharID(), inv1.getSlotID(),inv1.getInstance(),inv1.getQuantity());
 
 		    Inventory inv2 = InventoryDao.getInventoryByCharactersAndSlot(cxn, Char2, 2);
-		    System.out.format("Reading Inventory2: charID:%s slotID:%s itemID:%s quantity:%s", inv2.getCharID(), inv2.getSlotID(),inv2.getInstance(),inv2.getQuantity());
+		    System.out.format("\nReading Inventory2: charID:%s slotID:%s itemID:%s quantity:%s", inv2.getCharID(), inv2.getSlotID(),inv2.getInstance(),inv2.getQuantity());
 
 		    Inventory inv3 = InventoryDao.getInventoryByCharactersAndSlot(cxn, Char3, 3);
-		    System.out.format("Reading Inventory3: charID:%s slotID:%s itemID:%s quantity:%s", inv3.getCharID(), inv3.getSlotID(),inv3.getInstance(),inv3.getQuantity());
+		    System.out.format("\nReading Inventory3: charID:%s slotID:%s itemID:%s quantity:%s", inv3.getCharID(), inv3.getSlotID(),inv3.getInstance(),inv3.getQuantity());
 
 		    Inventory inv4 = InventoryDao.getInventoryByCharactersAndSlot(cxn, Char4, 4);
-		    System.out.format("Reading Inventory4: charID:%s slotID:%s itemID:%s quantity:%s", inv4.getCharID(), inv4.getSlotID(),inv4.getInstance(),inv4.getQuantity());
+		    System.out.format("\nReading Inventory4: charID:%s slotID:%s itemID:%s quantity:%s", inv4.getCharID(), inv4.getSlotID(),inv4.getInstance(),inv4.getQuantity());
 
 		    Inventory inv5 = InventoryDao.getInventoryByCharactersAndSlot(cxn, Char5, 5);
-		    System.out.format("Reading Inventory5: charID:%s slotID:%s itemID:%s quantity:%s", inv5.getCharID(), inv5.getSlotID(),inv5.getInstance(),inv5.getQuantity());
+		    System.out.format("\nReading Inventory5: charID:%s slotID:%s itemID:%s quantity:%s", inv5.getCharID(), inv5.getSlotID(),inv5.getInstance(),inv5.getQuantity());
 
 		    
 			//Read EquippedItems
+		    System.out.println("* Reading EquippedItems");
 			EquippedItems equipedIte1 = EquippedItemsDao.getEquippedItemsByCharIDAndSlot(cxn, Char1.getCharID(), "HEAD");
-		    System.out.format("Reading EquippedItems1: charID:%s equipPosition:%s itemID:%s ", equipedIte1.getCharID(), equipedIte1.getEquipPosition(),equipedIte1.getItemID());
+		    System.out.format("\nReading EquippedItems1: charID:%s equipPosition:%s itemID:%s ", equipedIte1.getCharID(), equipedIte1.getEquipPosition(),equipedIte1.getItemID());
 
 			EquippedItems equipedIte2 = EquippedItemsDao.getEquippedItemsByCharIDAndSlot(cxn, Char2.getCharID(), "BODY");
-		    System.out.format("Reading equipedIte2: charID:%s equipPosition:%s itemID:%s \n", equipedIte2.getCharID(), equipedIte2.getEquipPosition(),equipedIte2.getItemID());
+		    System.out.format("\nReading EquippedItems2: charID:%s equipPosition:%s itemID:%s \n", equipedIte2.getCharID(), equipedIte2.getEquipPosition(),equipedIte2.getItemID());
 		    System.out.println();
 
 			/**
@@ -269,7 +271,7 @@ public class Driver {
 			 */		
 			System.out.println("-------Testing Update Records Operations-------");
 		    //Update Players firstName
-		    System.out.println("Updating Players firstName: ");
+		    System.out.println("* Updating Players firstName: ");
 		    System.out.println("Before updating: ");
 		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
 		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
@@ -280,7 +282,7 @@ public class Driver {
 		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
 		    
 		    //Update Players lastName
-		    System.out.println("Updating Players lastName: ");
+		    System.out.println("* Updating Players lastName: ");
 		    System.out.println("Before updating: ");
 		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
 		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
@@ -291,7 +293,7 @@ public class Driver {
 		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
 		   
 		    //Update Players emailAddress
-		    System.out.println("Updating Players emailAddress: ");
+		    System.out.println("* Updating Players emailAddress: ");
 		    System.out.println("Before updating: ");
 		    System.out.format("Reading Players: PlayerId:%s FirstName:%s LastName:%s Email:%s \n",
 		      P1.getPlayerID(), P1.getFirstName(), P1.getLastName(), P1.getEmailAddress());
@@ -304,10 +306,10 @@ public class Driver {
 		    
 		    //Update Clans clanName
 		    System.out.format(
-		    		"%n%nUpdating Clans clanName %nBefore updating: %s", 
+		    		"%n* Updating Clans clanName %nBefore updating: %s", 
 		    		clan6.toString()
 		    		);
-		    ClansDao.updateClanName(cxn, clan6, "StarWars");
+		    clan6 = ClansDao.updateClanName(cxn, clan6, "StarWars");
 		    System.out.format(
 		    		"%nAfter updating: %s", 
 		    		clan6.toString()
@@ -315,10 +317,12 @@ public class Driver {
 		    
 		    //Update Consumables description
 		    System.out.format(
-		    		"%n%nUpdating Consumables description %nBefore updating: %s", 
+		    		"%n%n* Updating Consumables description %nBefore updating: %s", 
 		    		antidote.toString()
 		    		);
+		    int antidoteItemID = antidote.getItemID();
 		    ConsumablesDao.updateConsumablesDescription(cxn, antidote, "A potion that cures poison effects, restoring the user’s health and vitality.");
+		    antidote = ConsumablesDao.getConsumableByItemID(cxn, antidoteItemID);
 		    System.out.format(
 		    		"%nAfter updating: %s", 
 		    		antidote.toString()
@@ -327,7 +331,7 @@ public class Driver {
 		    
 			//Update EquippedItems itemID
 		    System.out.format(
-		    		"%n%nUpdating EquippedItems gear %nBefore updating: %s", 
+		    		"%n%n* Updating EquippedItems gear %nBefore updating: %s", 
 		    		equippedItem3.toString()
 		    		);
 		    
@@ -339,7 +343,7 @@ public class Driver {
 		    
 			//Update Inventory quantity
 		    System.out.format(
-		    		"%n%nUpdating Inventory quantity %nBefore updating: %s", 
+		    		"%n%n* Updating Inventory quantity %nBefore updating: %s", 
 		    		inv1.toString()
 		    		);
 //		    Inventory inv1 = InventoryDao.getInventoryByCharactersAndSlot(cxn, Char1, 1);
@@ -353,7 +357,7 @@ public class Driver {
 			System.out.println();
 			
 			// Update currencies
-			System.out.println("Updating currency cap");
+			System.out.println("* Updating currency cap");
 			System.out.println("Before update: " + gold.toString());
 			CurrenciesDao.updateCap(cxn, gold, new BigDecimal(2000.00));
 			gold = CurrenciesDao.getCurrenciesByName(cxn, "Gold");
@@ -367,7 +371,7 @@ public class Driver {
 			 */
 			System.out.println("-------Testing Delete Records Operations-------");
 		    // Delete Players
-		    System.out.println("Deleting Players 'Ethan Potter': ");
+		    System.out.println("* Deleting Players 'Ethan Potter': ");
 		    System.out.println("Before deleting: ");
 		    Players playToDelete = PlayersDao.getPlayerByPlayerID(cxn, P6.getPlayerID());
 		    if (playToDelete != null) {
@@ -388,12 +392,13 @@ public class Driver {
 		    
 			
 		    // delete Clans clan6
+		    System.out.format("* Deleting clan6: %nBefore deleting: %s", clan6.toString());
 		    String clan6Name = clan6.getClanName();  /* for check */
 		    ClansDao.deleteClan(cxn, clan6);
 		    	/* check */
 		    if (ClansDao.getClanRacebyClanName(cxn, clan6Name) == null) {
 		    	System.out.format(
-		    			"%n%nclan6 with clanName=%s has been successfully deleted.", 
+		    			"%nAfter deleting: no record with clanName=%s found.", 
 		    			clan6Name
 		    			);
 		    } else {
@@ -402,34 +407,36 @@ public class Driver {
 			System.out.println();
 			
 		    //delete EquippedItems 
+			System.out.println("\n* Deleting equippedItems3");
 		    int charID =  equippedItem3.getCharID();
 		    String equipmentSlot = equippedItem3.getEquipPosition();
-		    System.out.format("Before deleting EquippedItems:  charID:%s equipmentSlot:%s\\n",charID,equipmentSlot);
+		    System.out.format("Before deleting:  charID:%s equipmentSlot:%s\n",charID,equipmentSlot);
 		    
 		    EquippedItemsDao.delete(cxn, equippedItem3);
 		    EquippedItems deleteEquippedItem = EquippedItemsDao.getEquippedItemsByCharIDAndSlot(cxn, charID, equipmentSlot);
 		    if (deleteEquippedItem != null) {
 		    	
 		          System.out.println("equippedItem3 still exists in the database \n");
-				    System.out.format("Reading equippedItem3: charID:%s equipPosition:%s itemID:%s ", equippedItem3.getCharID(), equippedItem3.getEquipPosition(),equippedItem3.getItemID());
+				    System.out.format("Reading equippedItem3: charID:%s equipPosition:%s itemID:%s \n", equippedItem3.getCharID(), equippedItem3.getEquipPosition(),equippedItem3.getItemID());
 
 			    } else {
 		          System.out.println("equippedItem3 has been successfully deleted \n");
 			    }
-			System.out.println();
+		    
 		    
 		    //delete Inventory
-		    System.out.format("Before deleting Inventory1: charID:%s slotID:%s itemID:%s quantity:%s", inv1.getCharID(), inv1.getSlotID(),inv1.getInstance(),inv1.getQuantity());
+			System.out.println("* Deleting Inventory1: ");
+		    System.out.format("Before deleting Inventory1: charID:%s slotID:%s itemID:%s quantity:%s\n", inv1.getCharID(), inv1.getSlotID(),inv1.getInstance(),inv1.getQuantity());
 		    InventoryDao.delete(cxn, inven1);
 			//Read Inventory
 		    Inventory deletedInven = InventoryDao.getInventoryByCharactersAndSlot(cxn, Char1, 1);
 		    if (deletedInven != null) {
 		    	
 		          System.out.println("inven1 still exists in the database \n");
-				  System.out.format("Before deleting Inventory1: charID:%s slotID:%s itemID:%s quantity:%s", deletedInven.getCharID(), deletedInven.getSlotID(),deletedInven.getInstance(),deletedInven.getQuantity());
+				  System.out.format("Before deleting: charID:%s slotID:%s itemID:%s quantity:%s", deletedInven.getCharID(), deletedInven.getSlotID(),deletedInven.getInstance(),deletedInven.getQuantity());
 
 			    } else {
-		          System.out.println("inven1 has been successfully deleted \n");
+		          System.out.println("After deleting: inven1 has been successfully deleted \n");
 			    }
 		}
 	}
