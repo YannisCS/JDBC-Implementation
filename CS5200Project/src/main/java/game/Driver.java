@@ -47,7 +47,6 @@ public class Driver {
 			//Insert Items: 15 items: 5 Weapons, 5 Gears, and 5 Consumables.
 			/*Insert Weapons*/
 			//Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,1500.00,10,"Warrior",50);
-
 			Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,BigDecimal.valueOf(1500.00),10,"Warrior",50);
 			Weapons axe = WeaponsDao.create(cxn,"Axe of Fury",12,1,BigDecimal.valueOf(1700.00),12,"Mage", 45);
 			Weapons spear = WeaponsDao.create(cxn,"Spear of Destiny",11,1,BigDecimal.valueOf(1600.00),11,"Archer",40);
@@ -186,16 +185,16 @@ public class Driver {
 			//Read Items			
 			//Read Equipments
 		    System.out.println();
-		    Equipments equip1 = EquipmentsDao.getEquipmentByItemID(cxn, 1);
-		    System.out.format("\n* Reading equipment one: \n", equip1.toString());
+		    Equipments equip1 = EquipmentsDao.getEquipmentByItemID(cxn, sword.getItemID());
+		    System.out.println("\n* Reading equipment: " + equip1.toString());
 			
 			//Read Gears
-		    Gears gear1 = GearsDao.getGearByItemID(cxn,6);
-		    System.out.format("\n* Reading gear one: \n", gear1.toString());
+		    Gears gear1 = GearsDao.getGearByItemID(cxn,helmet.getItemID());
+		    System.out.println("\n* Reading gear: " + gear1.toString());
 			
 			//Read Weapons
-		    Weapons weapon1 = WeaponsDao.getWeaponByItemID(cxn, 1);
-		    System.out.format("\n* Reading weapon one: \n", weapon1.toString());
+		    Weapons weapon1 = WeaponsDao.getWeaponByItemID(cxn, sword.getItemID());
+		    System.out.println("\n* Reading weapon:" + weapon1.toString());
 			
 			//Read Characters
 		    Characters char1Test = CharactersDao.getCharacterByCharID(cxn, Char1.getCharID());
@@ -216,7 +215,7 @@ public class Driver {
 			
 			//Read EquipmentBonuse
 		    EquipmentBonuse  swordStrength = EquipmentBonuseDao.getEquipmengBonuseByEquipmentAndStats(cxn, sword, strength);
-		    System.out.format("\n* Reading strength of sword: \n",swordStrength.toString());
+		    System.out.println("\n* Reading strength of sword: \n" + swordStrength.toString());
 			
 			//Read Consumables
 		    Consumables cons = ConsumablesDao.getConsumableByItemID(cxn, 13);
