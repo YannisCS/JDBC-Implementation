@@ -59,7 +59,7 @@ public class ClansDao {
 	
 	/**
 	 * update an existing Clans record (clanName) in the database
-	 * since race cannot be changed for an existing clan
+	 * returns a Clans object
 	 */
 	public static Clans updateClanName(
 			Connection cxn,
