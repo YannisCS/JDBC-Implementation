@@ -69,6 +69,7 @@ public class ConsumablesDao {
 
 	/**
 	 * update an existing Consumables record (description) in the database
+	 * returns a Consumables object
 	 */
 	public static Consumables updateConsumablesDescription(
 			Connection cxn,
