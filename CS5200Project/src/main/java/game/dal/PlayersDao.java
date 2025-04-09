@@ -149,7 +149,7 @@ public class PlayersDao{
             new Players(
               results.getInt("playerID"),
               results.getString("firstName"),
-              lastName,
+              results.getString("lastName"),
               results.getString("emailAddress")
             )
           );
