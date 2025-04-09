@@ -134,30 +134,30 @@ public class PlayersDao{
   public static List<Players> getPlayersFromLastName(
 		    Connection cxn,
 		    String lastName
-		  ) throws SQLException {
-		    List<Players> players = new ArrayList<>();
-		    String selectPlayers = """
-		      SELECT playerID, firstName, lastName, emailAddress
-		      FROM Players 
-		      WHERE lastName = ?""";
+  ) throws SQLException {
+    List<Players> players = new ArrayList<>();
+    String selectPlayers = """
+      SELECT playerID, firstName, lastName, emailAddress
+      FROM Players 
+      WHERE lastName LIKE ?; """;
 
-		    try (PreparedStatement selectStmt = cxn.prepareStatement(selectPlayers)) {
-		      selectStmt.setString(1, lastName);
-		      try (ResultSet results = selectStmt.executeQuery()) {
-		        while (results.next()) {
-		          players.add(
-		            new Players(
-		              results.getInt("playerID"),
-		              results.getString("firstName"),
-		              lastName,
-		              results.getString("emailAddress")
-		            )
-		          );
-		        }
-		        return players;
-		      }
-		    }
-		  }
+    try (PreparedStatement selectStmt = cxn.prepareStatement(selectPlayers)) {
+      selectStmt.setString(1, "%" + lastName + "%");
+      try (ResultSet results = selectStmt.executeQuery()) {
+        while (results.next()) {
+          players.add(
+            new Players(
+              results.getInt("playerID"),
+              results.getString("firstName"),
+              lastName,
+              results.getString("emailAddress")
+            )
+          );
+        }
+        return players;
+      }
+    }
+  }
   
   
   /**
