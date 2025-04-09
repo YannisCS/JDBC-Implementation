@@ -49,8 +49,8 @@ function showAllCharacters() {
 <h1>Matching Characters</h1>
 <table border="1">
 <tr>
-<th>Char First Name</th>
-<th>Char Last Name</th>
+<th>Character First Name</th>
+<th>Character Last Name</th>
 <th>Player First Name</th>
 <th>Player Last Name</th>
 <th>Clan</th>
