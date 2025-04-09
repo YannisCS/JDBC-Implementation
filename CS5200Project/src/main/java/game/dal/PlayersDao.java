@@ -127,6 +127,40 @@ public class PlayersDao{
   }
   
   /**
+   * add in pm4
+   * Get the Players record by lastName.
+   * @return a list of Players
+   */
+  public static List<Players> getPlayersFromLastName(
+		    Connection cxn,
+		    String lastName
+		  ) throws SQLException {
+		    List<Players> players = new ArrayList<>();
+		    String selectPlayers = """
+		      SELECT playerID, firstName, lastName, emailAddress
+		      FROM Players 
+		      WHERE lastName = ?""";
+
+		    try (PreparedStatement selectStmt = cxn.prepareStatement(selectPlayers)) {
+		      selectStmt.setString(1, lastName);
+		      try (ResultSet results = selectStmt.executeQuery()) {
+		        while (results.next()) {
+		          players.add(
+		            new Players(
+		              results.getInt("playerID"),
+		              results.getString("firstName"),
+		              lastName,
+		              results.getString("emailAddress")
+		            )
+		          );
+		        }
+		        return players;
+		      }
+		    }
+		  }
+  
+  
+  /**
    * Update the emailAddress of the Player instance.
    * This runs a UPDATE statement.
    */
