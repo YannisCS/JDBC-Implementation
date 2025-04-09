@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import game.model.*;
 
@@ -80,5 +82,78 @@ public class CharactersDao{
       }
     }
   }
+  
+  /**
+   * add in pm4
+   * Get all Characters records in the database
+   * @return a list of all characters
+   */
+  public static List<Characters> getAllCharacters(
+		    Connection cxn
+  ) throws SQLException {
+    List<Characters> characters = new ArrayList<>();
+    
+    String selectCharacters = """
+      SELECT * FROM Characters;
+      """;
+
+    try (PreparedStatement selectStmt = cxn.prepareStatement(selectCharacters)) {
+    	try (ResultSet rs = selectStmt.executeQuery()) {
+    		while (rs.next()) {
+    			characters.add(
+    					new Characters(
+    						rs.getInt("charID"),
+    						PlayersDao.getPlayerByPlayerID(cxn, rs.getInt("playerID")),
+    						rs.getString("firstName"),
+    						rs.getString("lastName"),
+    						ClansDao.getClanRacebyClanName(cxn, rs.getString("clan")),
+    						WeaponsDao.getWeaponByItemID(cxn, rs.getInt("weaponWeared"))
+    					)
+    			);
+    		}
+    	}
+    }
+    return characters;
+  }
+  
+  /**
+   * add in pm4
+   * Get all Characters records by a specific Player
+   * @return a list of all characters
+   */
+  public static List<Characters> getCharactersByPlayer(
+		    Connection cxn,
+		    Players player
+  ) throws SQLException {
+    List<Characters> characters = new ArrayList<>();
+    
+    String selectCharactersByPlayer = """
+      SELECT * 
+      FROM Characters
+      WHERE playerID = ?;
+      """;
+
+    try (PreparedStatement pstmt = cxn.prepareStatement(selectCharactersByPlayer)) {
+    	pstmt.setInt(1, player.getPlayerID());
+    	try (ResultSet rs = pstmt.executeQuery()) {
+    		while (rs.next()) {
+    			characters.add(
+    					new Characters(
+    						rs.getInt("charID"),
+    						player,
+    						rs.getString("firstName"),
+    						rs.getString("lastName"),
+    						ClansDao.getClanRacebyClanName(cxn, rs.getString("clan")),
+    						WeaponsDao.getWeaponByItemID(cxn, rs.getInt("weaponWeared"))
+    					)
+    			);
+    		}
+    	}
+    }
+    return characters;
+  }
+  
+
+  
   
 }
