@@ -10,16 +10,18 @@ pageEncoding="ISO-8859-1"%>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Find Characters</title>
 <style>
-  .debug-box {
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px 0;
-    font-family: monospace;
-  }
+.button-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.button-container input {
+  padding: 5px 10px;
+  margin-right: 10px;
+}
 </style>
 </head>
 <body>
+
 <form action="findcharacter" method="get">
 <h1>Search by Player last name</h1>
 <p>
@@ -36,6 +38,10 @@ pageEncoding="ISO-8859-1"%>
 <script>
 function clearFilter() {
   document.getElementById('playerlastname').value = '';
+  window.location.href = 'findcharacter';
+}
+
+function showAllCharacters() {
   window.location.href = 'findcharacter';
 }
 </script>
@@ -62,8 +68,8 @@ function clearFilter() {
 </c:forEach>
 </table>
 
-<ul>
-  <li><a href="findcharacter">Show All Characters</a></li>
-</ul>
+<div class="button-container">
+  <input type="button" value="Show All Characters" onclick="showAllCharacters()">
+</div>
 </body>
 </html>
