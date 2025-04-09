@@ -10,6 +10,10 @@ pageEncoding="ISO-8859-1"%>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Find Characters</title>
 		<style>
+			body {
+		    	font-family: sans-serif;
+		    	margin: 30px
+			}
 			.button-container {
 				margin-top: 20px;
 			  	margin-bottom: 20px;
@@ -59,7 +63,7 @@ pageEncoding="ISO-8859-1"%>
 			<c:forEach items="${characters}" var="character">
 			<tr>
 			  <td><c:out value="${character.getFirstName()}" /></td>
-			  <td><a href="characterdetail?charid=${character.getCharID()}"><c:out value="${character.getLastName()}" /></a></td>
+			  <td><a href="characterdetailreport?charid=${character.getCharID()}"><c:out value="${character.getLastName()}" /></a></td>
 			  <td><c:out value="${character.getPlayers().getFirstName()}" /></td>
 			  <td><c:out value="${character.getPlayers().getLastName()}" /></td>
 			  <td><c:out value="${character.getClan().getClanName()}" /></td>
