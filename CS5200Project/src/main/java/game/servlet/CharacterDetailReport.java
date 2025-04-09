@@ -6,7 +6,9 @@ import game.model.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.annotation.*;
@@ -21,6 +23,7 @@ public class CharacterDetailReport extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   private static final String TITLE_MESSAGE = "title";
+
 
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -37,7 +40,7 @@ public class CharacterDetailReport extends HttpServlet {
       messages.put(TITLE_MESSAGE, "Character Detail for " + charIdStr);
     }
 
-    // Retrieve BlogUsers, and store in the request.
+    // Retrieve Character, and store in the request.
     try (Connection cxn = ConnectionManager.getConnection()) {
       int charId = Integer.parseInt(charIdStr);
       Characters character = CharactersDao.getCharacterByCharID(cxn, charId);
@@ -46,7 +49,14 @@ public class CharacterDetailReport extends HttpServlet {
           req.getRequestDispatcher("/FindCharacter.jsp").forward(req, resp);
           return;
       }
+      
+      // Get character unlocked jobs
+      List<CharacterUnlockedJob> unlockedJobs = new ArrayList<>();
+      unlockedJobs = CharacterUnlockedJobDao.getCharacterUnlockedJobByCharID(cxn, charId);
+      
+      
       req.setAttribute("character", character);
+      req.setAttribute("unlockedJobs", unlockedJobs);
       messages.put(TITLE_MESSAGE, character.getFirstName() + " " + character.getLastName());
       
       req.getRequestDispatcher("/CharacterDetailReport.jsp").forward(req, resp);
@@ -55,4 +65,6 @@ public class CharacterDetailReport extends HttpServlet {
       throw new IOException(e);
     }
   }
+ 
+  
 }

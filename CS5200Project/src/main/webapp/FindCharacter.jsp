@@ -14,6 +14,23 @@ pageEncoding="ISO-8859-1"%>
 		    	font-family: sans-serif;
 		    	margin: 30px
 			}
+			table {
+				border-collapse: collapse;
+				border: 1px solid #ddd;
+			}
+			th {
+				background-color: LightGray;
+				color: black;
+				border: 1px solid #ddd;
+				padding: 6px;
+			}
+			td {
+				padding: 6px;
+				border: 1px solid #ddd;
+			}
+			tr:hover {
+				background-color: #F5F5F5;
+			}
 			.button-container {
 				margin-top: 20px;
 			  	margin-bottom: 20px;
@@ -51,7 +68,7 @@ pageEncoding="ISO-8859-1"%>
 		</script>
 		
 		<h1>Matching Characters</h1>
-		<table border="1">
+		<table>
 			<tr>
 			<th>Character First Name</th>
 			<th>Character Last Name</th>
