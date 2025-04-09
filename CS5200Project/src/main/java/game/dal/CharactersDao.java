@@ -152,8 +152,6 @@ public class CharactersDao{
     }
     return characters;
   }
-  
 
-  
   
 }
