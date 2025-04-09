@@ -18,6 +18,23 @@
 		  border: 0;
 		  border-top: 1px solid LightGray;
 		}
+		table {
+			border-collapse: collapse;
+			border: 1px solid #ddd;
+		}
+		th {
+			background-color: LightGray;
+			color: black;
+			border: 1px solid #ddd;
+			padding: 5px;
+		}
+		td {
+			padding: 5px;
+			border: 1px solid #ddd;
+		}
+		tr:hover {
+			background-color: LightGray;
+		}
 		.button-container {
 			margin-top: 20px;
 		  	margin-bottom: 20px;
@@ -42,6 +59,57 @@
     <hr>
     
     <h2>Jobs</h2>
+    <c:choose>
+    	<c:when test="${empty unlockedJobs}">
+    		<p>No jobs unlocked for this character.</p>
+    	</c:when>
+    	<c:otherwise>
+    		<table>
+				<tr>
+					<th>Job Name</th>
+					<th>Job Level</th>
+					<th>XP</th>
+					<th>Status</th>
+				</tr>
+				<c:forEach items="${unlockedJobs}" var="job">
+				<tr>
+				  <td><c:out value="${job.getJob()}" /></td>
+				  <td>
+					  <c:choose>
+			              <c:when test="${job.getJobLevel() != null}">
+			                ${job.getJobLevel()}
+			              </c:when>
+			              <c:otherwise>
+			                --
+			              </c:otherwise>
+			          </c:choose>
+			      </td>
+			      <td>
+			          <c:choose>
+			              <c:when test="${job.getxP() != null}">
+			                ${job.getxP()}
+			              </c:when>
+			              <c:otherwise>
+			                --
+			              </c:otherwise>
+			          </c:choose>
+			      </td>
+			      <td>
+					  <c:choose>
+			              <c:when test="${job.getJobLevel() != null}">
+			                Unlocked
+			              </c:when>
+			              <c:otherwise>
+			                Locked
+			              </c:otherwise>
+			          </c:choose>
+			      </td>
+				</tr>
+				</c:forEach>
+			</table>
+    	</c:otherwise>
+    </c:choose>
+		
     <hr>
     
     <h2>Wealth</h2>

@@ -8,7 +8,7 @@ public class CharacterUnlockedJob{
 	private Integer jobLevel;
 	private Integer xP;
 	
-	public CharacterUnlockedJob(Characters character, String jobName, int jobLevel, int xP) {
+	public CharacterUnlockedJob(Characters character, String jobName, Integer jobLevel, Integer xP) {
 		super();
 		this.character = character;
 		this.jobName = jobName;
@@ -40,7 +40,7 @@ public class CharacterUnlockedJob{
 		this.jobName = jobName;
 	}
 
-	public int getJobLevel() {
+	public Integer getJobLevel() {
 		return jobLevel;
 	}
 
@@ -48,7 +48,7 @@ public class CharacterUnlockedJob{
 		this.jobLevel = jobLevel;
 	}
 
-	public int getxP() {
+	public Integer getxP() {
 		return xP;
 	}
 

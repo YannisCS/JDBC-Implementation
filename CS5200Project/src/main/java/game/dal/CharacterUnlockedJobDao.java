@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 import game.model.*;
 
@@ -88,6 +90,44 @@ public class CharacterUnlockedJobDao{
         }
       }
     }
+  }
+  
+  /**
+   * Get the a list of CharacterUnlockedJob record by fetching it from MySQL instance.
+   * This runs a SELECT statement and returns a list of CharacterUnlockedJob instance based on charID.
+   */
+  public static List<CharacterUnlockedJob> getCharacterUnlockedJobByCharID(
+	Connection cxn,
+    int charID
+  )  throws SQLException {
+	 List<CharacterUnlockedJob> unlockJobs = new ArrayList<>();
+     final String selectCharacterUnlockedJobs =
+       """
+       SELECT charID, jobName, jobLevel, XP
+       FROM CharacterUnlockedJob 
+       WHERE charID = ?;
+       """;
+
+     try (PreparedStatement selectStmt = cxn.prepareStatement(selectCharacterUnlockedJobs)) {
+    	  selectStmt.setInt(1, charID);
+
+	     try (ResultSet results = selectStmt.executeQuery()) {
+            while (results.next()) {
+            	Integer jobLevel = results.getObject("jobLevel", Integer.class);
+            	Integer xP = results.getObject("XP", Integer.class);
+            	
+                unlockJobs.add(
+                  new CharacterUnlockedJob(
+                    CharactersDao.getCharacterByCharID(cxn, charID),
+                    results.getString("jobName"),
+                    jobLevel,
+                    xP
+                  )
+                );
+            }
+        }
+    }
+    return unlockJobs;
   }
   
 }
