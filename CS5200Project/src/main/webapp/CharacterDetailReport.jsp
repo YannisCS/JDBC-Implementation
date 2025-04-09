@@ -26,14 +26,14 @@
 			background-color: LightGray;
 			color: black;
 			border: 1px solid #ddd;
-			padding: 5px;
+			padding: 6px;
 		}
 		td {
-			padding: 5px;
+			padding: 6px;
 			border: 1px solid #ddd;
 		}
 		tr:hover {
-			background-color: LightGray;
+			background-color: #F5F5F5;
 		}
 		.button-container {
 			margin-top: 20px;
