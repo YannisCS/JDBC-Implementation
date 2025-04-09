@@ -35,6 +35,12 @@ public class Driver {
 			Players P4 = PlayersDao.create(cxn, "Diana", "Brown", "diana@example.com");
 			Players P5 = PlayersDao.create(cxn, "Ethan", "Jones", "ethan@example.com");
 			Players P6 = PlayersDao.create(cxn, "Ethan", "Potter", "ethan@example.com");
+			Players P7 = PlayersDao.create(cxn, "Ella", "Smith", "alice@example.com");
+			Players P8 = PlayersDao.create(cxn, "Jane", "Johnson", "bob@example.com");
+			Players P9 = PlayersDao.create(cxn, "Emma", "Wilson", "emma@example.com");
+			Players P10 = PlayersDao.create(cxn, "Dan", "Brown", "dan@example.com");
+			Players P11 = PlayersDao.create(cxn, "Ellen", "Jones", "ellen@example.com");
+			Players P12 = PlayersDao.create(cxn, "James", "Potter", "james@example.com");
 			
 			//Insert Clans
 			Clans clan1 = ClansDao.create(cxn, "Lionhearts", Clans.Races.HUMAN);
@@ -43,15 +49,27 @@ public class Driver {
 			Clans clan4 = ClansDao.create(cxn, "BloodFury", Clans.Races.ORC);
 			Clans clan5 = ClansDao.create(cxn, "ShadowStalkers", Clans.Races.GOBLIN);
 			Clans clan6 = ClansDao.create(cxn, "StarFall", Clans.Races.ELF);
+			Clans clan7 = ClansDao.create(cxn, "FrostGiants", Clans.Races.HUMAN);
+			Clans clan8 = ClansDao.create(cxn, "MoonStriders", Clans.Races.ELF);
+			Clans clan9 = ClansDao.create(cxn, "IronBeards", Clans.Races.DWARF);
+			Clans clan10 = ClansDao.create(cxn, "RageFist", Clans.Races.ORC);
+			Clans clan11 = ClansDao.create(cxn, "NightSneakers", Clans.Races.GOBLIN);
+			Clans clan12 = ClansDao.create(cxn, "StoneCrusher", Clans.Races.DWARF);
 			
 			//Insert Items: 15 items: 5 Weapons, 5 Gears, and 5 Consumables.
 			/*Insert Weapons*/
-			//Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,1500.00,10,"Warrior",50);
 			Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,BigDecimal.valueOf(1500.00),10,"Warrior",50);
 			Weapons axe = WeaponsDao.create(cxn,"Axe of Fury",12,1,BigDecimal.valueOf(1700.00),12,"Mage", 45);
 			Weapons spear = WeaponsDao.create(cxn,"Spear of Destiny",11,1,BigDecimal.valueOf(1600.00),11,"Archer",40);
 			Weapons bow = WeaponsDao.create(cxn,"Bow of Eternity",9,1,BigDecimal.valueOf(1400.00),9,"Thief",35);
 			Weapons dagger = WeaponsDao.create(cxn,"Dagger of Stealth",8,1,BigDecimal.valueOf(1300.00),8,"Healer",30);
+			Weapons staff = WeaponsDao.create(cxn, "Staff of Wisdom", 10, 1, BigDecimal.valueOf(1550.00), 15, "Scholar", 48);
+			Weapons warhammer = WeaponsDao.create(cxn, "Warhammer of Thunder", 14, 1, BigDecimal.valueOf(1850.00), 18, "Paladin", 55);
+			Weapons katana = WeaponsDao.create(cxn, "Katana of Shadows", 13, 1, BigDecimal.valueOf(1750.00), 14, "Samurai", 52);
+			Weapons crossbow = WeaponsDao.create(cxn, "Crossbow of Precision", 11, 1, BigDecimal.valueOf(1650.00), 12, "Hunter", 42);
+			Weapons scythe = WeaponsDao.create(cxn, "Scythe of Souls", 15, 1, BigDecimal.valueOf(1900.00), 16, "Necromancer", 58);
+			Weapons rapier = WeaponsDao.create(cxn, "Rapier of Swiftness", 12, 1, BigDecimal.valueOf(1600.00), 10, "Fencer", 45);
+			Weapons mace = WeaponsDao.create(cxn, "Mace of Judgment", 13, 1, BigDecimal.valueOf(1700.00), 15, "Cleric", 50);
 
 			/*Insert Gears*/
 			Gears helmet = GearsDao.create(cxn,"Iron Helmet",1,1,BigDecimal.valueOf(200.00),5);
@@ -62,12 +80,27 @@ public class Driver {
 			Gears gloves = GearsDao.create(cxn,"Chainmail Gloves",6,1,BigDecimal.valueOf(600.00),6);
 			Gears legging = GearsDao.create(cxn,"Plate Leggings",7,1,BigDecimal.valueOf(800.00),7);
 			
+			Gears helmet2 = GearsDao.create(cxn, "Mithril Helmet", 15, 1, BigDecimal.valueOf(3000.00), 12);
+			Gears chestplate = GearsDao.create(cxn, "Dragon Scale Armor", 20, 1, BigDecimal.valueOf(5000.00), 18);
+			Gears gauntlets = GearsDao.create(cxn, "Gauntlets of Power", 12, 1, BigDecimal.valueOf(1800.00), 9);
+			Gears shield = GearsDao.create(cxn, "Kite Shield", 8, 1, BigDecimal.valueOf(1200.00), 8);
+			Gears belt = GearsDao.create(cxn, "Belt of Strength", 5, 1, BigDecimal.valueOf(900.00), 5);
+			Gears amulet = GearsDao.create(cxn, "Amulet of Protection", 10, 1, BigDecimal.valueOf(2500.00), 7);
+			Gears ring = GearsDao.create(cxn, "Ring of Wisdom", 9, 1, BigDecimal.valueOf(3200.00), 6);
+
 			/*Insert Consumables*/
 			Consumables smallHealthPotion = ConsumablesDao.create(cxn, "Small Health Potion", 1, 20, new BigDecimal("50.00"), "Restores 50 HP.");
 			Consumables largeHealthPotion = ConsumablesDao.create(cxn, "Large Health Potion", 1, 20, new BigDecimal("75.00"), "Restores 100 HP.");
 			Consumables manaPotion = ConsumablesDao.create(cxn, "Mana Potion", 1, 20, new BigDecimal("65.00"), "Restores 30 MP.");
 			Consumables staminaPotion = ConsumablesDao.create(cxn, "Stamina Potion", 1, 20, new BigDecimal("55.00"), "Boosts stamina temporarily.");
 			Consumables antidote = ConsumablesDao.create(cxn, "Antidote", 1, 15, new BigDecimal("40.00"), "Cures poison.");
+			Consumables strengthPotion = ConsumablesDao.create(cxn, "Strength Potion", 5, 20, new BigDecimal("80.00"), "Increases strength by 15% for 5 minutes.");
+			Consumables intelligenceElixir = ConsumablesDao.create(cxn, "Intelligence Elixir", 8, 10, new BigDecimal("120.00"), "Boosts spell damage by 20% for 3 minutes.");
+			Consumables speedDraught = ConsumablesDao.create(cxn, "Speed Draught", 6, 15, new BigDecimal("95.00"), "Increases movement speed by 25% for 2 minutes.");
+			Consumables toughnessTonic = ConsumablesDao.create(cxn, "Toughness Tonic", 7, 10, new BigDecimal("110.00"), "Reduces damage taken by 15% for 4 minutes.");
+			Consumables focusTablet = ConsumablesDao.create(cxn, "Focus Tablet", 9, 5, new BigDecimal("150.00"), "Reduces all ability cooldowns by 30% for 1 minute.");
+			Consumables restorationBrew = ConsumablesDao.create(cxn, "Restoration Brew", 10, 8, new BigDecimal("125.00"), "Heals 20% of max health and mana over 10 seconds.");
+			Consumables invisibilityPotion = ConsumablesDao.create(cxn, "Invisibility Potion", 12, 3, new BigDecimal("200.00"), "Grants invisibility for 15 seconds.");
 			
 			//Insert Statistics
 			Statistics strength = StatisticsDao.create(cxn, "Strength", "Determines physical power.");
@@ -75,6 +108,13 @@ public class Driver {
 			Statistics intelligence = StatisticsDao.create(cxn, "Intelligence", "Determines magical ability.");
 			Statistics endurance = StatisticsDao.create(cxn, "Endurance", "Determines stamina and resilience.");
 			Statistics luck = StatisticsDao.create(cxn, "Luck", "Determines chance of critical hits.");			
+			Statistics vitality = StatisticsDao.create(cxn, "Vitality", "Determines maximum health points.");
+			Statistics wisdom = StatisticsDao.create(cxn, "Wisdom", "Determines mana regeneration and spell resistance.");
+			Statistics perception = StatisticsDao.create(cxn, "Perception", "Determines accuracy and ability to spot hidden objects.");
+			Statistics charisma = StatisticsDao.create(cxn, "Charisma", "Determines effectiveness in social interactions and trading.");
+			Statistics focus = StatisticsDao.create(cxn, "Focus", "Determines ability to concentrate and maintain spells.");
+			Statistics willpower = StatisticsDao.create(cxn, "Willpower", "Determines resistance to mental effects and status ailments.");
+			Statistics dexterity = StatisticsDao.create(cxn, "Dexterity", "Determines hand-eye coordination and fine motor skills.");
 			
 			//Insert Currencies
 			Currencies gold = CurrenciesDao.create(cxn, "Gold", new BigDecimal(1000.00), null);
@@ -82,6 +122,13 @@ public class Driver {
 			Currencies bronze = CurrenciesDao.create(cxn, "Bronze", null, null);
 			Currencies platinum = CurrenciesDao.create(cxn, "Platinum",new BigDecimal(300.00), new BigDecimal(30.00));
 			Currencies diamond = CurrenciesDao.create(cxn, "Diamond", new BigDecimal(50.00), new BigDecimal(5.00));
+			Currencies copper = CurrenciesDao.create(cxn, "Copper", null, null);
+			Currencies gemstone = CurrenciesDao.create(cxn, "Gemstone", new BigDecimal(100.00), null);
+			Currencies token = CurrenciesDao.create(cxn, "Token", new BigDecimal(200.00), new BigDecimal(20.00));
+			Currencies shard = CurrenciesDao.create(cxn, "Shard", null, new BigDecimal(30.00));
+			Currencies essence = CurrenciesDao.create(cxn, "Essence", new BigDecimal(300.00), null);
+			Currencies fragment = CurrenciesDao.create(cxn, "Fragment", null, new BigDecimal(25.00));
+			Currencies ember = CurrenciesDao.create(cxn, "Ember", new BigDecimal(150.00), new BigDecimal(15.00));
 			
 			//Insert Characters
 			Characters Char1 = CharactersDao.create(cxn, P1, "Alicia", "Storm", clan1, sword);
@@ -89,6 +136,13 @@ public class Driver {
 			Characters Char3 = CharactersDao.create(cxn, P3, "Cecilia", "Wind", clan3, spear);
 			Characters Char4 = CharactersDao.create(cxn, P4, "Derek", "Stone", clan4, bow);
 			Characters Char5 = CharactersDao.create(cxn, P5, "Eva", "Night", clan5, dagger);
+			Characters Char6 = CharactersDao.create(cxn, P6, "Marcus", "Storm", clan7, staff);
+			Characters Char7 = CharactersDao.create(cxn, P7, "Elara", "Moon", clan8, warhammer);
+			Characters Char8 = CharactersDao.create(cxn, P8, "Garrick", "Stone", clan9, katana);
+			Characters Char9 = CharactersDao.create(cxn, P9, "Lyra", "Flame", clan10, crossbow);
+			Characters Char10 = CharactersDao.create(cxn, P10, "Thorne", "Night", clan11, scythe);
+			Characters Char11 = CharactersDao.create(cxn, P11, "Serena", "Wind", clan12, rapier);
+			Characters Char12 = CharactersDao.create(cxn, P1, "Rowan", "Storm", clan1, mace);
 			
 		    //Insert CharacterStatistics
 			CharacterStatistics charStat1 = CharacterStatisticsDao.create(cxn, Char1, strength, 10);
@@ -96,13 +150,36 @@ public class Driver {
 			CharacterStatistics charStat3 = CharacterStatisticsDao.create(cxn, Char3, intelligence, 15);
 			CharacterStatistics charStat4 = CharacterStatisticsDao.create(cxn, Char4, endurance, 11);
 			CharacterStatistics charStat5 = CharacterStatisticsDao.create(cxn, Char5, luck, 8);
-				
+			CharacterStatistics charStat6 = CharacterStatisticsDao.create(cxn, Char6, vitality, 14);
+			CharacterStatistics charStat7 = CharacterStatisticsDao.create(cxn, Char7, wisdom, 13);
+			CharacterStatistics charStat8 = CharacterStatisticsDao.create(cxn, Char8, perception, 9);
+			CharacterStatistics charStat9 = CharacterStatisticsDao.create(cxn, Char9, charisma, 16);
+			CharacterStatistics charStat10 = CharacterStatisticsDao.create(cxn, Char10, focus, 11);
+			CharacterStatistics charStat11 = CharacterStatisticsDao.create(cxn, Char11, willpower, 12);
+			CharacterStatistics charStat12 = CharacterStatisticsDao.create(cxn, Char12, dexterity, 10);
+			// Additional stats for existing characters
+			CharacterStatistics charStat13 = CharacterStatisticsDao.create(cxn, Char1, intelligence, 8);
+			CharacterStatistics charStat14 = CharacterStatisticsDao.create(cxn, Char2, strength, 15);
+			CharacterStatistics charStat15 = CharacterStatisticsDao.create(cxn, Char3, agility, 13);
+			CharacterStatistics charStat16 = CharacterStatisticsDao.create(cxn, Char4, luck, 9);
+			CharacterStatistics charStat17 = CharacterStatisticsDao.create(cxn, Char5, vitality, 14);
+			
 			//Insert EquipmentBonuse
 			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, sword.getItemID()), strength, 5);
 			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, boots.getItemID()), agility, 3);
 			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, spear.getItemID()), intelligence, 4);
 			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, helmet.getItemID()), endurance, 11);
 			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, axe.getItemID()), strength, 10);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, staff.getItemID()), intelligence, 8);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, warhammer.getItemID()), strength, 12);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, katana.getItemID()), agility, 9);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, crossbow.getItemID()), perception, 7);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, scythe.getItemID()), vitality, 6);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, helmet2.getItemID()), endurance, 9);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, chestplate.getItemID()), vitality, 14);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, gauntlets.getItemID()), strength, 8);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, shield.getItemID()), endurance, 10);
+			EquipmentBonuseDao.create(cxn, EquipmentsDao.getEquipmentByItemID(cxn, rapier.getItemID()), dexterity, 11);
 
 			//Insert ConsumableItemBonuse
 			ConsumableItemBonuse sHealthPotionBonuse = ConsumableItemBonuseDao.create(cxn, smallHealthPotion, strength, 10, 15);
@@ -110,7 +187,13 @@ public class Driver {
 			ConsumableItemBonuse manaPotionBonuse = ConsumableItemBonuseDao.create(cxn, manaPotion, endurance, 5, 8);
 			ConsumableItemBonuse staminaPotionBonuse = ConsumableItemBonuseDao.create(cxn, staminaPotion, agility, 12, 18);
 			ConsumableItemBonuse antidoteBonuse = ConsumableItemBonuseDao.create(cxn, antidote, luck, 20, 25);
-			
+			ConsumableItemBonuse strengthPotionBonus = ConsumableItemBonuseDao.create(cxn, strengthPotion, strength, 15, 20);
+			ConsumableItemBonuse intelligenceElixirBonus = ConsumableItemBonuseDao.create(cxn, intelligenceElixir, intelligence, 18, 25);
+			ConsumableItemBonuse speedDraughtBonus = ConsumableItemBonuseDao.create(cxn, speedDraught, agility, 20, 30);
+			ConsumableItemBonuse toughnessTonicBonus = ConsumableItemBonuseDao.create(cxn, toughnessTonic, endurance, 15, 22);
+			ConsumableItemBonuse focusTabletBonus = ConsumableItemBonuseDao.create(cxn, focusTablet, willpower, 25, 35);
+			ConsumableItemBonuse restorationBrewBonus = ConsumableItemBonuseDao.create(cxn, restorationBrew, vitality, 22, 30);
+			ConsumableItemBonuse invisibilityPotionBonus = ConsumableItemBonuseDao.create(cxn, invisibilityPotion, perception, 30, 40);
 			
 			//Insert JobsForGear
 			JobsForGear JFG1 = JobsForGearDao.create(cxn, helmet, "Warrior");
@@ -118,14 +201,32 @@ public class Driver {
 			JobsForGear JFG3 = JobsForGearDao.create(cxn, boots, "Archer");
 			JobsForGear JFG4 = JobsForGearDao.create(cxn, gloves, "Thief");
 			JobsForGear JFG5 = JobsForGearDao.create(cxn, legging, "Healer");
+			JobsForGear JFG6 = JobsForGearDao.create(cxn, helmet2, "Paladin");
+			JobsForGear JFG7 = JobsForGearDao.create(cxn, chestplate, "Samurai");
+			JobsForGear JFG8 = JobsForGearDao.create(cxn, gauntlets, "Warrior");
+			JobsForGear JFG9 = JobsForGearDao.create(cxn, shield, "Paladin");
+			JobsForGear JFG10 = JobsForGearDao.create(cxn, belt, "Hunter");
+			JobsForGear JFG11 = JobsForGearDao.create(cxn, amulet, "Necromancer");
+			JobsForGear JFG12 = JobsForGearDao.create(cxn, ring, "Scholar");
 			
 			//Insert CharacterUnlockedJob
 			CharacterUnlockedJob CUJ1 = CharacterUnlockedJobDao.create(cxn, Char1, "Warrior", 1, 100);
 			CharacterUnlockedJob CUJ2 = CharacterUnlockedJobDao.create(cxn, Char1, "Mage", null, null);
-			CharacterUnlockedJob CUJ3 = CharacterUnlockedJobDao.create(cxn, Char2, "Mage", 2, 200);
-			CharacterUnlockedJob CUJ4 = CharacterUnlockedJobDao.create(cxn, Char3, "Archer", 3, 300);
-			CharacterUnlockedJob CUJ5 = CharacterUnlockedJobDao.create(cxn, Char4, "Thief", 4, 400);
-			CharacterUnlockedJob CUJ6 = CharacterUnlockedJobDao.create(cxn, Char5, "Healer", 5, 500);
+			CharacterUnlockedJob CUJ3 = CharacterUnlockedJobDao.create(cxn, Char1, "Paladin", 1, 800);
+			CharacterUnlockedJob CUJ4 = CharacterUnlockedJobDao.create(cxn, Char2, "Mage", 2, 200);
+			CharacterUnlockedJob CUJ5 = CharacterUnlockedJobDao.create(cxn, Char2, "Paladin", 8, 800);
+			CharacterUnlockedJob CUJ6 = CharacterUnlockedJobDao.create(cxn, Char3, "Archer", 3, 300);
+			CharacterUnlockedJob CUJ7 = CharacterUnlockedJobDao.create(cxn, Char4, "Thief", 4, 400);
+			CharacterUnlockedJob CUJ8 = CharacterUnlockedJobDao.create(cxn, Char5, "Healer", 5, 500);
+			CharacterUnlockedJob CUJ9 = CharacterUnlockedJobDao.create(cxn, Char6, "Scholar", 7, 700);
+			CharacterUnlockedJob CUJ10 = CharacterUnlockedJobDao.create(cxn, Char7, "Paladin", 8, 800);
+			CharacterUnlockedJob CUJ11 = CharacterUnlockedJobDao.create(cxn, Char8, "Samurai", 9, 900);
+			CharacterUnlockedJob CUJ12 = CharacterUnlockedJobDao.create(cxn, Char9, "Hunter", 10, 1000);
+			CharacterUnlockedJob CUJ13 = CharacterUnlockedJobDao.create(cxn, Char10, "Necromancer", 11, 1100);
+			CharacterUnlockedJob CUJ14 = CharacterUnlockedJobDao.create(cxn, Char3, "Warrior", null, null);
+			CharacterUnlockedJob CUJ15 = CharacterUnlockedJobDao.create(cxn, Char10, "Mage", 3, 250);
+			CharacterUnlockedJob CUJ16 = CharacterUnlockedJobDao.create(cxn, Char11, "Fencer", 6, 600);
+			CharacterUnlockedJob CUJ17 = CharacterUnlockedJobDao.create(cxn, Char12, "Cleric", 7, 700);
 			
 			//Insert CharacterWealth
 			CharacterWealth CW1 = CharacterWealthDao.create(cxn, Char1, gold, new BigDecimal(500.00), new BigDecimal(50.00));
@@ -133,7 +234,21 @@ public class Driver {
 			CharacterWealth CW3 = CharacterWealthDao.create(cxn, Char3, bronze, new BigDecimal(300.00), new BigDecimal(30.00));
 			CharacterWealth CW4 = CharacterWealthDao.create(cxn, Char4, platinum, new BigDecimal(150.00), new BigDecimal(15.00));
 			CharacterWealth CW5 = CharacterWealthDao.create(cxn, Char5, diamond, new BigDecimal(20.00), null);
-
+			CharacterWealth CW6 = CharacterWealthDao.create(cxn, Char6, gold, new BigDecimal(750.00), new BigDecimal(75.00));
+			CharacterWealth CW7 = CharacterWealthDao.create(cxn, Char7, silver, new BigDecimal(1500.00), new BigDecimal(150.00));
+			CharacterWealth CW8 = CharacterWealthDao.create(cxn, Char8, bronze, new BigDecimal(450.00), new BigDecimal(45.00));
+			CharacterWealth CW9 = CharacterWealthDao.create(cxn, Char9, platinum, new BigDecimal(200.00), new BigDecimal(20.00));
+			CharacterWealth CW10 = CharacterWealthDao.create(cxn, Char10, diamond, new BigDecimal(30.00), null);
+			CharacterWealth CW11 = CharacterWealthDao.create(cxn, Char11, copper, new BigDecimal(600.00), new BigDecimal(60.00));
+			CharacterWealth CW12 = CharacterWealthDao.create(cxn, Char12, gemstone, new BigDecimal(50.00), null);
+			// Additional currencies for existing characters
+			CharacterWealth CW13 = CharacterWealthDao.create(cxn, Char1, token, new BigDecimal(120.00), new BigDecimal(12.00));
+			CharacterWealth CW14 = CharacterWealthDao.create(cxn, Char2, shard, new BigDecimal(80.00), new BigDecimal(8.00));
+			CharacterWealth CW15 = CharacterWealthDao.create(cxn, Char3, essence, new BigDecimal(200.00), null);
+			CharacterWealth CW16 = CharacterWealthDao.create(cxn, Char4, fragment, new BigDecimal(150.00), new BigDecimal(15.00));
+			CharacterWealth CW17 = CharacterWealthDao.create(cxn, Char5, ember, new BigDecimal(100.00), new BigDecimal(10.00));
+			CharacterWealth CW18 = CharacterWealthDao.create(cxn, Char6, shard, new BigDecimal(350.00), new BigDecimal(35.00));
+			CharacterWealth CW19 = CharacterWealthDao.create(cxn, Char7, token, new BigDecimal(250.00), new BigDecimal(25.00));
 			
 			
 			//Insert Inventory
@@ -142,14 +257,76 @@ public class Driver {
 			Inventory inven3 = InventoryDao.create(cxn, Char3, 3, spear, 1);
 			Inventory inven4 = InventoryDao.create(cxn, Char4, 4, gloves, 1);
 			Inventory inven5 = InventoryDao.create(cxn, Char5, 5, helmet, 1);
+			//Insert more Inventory items
+			Inventory inven6 = InventoryDao.create(cxn, Char6, 1, staff, 1);
+			Inventory inven7 = InventoryDao.create(cxn, Char7, 2, warhammer, 1);
+			Inventory inven8 = InventoryDao.create(cxn, Char8, 3, helmet2, 1);
+			Inventory inven9 = InventoryDao.create(cxn, Char9, 4, chestplate, 1);
+			Inventory inven10 = InventoryDao.create(cxn, Char10, 5, gauntlets, 1);
+			Inventory inven11 = InventoryDao.create(cxn, Char11, 6, shield, 1);
+			Inventory inven12 = InventoryDao.create(cxn, Char12, 7, belt, 1);
+			// Add consumables to inventories
+			Inventory inven13 = InventoryDao.create(cxn, Char1, 10, smallHealthPotion, 5);
+			Inventory inven14 = InventoryDao.create(cxn, Char2, 11, largeHealthPotion, 3);
+			Inventory inven15 = InventoryDao.create(cxn, Char3, 12, manaPotion, 7);
+			Inventory inven16 = InventoryDao.create(cxn, Char4, 13, staminaPotion, 4);
+			Inventory inven17 = InventoryDao.create(cxn, Char5, 14, antidote, 2);
+			Inventory inven18 = InventoryDao.create(cxn, Char6, 15, strengthPotion, 6);
+			Inventory inven19 = InventoryDao.create(cxn, Char7, 16, intelligenceElixir, 3);
 
 
 			//Insert EquippedItems
-			EquippedItems equippedItem1 = EquippedItemsDao.create(cxn, Char1, "HEAD", helmet);
-			EquippedItems equippedItem2 = EquippedItemsDao.create(cxn, Char2, "BODY", armor);
-			EquippedItems equippedItem3 = EquippedItemsDao.create(cxn, Char3, "FOOT", boots);
-			EquippedItems equippedItem4 = EquippedItemsDao.create(cxn, Char4, "HAND", gloves);
-			EquippedItems equippedItem5 = EquippedItemsDao.create(cxn, Char5, "LEG", legging);
+			// For Char1 (Warrior with sword)
+			EquippedItems equippedItem1 = EquippedItemsDao.create(cxn, Char1, "HEAD", helmet);  // Already exists
+			EquippedItems equippedItem1b = EquippedItemsDao.create(cxn, Char1, "BODY", armor);
+			EquippedItems equippedItem1c = EquippedItemsDao.create(cxn, Char1, "HAND", gloves);
+			// For Char2 (Mage with axe)
+			EquippedItems equippedItem2 = EquippedItemsDao.create(cxn, Char2, "BODY", armor);  // Already exists
+			EquippedItems equippedItem2b = EquippedItemsDao.create(cxn, Char2, "HEAD", helmet2);
+			EquippedItems equippedItem2c = EquippedItemsDao.create(cxn, Char2, "NECK", amulet);
+			// For Char3 (Archer with spear)
+			EquippedItems equippedItem3 = EquippedItemsDao.create(cxn, Char3, "FOOT", boots);  // Already exists
+			EquippedItems equippedItem3b = EquippedItemsDao.create(cxn, Char3, "HEAD", helmet);
+			EquippedItems equippedItem3c = EquippedItemsDao.create(cxn, Char3, "WAIST", belt);
+			// For Char4 (Thief with bow)
+			EquippedItems equippedItem4 = EquippedItemsDao.create(cxn, Char4, "HAND", gloves);  // Already exists
+			EquippedItems equippedItem4b = EquippedItemsDao.create(cxn, Char4, "FOOT", boots);
+			EquippedItems equippedItem4c = EquippedItemsDao.create(cxn, Char4, "FINGER", ring);
+			// For Char5 (Healer with dagger)
+			EquippedItems equippedItem5 = EquippedItemsDao.create(cxn, Char5, "LEG", legging);  // Already exists
+			EquippedItems equippedItem5b = EquippedItemsDao.create(cxn, Char5, "NECK", amulet);
+			EquippedItems equippedItem5c = EquippedItemsDao.create(cxn, Char5, "WRIST", ring);
+			// For Char6 (Scholar with staff)
+			EquippedItems equippedItem6a = EquippedItemsDao.create(cxn, Char6, "HEAD", helmet2);
+			EquippedItems equippedItem6b = EquippedItemsDao.create(cxn, Char6, "BODY", chestplate);
+			EquippedItems equippedItem6c = EquippedItemsDao.create(cxn, Char6, "FINGER", ring);
+			// For Char7 (Paladin with warhammer)
+			EquippedItems equippedItem7a = EquippedItemsDao.create(cxn, Char7, "HEAD", helmet);
+			EquippedItems equippedItem7b = EquippedItemsDao.create(cxn, Char7, "BODY", armor);
+			EquippedItems equippedItem7c = EquippedItemsDao.create(cxn, Char7, "HAND", gauntlets);
+			EquippedItems equippedItem7d = EquippedItemsDao.create(cxn, Char7, "LEG", legging);
+			EquippedItems equippedItem7e = EquippedItemsDao.create(cxn, Char7, "OFF_HAND", shield);
+			// For Char8 (Samurai with katana)
+			EquippedItems equippedItem8a = EquippedItemsDao.create(cxn, Char8, "HEAD", helmet2);
+			EquippedItems equippedItem8b = EquippedItemsDao.create(cxn, Char8, "BODY", chestplate);
+			EquippedItems equippedItem8c = EquippedItemsDao.create(cxn, Char8, "HAND", gauntlets);
+			// For Char9 (Hunter with crossbow)
+			EquippedItems equippedItem9a = EquippedItemsDao.create(cxn, Char9, "HEAD", helmet);
+			EquippedItems equippedItem9b = EquippedItemsDao.create(cxn, Char9, "BODY", armor);
+			EquippedItems equippedItem9c = EquippedItemsDao.create(cxn, Char9, "FOOT", boots);
+			EquippedItems equippedItem9d = EquippedItemsDao.create(cxn, Char9, "WAIST", belt);
+			// For Char10 (Necromancer with scythe)
+			EquippedItems equippedItem10a = EquippedItemsDao.create(cxn, Char10, "HEAD", helmet2);
+			EquippedItems equippedItem10b = EquippedItemsDao.create(cxn, Char10, "NECK", amulet);
+			EquippedItems equippedItem10c = EquippedItemsDao.create(cxn, Char10, "FINGER", ring);
+			// For Char11 (Fencer with rapier)
+			EquippedItems equippedItem11a = EquippedItemsDao.create(cxn, Char11, "BODY", armor);
+			EquippedItems equippedItem11b = EquippedItemsDao.create(cxn, Char11, "HAND", gauntlets);
+			EquippedItems equippedItem11c = EquippedItemsDao.create(cxn, Char11, "FOOT", boots);
+			// For Char12 (Cleric with mace)
+			EquippedItems equippedItem12a = EquippedItemsDao.create(cxn, Char12, "HEAD", helmet);
+			EquippedItems equippedItem12b = EquippedItemsDao.create(cxn, Char12, "BODY", chestplate);
+			EquippedItems equippedItem12c = EquippedItemsDao.create(cxn, Char12, "OFF_HAND", shield);
 			
 			/**
 			 * Read records
@@ -218,7 +395,7 @@ public class Driver {
 		    System.out.println("\n* Reading strength of sword: \n" + swordStrength.toString());
 			
 			//Read Consumables
-		    Consumables cons = ConsumablesDao.getConsumableByItemID(cxn, 13);
+		    Consumables cons = ConsumablesDao.getConsumableByItemID(cxn, smallHealthPotion.getItemID());
 		    System.out.format("\n\n* Reading consumable item with itemID=13: \n%s", cons.toString());
 			
 			//Read ConsumableItemBonuse

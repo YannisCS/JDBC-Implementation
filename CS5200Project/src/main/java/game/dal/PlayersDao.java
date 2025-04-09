@@ -212,24 +212,49 @@ public class PlayersDao{
    * Update the lastName of the Player instance.
    * This runs a UPDATE statement.
    */
+//  public static Players updatePlayerLastName(
+//    Connection cxn,
+//    Players player,
+//    String newLastName
+//	  ) throws SQLException {
+//    String updatePlayerLastName = """
+//      UPDATE Players
+//      SET lastName = ?
+//      WHERE playerID = ?;""";
+//
+//    try (PreparedStatement updateStmt = cxn.prepareStatement(updatePlayerLastName)) {
+//      updateStmt.setString(1, newLastName);
+//      updateStmt.setInt(2, player.getPlayerID());
+//      updateStmt.executeUpdate();
+//      
+//      player.setLastName(newLastName);
+//      return player;
+//    }
+//  }
+  
   public static Players updatePlayerLastName(
-    Connection cxn,
-    Players player,
-    String newLastName
-	  ) throws SQLException {
-    String updatePlayerLastName = """
-      UPDATE Players
-      SET lastName = ?
-      WHERE playerID = ?;""";
+		  Connection cxn,
+		  Players player,
+		  String newLastName
+		) throws SQLException {
+		  System.out.println("Updating player ID " + player.getPlayerID() + 
+		                    " last name from '" + player.getLastName() + 
+		                    "' to '" + newLastName + "'");
+		  
+		  String updatePlayerLastName = """
+		    UPDATE Players
+		    SET lastName = ?
+		    WHERE playerID = ?;""";
 
-    try (PreparedStatement updateStmt = cxn.prepareStatement(updatePlayerLastName)) {
-      updateStmt.setString(1, newLastName);
-      updateStmt.setInt(2, player.getPlayerID());
-      updateStmt.executeUpdate();
-      
-      player.setLastName(newLastName);
-      return player;
-    }
-  }
+		  try (PreparedStatement updateStmt = cxn.prepareStatement(updatePlayerLastName)) {
+		    updateStmt.setString(1, newLastName);
+		    updateStmt.setInt(2, player.getPlayerID());
+		    int rowsAffected = updateStmt.executeUpdate();
+		    System.out.println("Rows affected by update: " + rowsAffected);
+		    
+		    player.setLastName(newLastName);
+		    return player;
+		  }
+		}
   
 }

@@ -31,8 +31,8 @@ public class CharactersDao{
 
       try (PreparedStatement insertStmt = cxn.prepareStatement(insertCharacters, Statement.RETURN_GENERATED_KEYS)) {
     	insertStmt.setInt(1, player.getPlayerID());
-        insertStmt.setString(2, player.getFirstName());
-        insertStmt.setString(3, player.getLastName());
+        insertStmt.setString(2, firstName);
+        insertStmt.setString(3, lastName);
         insertStmt.setString(4, clan.getClanName());
         insertStmt.setInt(5, weaponWeared.getItemID());
         insertStmt.executeUpdate();
