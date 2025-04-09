@@ -102,7 +102,7 @@ public class CharactersDao{
     		while (rs.next()) {
     			Players player = PlayersDao.getPlayerByPlayerID(cxn, rs.getInt("playerID"));
     			Clans clan = ClansDao.getClanRacebyClanName(cxn, rs.getString("clan"));
-    			Weapons weapon = WeaponsDao.getWeaponByItemID(cxn, rs.getInt("weaponID"));
+    			Weapons weapon = WeaponsDao.getWeaponByItemID(cxn, rs.getInt("weaponWeared"));
     			
     			characters.add(
     					new Characters(
