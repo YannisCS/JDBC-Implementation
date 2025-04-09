@@ -23,7 +23,7 @@ pageEncoding="ISO-8859-1"%>
 <body>
 
 <form action="findcharacter" method="get">
-<h1>Search by Player last name</h1>
+<h1>Search Characters by Player's last name</h1>
 <p>
 <label for="playerlastname">Player last name</label>
 <input id="playerlastname" name="playerlastname" value="${fn:escapeXml(param.playerlastname)}">
