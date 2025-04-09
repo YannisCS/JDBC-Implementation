@@ -100,14 +100,18 @@ public class CharactersDao{
     try (PreparedStatement selectStmt = cxn.prepareStatement(selectCharacters)) {
     	try (ResultSet rs = selectStmt.executeQuery()) {
     		while (rs.next()) {
+    			Players player = PlayersDao.getPlayerByPlayerID(cxn, rs.getInt("playerID"));
+    			Clans clan = ClansDao.getClanRacebyClanName(cxn, rs.getString("clan"));
+    			Weapons weapon = WeaponsDao.getWeaponByItemID(cxn, rs.getInt("weaponID"));
+    			
     			characters.add(
     					new Characters(
     						rs.getInt("charID"),
-    						PlayersDao.getPlayerByPlayerID(cxn, rs.getInt("playerID")),
+    						player,
     						rs.getString("firstName"),
     						rs.getString("lastName"),
-    						ClansDao.getClanRacebyClanName(cxn, rs.getString("clan")),
-    						WeaponsDao.getWeaponByItemID(cxn, rs.getInt("weaponWeared"))
+    						clan,
+    						weapon
     					)
     			);
     		}
