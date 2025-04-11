@@ -108,6 +108,8 @@ public class FindCharacter extends HttpServlet {
 			
 			req.setAttribute("characters", characters);
 			// req.setAttribute("debugInfo", debugInfo);
+			req.setAttribute("currentSortBy", sortBy);
+			req.setAttribute("currentSortOrder", sortOrder);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new IOException(e);

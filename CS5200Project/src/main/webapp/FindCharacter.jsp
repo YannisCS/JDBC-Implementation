@@ -61,8 +61,8 @@ pageEncoding="ISO-8859-1"%>
 			<p>
 				<span id="responseMessage"><b>${messages.response}</b></span>
 			</p>
-		</form>
-		
+		</form>	
+	
 		<script>
 			function clearFilter() {
 				document.getElementById('playerlastname').value = '';
