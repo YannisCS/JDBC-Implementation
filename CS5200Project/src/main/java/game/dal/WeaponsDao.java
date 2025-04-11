@@ -82,5 +82,43 @@ public class WeaponsDao {
 			}
 		}
 	}
+	
+	public static Weapons getWeaponByWeaponName(Connection cxn, String itemName) throws SQLException {
+		String selectWeapon = """
+				SELECT ItemID,
+					   level,
+					   maxStackSize,
+					   price,
+					   requiredLevel,
+					   wearableJob,
+					   damage
+				FROM Weapons W
+				JOIN Equipments E
+				ON W.ItemID = E.ItemID
+				JOIN Items I
+				ON E.itemID = I.itemID
+				WHERE W.itemName = ?;
+				""";
+		
+		try (PreparedStatement selectStmt = cxn.prepareStatement(selectWeapon)) {
+			selectStmt.setString(1, itemName);
+			
+			try (ResultSet result = selectStmt.executeQuery()) {
+				if (result.next()) {
+					return new Weapons(
+							result.getInt("itemID"),
+							itemName,
+							result.getInt("level"),
+							result.getInt("maxStackSize"),
+							result.getBigDecimal("price"),
+							result.getInt("requiredLevel"),
+							result.getString("wearableJob"),
+							result.getInt("damage"));
+				} else {
+					return null;
+				}
+			}
+		}
+	}
 
 }

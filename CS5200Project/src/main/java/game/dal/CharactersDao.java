@@ -219,6 +219,24 @@ public class CharactersDao{
 	  default: return "p.lastName";
 	  }
   }
+  
+  public static Characters updateWeaponWeared(Connection cxn, Characters character, Weapons weapon) throws SQLException {
+	  final String updateWeapon = """
+	  		UPDATE Characters
+	  		SET weaponWeared = ?
+	  		WHERE charID = ?
+	  		""";
+	  
+	  try (PreparedStatement updateStmt = cxn.prepareStatement(updateWeapon)) {
+		  updateStmt.setInt(1, weapon.getItemID());
+		  updateStmt.setInt(2, character.getCharID());
+		  updateStmt.executeUpdate();
+		  
+		  character.setWeaponWeared(weapon);
+		  return character;
+	  }
+	  
+  }
 
   
 }
