@@ -54,9 +54,14 @@ public class CharacterDetailReport extends HttpServlet {
       List<CharacterUnlockedJob> unlockedJobs = new ArrayList<>();
       unlockedJobs = CharacterUnlockedJobDao.getCharacterUnlockedJobByCharID(cxn, charId);
       
+      // Get character wealth
+      List<CharacterWealth> wealthList = CharacterWealthDao.getCharacterWealthByCharacter(cxn, character);
+      
       
       req.setAttribute("character", character);
       req.setAttribute("unlockedJobs", unlockedJobs);
+      req.setAttribute("characterWealthList", wealthList);
+      
       messages.put(TITLE_MESSAGE, character.getFirstName() + " " + character.getLastName());
       
       req.getRequestDispatcher("/CharacterDetailReport.jsp").forward(req, resp);
