@@ -6,6 +6,7 @@ import game.model.*;
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.servlet.annotation.*;
 import javax.servlet.ServletException;
@@ -72,23 +73,37 @@ public class FindCharacter extends HttpServlet {
 			boolean hasParameter = req.getParameterMap().containsKey("playerlastname");
 			// debugInfo += "Has Parameter: " + hasParameter + " | ";
 			
+			// get sorting parameter
+			String sortBy = req.getParameter("sortBy");
+			String sortOrder = req.getParameter("sortOrder");
+			// default sorting if not not specified
+			if (sortBy == null || sortBy.isEmpty() ) {
+				sortBy = "playerLastName";
+			}
+			if (sortOrder == null || sortOrder.isEmpty() ) {
+				sortOrder = "asc";
+			}
+			
 			// check if on the initial page load (no parameter) or if doing a search (has parameter)
 			if (hasParameter) {
 				if (playerLastName != null && !playerLastName.trim().isEmpty()) {
 					// non-empty search
 					// debugInfo += "Filtering characters by name |";
-					characters = getCharactersByPlayerLastName(cxn, playerLastName);
-					messages.put(RESPONSE_MESSAGE, "Displaying characters for player with last name: " + playerLastName);	
+					characters = getCharactersByPlayerLastName(cxn, playerLastName, sortBy, sortOrder);
+					messages.put(
+							RESPONSE_MESSAGE, 
+							"Displaying characters for player with last name: " + playerLastName
+							);	
 				} else {
 					// empty search
-					// debugInfo += "Empty seach term |";
+					// debugInfo += "Empty searching term |";
 					messages.put(RESPONSE_MESSAGE, "No search term provided. PLease enter a player's last name.");
 				}
 			} else {
 				// initial page - show all characters
 				// debugInfo += "Initial page load |";
-				characters = CharactersDao.getAllCharacters(cxn);
-				messages.put(RESPONSE_MESSAGE, "Displaying all characters");
+				characters = CharactersDao.getAllCharacters(cxn, sortBy, sortOrder);
+				messages.put(RESPONSE_MESSAGE, "Displaying all characters: ");
 			}
 			
 			req.setAttribute("characters", characters);
@@ -100,22 +115,27 @@ public class FindCharacter extends HttpServlet {
 		req.getRequestDispatcher("/FindCharacter.jsp").forward(req, resp);
 	}
 	
-	
 	/**
+	 * add in pm4
 	 * Get all Characters records by similar Player's lastName
 	 * @return a list of all characters
 	 */
-	private List<Characters> getCharactersByPlayerLastName(
-			Connection cxn,
-			String playerLastName
+
+	public static List<Characters> getCharactersByPlayerLastName(
+			final Connection cxn,
+			final String playerLastName,
+			final String sortBy,
+		    final String sortOrder
 	) throws SQLException {
-		  List<Characters> result = new ArrayList<>();
 		  List<Players> players = PlayersDao.getPlayersFromLastName(cxn, playerLastName);
-		  for (Players p : players) {
-			  List<Characters> characters = CharactersDao.getCharactersByPlayer(cxn, p);
-			  result.addAll(characters);
-		  }
-		  return result;
-	  }	  
+		  
+		  List<Integer> playerIDs = players.stream()
+				  .map(Players::getPlayerID)
+				  .collect(Collectors.toList());
+		  
+		  return CharactersDao.getCharactersByPlayerIDs(cxn, playerIDs, sortBy, sortOrder);
+	  }  	
+
+	
 }
 

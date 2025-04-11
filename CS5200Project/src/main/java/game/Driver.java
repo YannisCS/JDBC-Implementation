@@ -3,6 +3,7 @@ package game;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import game.dal.*;
@@ -441,6 +442,20 @@ public class Driver {
 			EquippedItems equipedIte2 = EquippedItemsDao.getEquippedItemsByCharIDAndSlot(cxn, Char2.getCharID(), "BODY");
 		    System.out.format("\nReading EquippedItems2: charID:%s equipPosition:%s itemID:%s \n", equipedIte2.getCharID(), equipedIte2.getEquipPosition(),equipedIte2.getItemID());
 		    System.out.println();
+		    
+		    // get a list of all characters 
+		    List<Characters> characters = CharactersDao.getAllCharacters(cxn, "characterfirstname", "ASC");
+		    System.out.print("\n\nget a list of all characters:");
+		    for (Characters c : characters) {
+		    	System.out.format("%n	%s", c.toString());
+		    }
+		    // get characters by playerIDs
+		    List<Integer> playerIDs = new ArrayList<>(List.of(1, 2));
+		    List<Characters> charactersByPlayerIDs = CharactersDao.getCharactersByPlayerIDs(cxn, playerIDs, "characterfirstname", "asc");
+		    System.out.print("\n\nget a list of all characters of players with ids 1, 2:");
+		    for (Characters c : charactersByPlayerIDs) {
+		    	System.out.format("%n	%s", c.toString());
+		    }
 
 			/**
 			 * Update records
