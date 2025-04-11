@@ -113,6 +113,20 @@
     <hr>
     
     <h2>Wealth</h2>
+<table border="1">
+    <tr>
+        <th>Currency</th>
+        <th>Amount</th>
+        <th>Weekly Acquired</th>
+    </tr>
+    <c:forEach var="wealth" items="${characterWealthList}">
+        <tr>
+            <td>${wealth.currency.currencyName}</td>
+            <td>${wealth.amount}</td>
+            <td>${wealth.weeklyAcquired}</td>
+        </tr>
+    </c:forEach>
+</table>
     <hr>
     
     <h2>Inventory</h2>
