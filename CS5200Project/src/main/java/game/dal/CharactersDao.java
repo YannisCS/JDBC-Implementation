@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import game.model.*;
@@ -85,24 +86,31 @@ public class CharactersDao{
   
   /**
    * add in pm4
-   * Get all Characters records in the database
-   * @return a list of all characters
+   * Get all Characters records join with player's name, clan, and weapon in the database
+   * @return a list of all ordered characters
    */
   public static List<Characters> getAllCharacters(
-		    Connection cxn
+		    Connection cxn,
+		    String sortBy,
+		    String sortOrder
   ) throws SQLException {
     List<Characters> characters = new ArrayList<>();
     
-    String selectCharacters = """
-      SELECT * FROM Characters;
-      """;
+    String validatedSortAttribute = validateSortAttribute(sortBy);
+    String validatedSortOrder = validateSortOrder(sortOrder);
+    String selectCharacters = "SELECT c.*, p.*, cl.*, w.* " + 
+    						  "FROM Characters c " +
+    						  "JOIN Players p ON c.playerID = p.playerID " +
+    						  "JOIN Clans cl ON c.clan = cl.clanName " +
+    						  "JOIN Weapons w ON c.weaponWeared = w.itemID " +
+    						  "ORDER BY " + validatedSortAttribute + " " + validatedSortOrder;
 
     try (PreparedStatement selectStmt = cxn.prepareStatement(selectCharacters)) {
     	try (ResultSet rs = selectStmt.executeQuery()) {
     		while (rs.next()) {
-    			Players player = PlayersDao.getPlayerByPlayerID(cxn, rs.getInt("playerID"));
-    			Clans clan = ClansDao.getClanRacebyClanName(cxn, rs.getString("clan"));
-    			Weapons weapon = WeaponsDao.getWeaponByItemID(cxn, rs.getInt("weaponWeared"));
+    			Players player = PlayersDao.getPlayerByPlayerID(cxn, rs.getInt("p.playerID"));
+    			Clans clan = ClansDao.getClanRacebyClanName(cxn, rs.getString("cl.clanName"));
+    			Weapons weapon = WeaponsDao.getWeaponByItemID(cxn, rs.getInt("w.itemID"));
     			
     			characters.add(
     					new Characters(
@@ -122,39 +130,94 @@ public class CharactersDao{
   
   /**
    * add in pm4
-   * Get all Characters records by a specific Player
-   * @return a list of all characters
+   * Get all Characters records by a list of PlayerIDs
+   * @return a list of all ordered characters
    */
-  public static List<Characters> getCharactersByPlayer(
+  public static List<Characters> getCharactersByPlayerIDs(
 		    Connection cxn,
-		    Players player
+		    List<Integer> playerIDs,
+		    String sortBy,
+		    String sortOrder
   ) throws SQLException {
+	  if (playerIDs == null || playerIDs.isEmpty()) {
+		  return new ArrayList<>();
+	  }
     List<Characters> characters = new ArrayList<>();
     
-    String selectCharactersByPlayer = """
-      SELECT * 
-      FROM Characters
-      WHERE playerID = ?;
-      """;
+    String validatedSortAttribute = validateSortAttribute(sortBy);
+    String validatedSortOrder = validateSortOrder(sortOrder);
+    // create the IN clause placeholder (?, ?, ..., ?)
+    String placeholders = String.join(",", Collections.nCopies(playerIDs.size(), "?"));
+    
+    String selectCharactersByPlayer = "SELECT c.*, p.*, cl.*, w.* " + 
+									  "FROM Characters c " +
+									  "JOIN Players p ON c.playerID = p.playerID " +
+									  "JOIN Clans cl ON c.clan = cl.clanName " +
+									  "JOIN Weapons w ON c.weaponWeared = w.itemID " +
+									  "WHERE p.playerID IN (" + placeholders + ") " +
+									  "ORDER BY " + validatedSortAttribute + " " + validatedSortOrder;
 
     try (PreparedStatement pstmt = cxn.prepareStatement(selectCharactersByPlayer)) {
-    	pstmt.setInt(1, player.getPlayerID());
+    	// set player id in the IN clause
+    	for (int i = 0; i < playerIDs.size(); i++) {
+    		pstmt.setInt(i + 1, playerIDs.get(i));
+    	}
+    	
     	try (ResultSet rs = pstmt.executeQuery()) {
     		while (rs.next()) {
     			characters.add(
     					new Characters(
-    						rs.getInt("charID"),
-    						player,
-    						rs.getString("firstName"),
-    						rs.getString("lastName"),
-    						ClansDao.getClanRacebyClanName(cxn, rs.getString("clan")),
-    						WeaponsDao.getWeaponByItemID(cxn, rs.getInt("weaponWeared"))
+    						rs.getInt("c.charID"),
+    						PlayersDao.getPlayerByPlayerID(cxn, rs.getInt("p.playerID")),
+    						rs.getString("c.firstName"),
+    						rs.getString("c.lastName"),
+    						ClansDao.getClanRacebyClanName(cxn, rs.getString("cl.clanName")),
+    						WeaponsDao.getWeaponByItemID(cxn, rs.getInt("w.itemID"))
     					)
     			);
     		}
     	}
     }
     return characters;
+  }
+
+  /**
+   * add in pm4
+   * validates the sort order parameter in query
+   * @param sortOrder
+   * @return a string (ASC / DESC)
+   */
+  public static String validateSortOrder(String sortOrder) {
+	  if (sortOrder == null || sortOrder.trim().isEmpty()) {
+		  return "ASC"; // default
+	  }
+	  
+	  if (sortOrder.equals("descending")) {
+		  return "DESC";
+	  } else {
+		  return "ASC";
+	  }
+  }
+  /**
+   * add in pm4
+   * validates the sort attribute in query
+   * @param sortBy
+   * @return a string (the attribute name)
+   */
+  public static String validateSortAttribute(String sortBy) {
+	  if (sortBy == null || sortBy.trim().isEmpty()) {
+		  return "p.lastName"; // default
+	  }
+	  
+	  switch (sortBy.toLowerCase()) {
+	  case "characterfirstname": return "c.firstName";
+	  case "characterlastname": return "c.lastName";
+	  case "playerfirstname": return "p.firstName";
+	  case "playerlastname": return "p.lastName";
+	  case "clan": return "cl.clanName";
+	  case "job": return "w.wearablejob";
+	  default: return "p.lastName";
+	  }
   }
 
   
