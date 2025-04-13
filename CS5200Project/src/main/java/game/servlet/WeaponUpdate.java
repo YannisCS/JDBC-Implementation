@@ -75,6 +75,6 @@ public class WeaponUpdate extends HttpServlet {
       }
     }
 
-    req.getRequestDispatcher("/Update.jsp").forward(req, resp);
+    req.getRequestDispatcher("/WeaponUpdate.jsp").forward(req, resp);
   }
 }
