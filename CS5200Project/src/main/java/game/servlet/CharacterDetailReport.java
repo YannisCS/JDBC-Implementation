@@ -72,11 +72,18 @@ public class CharacterDetailReport extends HttpServlet {
       List<Inventory>  inventoryList = new ArrayList<Inventory>();
       inventoryList = InventoryDao.getInventoryOnlyByCharacters(cxn, character);
       
+      //get Item Name from ItemId
+      List<String> itemNameList = new ArrayList<String>();
+      for(Inventory inven:inventoryList) {
+    	  itemNameList.add(ItemsDao.getNameByItemID(cxn,inven.getInstance()));
+      }
+      
       req.setAttribute("character", character);
       req.setAttribute("unlockedJobs", unlockedJobs);
       req.setAttribute("characterWealthList", wealthList);
       req.setAttribute("gearList", gearList);
       req.setAttribute("inventoryList", inventoryList);
+      req.setAttribute("itemNameList", itemNameList);
 
       
       messages.put(TITLE_MESSAGE, character.getFirstName() + " " + character.getLastName());

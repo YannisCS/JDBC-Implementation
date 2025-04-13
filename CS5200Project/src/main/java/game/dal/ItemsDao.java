@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import game.model.Gears;
 import game.model.Items;
 
 
@@ -44,6 +45,27 @@ public class ItemsDao {
 
 	    }
 		
+	}
+	
+	
+	public static String getNameByItemID(Connection cxn, int itemID) throws SQLException {
+		String selectItem = """
+				SELECT itemName
+				FROM Items 
+				WHERE itemID = ?;
+				""";
+		
+		try (PreparedStatement selectStmt = cxn.prepareStatement(selectItem)) {
+			selectStmt.setInt(1, itemID);
+			
+			try (ResultSet result = selectStmt.executeQuery()) {
+				if (result.next()) {
+					return result.getString("itemName");
+				} else {
+					return null;
+				}
+			}
+		}
 	}
 	
 	

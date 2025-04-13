@@ -65,7 +65,7 @@
     	<c:otherwise>
     		<table>
 				<tr>
-					<th>WeaponWeared Name</th>
+					<th>Weapon Name</th>
 					<th>maxStackSize</th>
 					<th>price</th>
 					<th>requiredLevel</th>
@@ -198,13 +198,13 @@
     		<table>
 				<tr>
 					<th>slotID</th>
-					<th>item</th>
+					<th>itemName</th>
 					<th>quantity</th>
 				</tr>
-				<c:forEach items="${inventoryList}" var="inventory">
+				<c:forEach items="${inventoryList}" var="inventory" varStatus="status">
 				<tr>
 				  <td>${inventory.getSlotID()}</td>
-				  <td>${inventory.getInstance()}</td>
+				  <td>${itemNameList.get(status.index)}</td>
                   <td>${inventory.getQuantity()}</td>
 				</tr>
 				</c:forEach>
