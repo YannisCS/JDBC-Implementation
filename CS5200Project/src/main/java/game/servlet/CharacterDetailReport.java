@@ -58,9 +58,21 @@ public class CharacterDetailReport extends HttpServlet {
       List<CharacterWealth> wealthList = CharacterWealthDao.getCharacterWealthByCharacter(cxn, character);
       
       
+      //Get Gears
+      List<Gears> gearList = new ArrayList<Gears>();
+      // first Get EquippedItems
+      List<EquippedItems> equippedItems = EquippedItemsDao.getEquippedItemsOnlyByCharacters(cxn, character);
+      for(EquippedItems eachItem:equippedItems) {
+          Gears gear = GearsDao.getGearByItemID(cxn, eachItem.getItemID());
+          gearList.add(gear);
+
+      }
+      
       req.setAttribute("character", character);
       req.setAttribute("unlockedJobs", unlockedJobs);
       req.setAttribute("characterWealthList", wealthList);
+      req.setAttribute("gearList", gearList);
+
       
       messages.put(TITLE_MESSAGE, character.getFirstName() + " " + character.getLastName());
       

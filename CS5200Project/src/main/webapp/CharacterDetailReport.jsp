@@ -55,7 +55,38 @@
 	<p><strong>Job: </strong> ${character.getWeaponWeared().getWearableJob()}</p>
     <hr>
     
-    <h2>Equipments</h2>
+    <h2>Equipments Details</h2>
+    <p><strong>WeaponWeared: </strong> ${character.getWeaponWeared().getItemName()}</p>
+    <p><strong>Gear items currently equipped: </strong> </p>
+    
+    <c:choose>
+    	<c:when test="${empty gearList}">
+    		<p>No equipped gear for this character.</p>
+    	</c:when>
+    	<c:otherwise>
+    		<table>
+				<tr>
+					<th>Gear Name</th>
+					<th>maxStackSize</th>
+					<th>price</th>
+					<th>requiredLevel</th>
+				</tr>
+				<c:forEach items="${gearList}" var="gear">
+				<tr>
+				  <td>${gear.getItemName()}</td>
+				  <td>${gear.getMaxStackSize()}</td>
+                  <td>${gear.getPrice()}</td>
+                  <td>${gear.getRequiredLevel()}</td>
+				</tr>
+				</c:forEach>
+			</table>
+    	</c:otherwise>
+    </c:choose>
+    
+    <div class="button-container">
+    <input type="button" value="Update current equipped weapon" onclick="window.location.href='update'">
+	</div>
+   
     <hr>
     
     <h2>Jobs</h2>
