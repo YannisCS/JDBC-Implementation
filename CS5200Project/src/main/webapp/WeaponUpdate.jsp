@@ -45,22 +45,29 @@
 		}
 	</style>
   </head>
-  <body>
-    <h1>Change a weapon</h1>
-    <form action="weaponupdate" method="post">
-      <p> <strong>Current Weapon for character ${character.getFirstName()} ${character.getLastName()}</strong> </p>
-      <p> ${character.getWeaponWeared().getItemName()} </p>
-      <p>
-        <label for="weapon">Enter the weapon</label>
-        <input id="weapon" name="weapon" value="">
-      </p>
-      <p>
-        <input type="submit">
-      </p>
-    </form>
-    <br/><br/>
+<body>
+  <div class="button-container">
+    <input type="button" value="< Back to character detail page" onclick="window.location.href='characterdetailreport?charid=${character.getCharID()}'">
+  </div>
+  <h1>Change a weapon</h1>
+  <form action="weaponupdate" method="post">
+    <!-- Add a hidden field for charid -->
+    <input type="hidden" name="charid" value="${character.getCharID()}">
     <p>
-      <span id="responseMessage"><b>${messages.response}</b></span>
+      <strong>Current Weapon for character ${character.getFirstName()} ${character.getLastName()}</strong>: ${character.getWeaponWeared().getItemName()}
     </p>
-  </body>
+    <p>
+      <label for="weapon">Enter the new weapon</label>
+      <input id="weapon" name="weapon" value="">
+    </p>
+    <p>
+      <input type="submit">
+    </p>
+  </form>
+  <br/><br/>
+  <p>
+    <span id="responseMessage"><b>${messages.response}</b></span>
+  </p>
+</body>
+
 </html>

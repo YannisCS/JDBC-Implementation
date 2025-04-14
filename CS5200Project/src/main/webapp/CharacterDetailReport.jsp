@@ -112,7 +112,7 @@
     
     <div class="button-container">
     <input type="button" value="Update current equipped weapon" 
-           onclick="window.location.href='update?charid=${character.getCharID()}&weaponName=${character.getWeaponWeared().getItemName()}'">   
+           onclick="window.location.href='weaponupdate?charid=${character.getCharID()}&weaponName=${character.getWeaponWeared().getItemName()}'">   
 	</div>
    
     <hr>

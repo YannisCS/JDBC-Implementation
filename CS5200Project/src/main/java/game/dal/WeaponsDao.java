@@ -85,7 +85,7 @@ public class WeaponsDao {
 	
 	public static Weapons getWeaponByWeaponName(Connection cxn, String itemName) throws SQLException {
 		String selectWeapon = """
-				SELECT ItemID,
+				SELECT W.ItemID,
 					   level,
 					   maxStackSize,
 					   price,
@@ -97,7 +97,7 @@ public class WeaponsDao {
 				ON W.ItemID = E.ItemID
 				JOIN Items I
 				ON E.itemID = I.itemID
-				WHERE W.itemName = ?;
+				WHERE I.itemName = ?;
 				""";
 		
 		try (PreparedStatement selectStmt = cxn.prepareStatement(selectWeapon)) {

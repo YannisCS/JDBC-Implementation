@@ -48,8 +48,9 @@ public class WeaponUpdate extends HttpServlet {
     // Retrieve user and validate.
     String charid = req.getParameter("charid");
     if (charid == null || charid.trim().isEmpty()) {
-      messages.put(RESPONSE_MESSAGE, "Not a valid character.");
+      messages.put(RESPONSE_MESSAGE, charid + "Not a valid character.");
     } else {
+    	
       try (Connection cxn = ConnectionManager.getConnection()) {
         Characters chara =
           CharactersDao.getCharacterByCharID(cxn, Integer.parseInt(charid));
@@ -61,14 +62,15 @@ public class WeaponUpdate extends HttpServlet {
         } else {
           String weaponName = req.getParameter("weapon");
           if (weaponName == null || weaponName.trim().isEmpty()) {
-            messages.put(RESPONSE_MESSAGE, "Enter a weapon you want to equip.");
+            messages.put(RESPONSE_MESSAGE, " ");
           } else {
         	Weapons weapon = WeaponsDao.getWeaponByWeaponName(cxn, weaponName);
         	if (weapon == null) {
-        		messages.put(RESPONSE_MESSAGE, "You do not have this weapon in bag.");
+        		messages.put(RESPONSE_MESSAGE, "** You do not have " + weaponName + ".");
         	} else {
             CharactersDao.updateWeaponWeared(cxn, chara, weapon);
-            messages.put(RESPONSE_MESSAGE, "Successfully equiptted " + weapon);
+            messages.put(RESPONSE_MESSAGE, "Successfully equipt " + weapon.getItemName() 
+            + " for " + chara.getFirstName() + " " + chara.getLastName());
         	}
         }
         req.setAttribute("character", chara);
