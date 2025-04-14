@@ -55,8 +55,66 @@
 	<p><strong>Job: </strong> ${character.getWeaponWeared().getWearableJob()}</p>
     <hr>
     
-    <h2>Equipments</h2>
-    <p><a href="weaponupdate?charid=${character.getCharID()}">Change weapon</a></p>
+    <h2>Equipments Details</h2>
+    <p><strong>WeaponWeared: </strong> </p>
+    
+        <c:choose>
+    	<c:when test="${empty character.weaponWeared}">
+    		<p>No weapon equipped for this character.</p>
+    	</c:when>
+    	<c:otherwise>
+    		<table>
+				<tr>
+					<th>Weapon Name</th>
+					<th>maxStackSize</th>
+					<th>price</th>
+					<th>requiredLevel</th>
+					<th>wearableJob</th>
+					<th>damage</th>
+				</tr>
+				<tr>
+				  <td>${character.getWeaponWeared().getItemName()}</td>
+				  <td>${character.getWeaponWeared().getMaxStackSize()}</td>
+                  <td>${character.getWeaponWeared().getPrice()}</td>
+                  <td>${character.getWeaponWeared().getRequiredLevel()}</td>
+                  <td>${character.getWeaponWeared().getWearableJob()}</td>
+                  <td>${character.getWeaponWeared().getDamage()}</td>
+				</tr>
+			</table>
+    	</c:otherwise>
+    </c:choose>
+    
+    <p><strong>Gear items currently equipped: </strong> </p>
+    
+    <c:choose>
+    	<c:when test="${empty gearList}">
+    		<p>No equipped gear for this character.</p>
+    	</c:when>
+    	<c:otherwise>
+    		<table>
+				<tr>
+					<th>Gear Name</th>
+					<th>maxStackSize</th>
+					<th>price</th>
+					<th>requiredLevel</th>
+				</tr>
+				<c:forEach items="${gearList}" var="gear">
+				<tr>
+				  <td>${gear.getItemName()}</td>
+				  <td>${gear.getMaxStackSize()}</td>
+                  <td>${gear.getPrice()}</td>
+                  <td>${gear.getRequiredLevel()}</td>
+				</tr>
+				</c:forEach>
+			</table>
+    	</c:otherwise>
+    </c:choose>
+    
+    <div class="button-container">
+    <input type="button" value="Update current equipped weapon" 
+           onclick="window.location.href='update?charid=${character.getCharID()}&weaponName=${character.getWeaponWeared().getItemName()}'">   
+	</div>
+   
     <hr>
     
     <h2>Jobs</h2>
@@ -130,7 +188,30 @@
 </table>
     <hr>
     
-    <h2>Inventory</h2>
+    <h2>Inventory items</h2>
+    
+    <c:choose>
+    	<c:when test="${empty inventoryList}">
+    		<p>No equipped gear for this character.</p>
+    	</c:when>
+    	<c:otherwise>
+    		<table>
+				<tr>
+					<th>slotID</th>
+					<th>itemName</th>
+					<th>quantity</th>
+				</tr>
+				<c:forEach items="${inventoryList}" var="inventory" varStatus="status">
+				<tr>
+				  <td>${inventory.getSlotID()}</td>
+				  <td>${itemNameList.get(status.index)}</td>
+                  <td>${inventory.getQuantity()}</td>
+				</tr>
+				</c:forEach>
+			</table>
+    	</c:otherwise>
+    </c:choose>
+    
     
     <div class="button-container">
   		<input type="button" value="Back to Find Characters" onclick="window.location.href='findcharacter'">
