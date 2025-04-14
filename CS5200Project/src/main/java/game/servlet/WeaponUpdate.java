@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/update")
+@WebServlet("/weaponupdate")
 public class WeaponUpdate extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private static final String RESPONSE_MESSAGE = "response";
@@ -61,20 +61,23 @@ public class WeaponUpdate extends HttpServlet {
         } else {
           String weaponName = req.getParameter("weapon");
           if (weaponName == null || weaponName.trim().isEmpty()) {
-            messages.put(RESPONSE_MESSAGE, "You do not have this weapon in bag.");
+            messages.put(RESPONSE_MESSAGE, "Enter a weapon you want to equip.");
           } else {
         	Weapons weapon = WeaponsDao.getWeaponByWeaponName(cxn, weaponName);
+        	if (weapon == null) {
+        		messages.put(RESPONSE_MESSAGE, "You do not have this weapon in bag.");
+        	} else {
             CharactersDao.updateWeaponWeared(cxn, chara, weapon);
             messages.put(RESPONSE_MESSAGE, "Successfully equiptted " + weapon);
-          }
+        	}
         }
         req.setAttribute("character", chara);
-      } catch (SQLException e) {
+      }} catch (SQLException e) {
         e.printStackTrace();
         throw new IOException(e);
       }
     }
 
-    req.getRequestDispatcher("/Update.jsp").forward(req, resp);
+    req.getRequestDispatcher("/WeaponUpdate.jsp").forward(req, resp);
   }
 }

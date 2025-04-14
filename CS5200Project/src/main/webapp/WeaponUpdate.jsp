@@ -48,9 +48,8 @@
   <body>
     <h1>Change a weapon</h1>
     <form action="weaponupdate" method="post">
-      <p> <strong>Current Weapon for character</strong> </p>
-      <p> ${character.getFirstName()} ${character.getLastName()} </p>
-      <p> ${character.getWeaponWeared()} </p>
+      <p> <strong>Current Weapon for character ${character.getFirstName()} ${character.getLastName()}</strong> </p>
+      <p> ${character.getWeaponWeared().getItemName()} </p>
       <p>
         <label for="weapon">Enter the weapon</label>
         <input id="weapon" name="weapon" value="">

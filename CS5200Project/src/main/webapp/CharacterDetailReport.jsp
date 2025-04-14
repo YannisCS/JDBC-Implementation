@@ -56,6 +56,7 @@
     <hr>
     
     <h2>Equipments</h2>
+    <p><a href="weaponupdate?charid=${character.getCharID()}">Change weapon</a></p>
     <hr>
     
     <h2>Jobs</h2>
