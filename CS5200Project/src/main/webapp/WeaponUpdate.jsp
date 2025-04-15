@@ -49,7 +49,7 @@
   <div class="button-container">
     <input type="button" value="< Back to character detail page" onclick="window.location.href='characterdetailreport?charid=${character.getCharID()}'">
   </div>
-  <h1>Change a weapon</h1>
+  <h1>Change weapon</h1>
   <form action="weaponupdate" method="post">
     <!-- Hidden field for charid -->
     <input type="hidden" name="charid" value="${character.getCharID()}">
@@ -58,15 +58,22 @@
       ${character.getWeaponWeared().getItemName()}
     </p>
     <p>
-      <label for="weapon">Select a new weapon</label>
+      <label for="weapon">Select a weapon from bag</label>
       <select id="weapon" name="weapon">
-        <c:forEach var="weapon" items="${weaponsList}">
-          <option value="${weapon.getItemName()}">${weapon.getItemName()}</option>
-        </c:forEach>
+		  <c:choose>
+		    <c:when test="${empty weaponsList}">
+		      <option value="">-- No available weapons --</option>
+		    </c:when>
+		    <c:otherwise>
+		      <c:forEach var="weapon" items="${weaponsList}">
+		        <option value="${weapon.getItemName()}">${weapon.getItemName()}</option>
+		      </c:forEach>
+		    </c:otherwise>
+		  </c:choose>
       </select>
     </p>
     <p>
-      <input type="submit" value="Update Weapon">
+      <input type="submit" value="Equip">
     </p>
   </form>
   <br/><br/>
