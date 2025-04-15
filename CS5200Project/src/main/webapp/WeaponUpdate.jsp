@@ -51,17 +51,22 @@
   </div>
   <h1>Change a weapon</h1>
   <form action="weaponupdate" method="post">
-    <!-- Add a hidden field for charid -->
+    <!-- Hidden field for charid -->
     <input type="hidden" name="charid" value="${character.getCharID()}">
     <p>
-      <strong>Current Weapon for character ${character.getFirstName()} ${character.getLastName()}</strong>: ${character.getWeaponWeared().getItemName()}
+      <strong>Current Weapon for character ${character.getFirstName()} ${character.getLastName()}</strong>: 
+      ${character.getWeaponWeared().getItemName()}
     </p>
     <p>
-      <label for="weapon">Enter the new weapon</label>
-      <input id="weapon" name="weapon" value="">
+      <label for="weapon">Select a new weapon</label>
+      <select id="weapon" name="weapon">
+        <c:forEach var="weapon" items="${weaponsList}">
+          <option value="${weapon.getItemName()}">${weapon.getItemName()}</option>
+        </c:forEach>
+      </select>
     </p>
     <p>
-      <input type="submit">
+      <input type="submit" value="Update Weapon">
     </p>
   </form>
   <br/><br/>
@@ -69,5 +74,6 @@
     <span id="responseMessage"><b>${messages.response}</b></span>
   </p>
 </body>
+
 
 </html>

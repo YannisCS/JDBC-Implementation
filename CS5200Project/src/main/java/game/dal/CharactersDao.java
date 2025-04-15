@@ -237,6 +237,5 @@ public class CharactersDao{
 	  }
 	  
   }
-
   
 }

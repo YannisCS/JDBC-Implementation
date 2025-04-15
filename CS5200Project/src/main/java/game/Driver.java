@@ -254,6 +254,8 @@ public class Driver {
 			
 			//Insert Inventory
 			Inventory inven1 = InventoryDao.create(cxn, Char1, 1, armor, 1);
+			Inventory inven20 = InventoryDao.create(cxn, Char7, 1, mace, 1);
+			Inventory inven21 = InventoryDao.create(cxn, Char7, 3, bow, 1);
 			Inventory inven2 = InventoryDao.create(cxn, Char2, 2, boots, 1);
 			Inventory inven3 = InventoryDao.create(cxn, Char3, 3, spear, 1);
 			Inventory inven4 = InventoryDao.create(cxn, Char4, 4, gloves, 1);

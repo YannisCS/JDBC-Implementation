@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import game.model.*;
 
@@ -120,5 +122,51 @@ public class WeaponsDao {
 			}
 		}
 	}
+	
+	public static List<Weapons> getWeaponsByCharacter(
+			Connection cxn,
+			int charid
+	         ) throws SQLException{
+	     String selectWeaponsOfChar = """
+				SELECT W.ItemID,
+	     		  	   itemName,
+					   level,
+					   maxStackSize,
+					   price,
+					   requiredLevel,
+					   wearableJob,
+					   damage
+				FROM Inventory T
+				JOIN Weapons W
+				ON W.itemID = instance
+				JOIN Equipments E
+				ON W.ItemID = E.ItemID
+				JOIN Items I
+				ON E.itemID = I.itemID
+				WHERE T.charID = ?;
+	         """;
+
+	        List<Weapons> weapons = new ArrayList<>();
+
+	        try (PreparedStatement ps = cxn.prepareStatement(selectWeaponsOfChar)) {
+	            ps.setInt(1, charid); 
+
+	            try (ResultSet result = ps.executeQuery()) {
+	                while (result.next()) {
+	                	Weapons weapon = new Weapons(
+								result.getInt("itemID"),
+								result.getString("itemName"),
+								result.getInt("level"),
+								result.getInt("maxStackSize"),
+								result.getBigDecimal("price"),
+								result.getInt("requiredLevel"),
+								result.getString("wearableJob"),
+								result.getInt("damage"));
+	                	weapons.add(weapon);
+	                }
+	    	        return weapons;
+	            }
+	        }
+	    }
 
 }
