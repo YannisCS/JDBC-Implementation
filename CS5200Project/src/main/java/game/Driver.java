@@ -57,7 +57,7 @@ public class Driver {
 			Clans clan11 = ClansDao.create(cxn, "NightSneakers", Clans.Races.GOBLIN);
 			Clans clan12 = ClansDao.create(cxn, "StoneCrusher", Clans.Races.DWARF);
 			
-			//Insert Items: 15 items: 5 Weapons, 5 Gears, and 5 Consumables.
+			//Insert Items: Weapons, Gears, and Consumables.
 			/*Insert Weapons*/
 			Weapons sword = WeaponsDao.create(cxn,"Sword of Valor",10,1,BigDecimal.valueOf(1500.00),10,"Warrior",50);
 			Weapons axe = WeaponsDao.create(cxn,"Axe of Fury",12,1,BigDecimal.valueOf(1700.00),12,"Mage", 45);
@@ -228,6 +228,8 @@ public class Driver {
 			CharacterUnlockedJob CUJ15 = CharacterUnlockedJobDao.create(cxn, Char10, "Mage", 3, 250);
 			CharacterUnlockedJob CUJ16 = CharacterUnlockedJobDao.create(cxn, Char11, "Fencer", 6, 600);
 			CharacterUnlockedJob CUJ17 = CharacterUnlockedJobDao.create(cxn, Char12, "Cleric", 7, 700);
+			CharacterUnlockedJob CUJ18 = CharacterUnlockedJobDao.create(cxn, Char7, bow.getWearableJob(), 2, 200);
+			CharacterUnlockedJob CUJ19 = CharacterUnlockedJobDao.create(cxn, Char7, mace.getWearableJob(), 7, 400);
 			
 			//Insert CharacterWealth
 			CharacterWealth CW1 = CharacterWealthDao.create(cxn, Char1, gold, new BigDecimal(500.00), new BigDecimal(50.00));
@@ -280,23 +282,23 @@ public class Driver {
 
 			//Insert EquippedItems
 			// For Char1 (Warrior with sword)
-			EquippedItems equippedItem1 = EquippedItemsDao.create(cxn, Char1, "HEAD", helmet);  // Already exists
+			EquippedItems equippedItem1 = EquippedItemsDao.create(cxn, Char1, "HEAD", helmet);
 			EquippedItems equippedItem1b = EquippedItemsDao.create(cxn, Char1, "BODY", armor);
 			EquippedItems equippedItem1c = EquippedItemsDao.create(cxn, Char1, "HAND", gloves);
 			// For Char2 (Mage with axe)
-			EquippedItems equippedItem2 = EquippedItemsDao.create(cxn, Char2, "BODY", armor);  // Already exists
+			EquippedItems equippedItem2 = EquippedItemsDao.create(cxn, Char2, "BODY", armor);
 			EquippedItems equippedItem2b = EquippedItemsDao.create(cxn, Char2, "HEAD", helmet2);
 			EquippedItems equippedItem2c = EquippedItemsDao.create(cxn, Char2, "NECK", amulet);
 			// For Char3 (Archer with spear)
-			EquippedItems equippedItem3 = EquippedItemsDao.create(cxn, Char3, "FOOT", boots);  // Already exists
+			EquippedItems equippedItem3 = EquippedItemsDao.create(cxn, Char3, "FOOT", boots);
 			EquippedItems equippedItem3b = EquippedItemsDao.create(cxn, Char3, "HEAD", helmet);
 			EquippedItems equippedItem3c = EquippedItemsDao.create(cxn, Char3, "WAIST", belt);
 			// For Char4 (Thief with bow)
-			EquippedItems equippedItem4 = EquippedItemsDao.create(cxn, Char4, "HAND", gloves);  // Already exists
+			EquippedItems equippedItem4 = EquippedItemsDao.create(cxn, Char4, "HAND", gloves);
 			EquippedItems equippedItem4b = EquippedItemsDao.create(cxn, Char4, "FOOT", boots);
 			EquippedItems equippedItem4c = EquippedItemsDao.create(cxn, Char4, "FINGER", ring);
 			// For Char5 (Healer with dagger)
-			EquippedItems equippedItem5 = EquippedItemsDao.create(cxn, Char5, "LEG", legging);  // Already exists
+			EquippedItems equippedItem5 = EquippedItemsDao.create(cxn, Char5, "LEG", legging);
 			EquippedItems equippedItem5b = EquippedItemsDao.create(cxn, Char5, "NECK", amulet);
 			EquippedItems equippedItem5c = EquippedItemsDao.create(cxn, Char5, "WRIST", ring);
 			// For Char6 (Scholar with staff)
