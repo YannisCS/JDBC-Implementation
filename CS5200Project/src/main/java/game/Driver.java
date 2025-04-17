@@ -138,7 +138,7 @@ public class Driver {
 			Characters Char4 = CharactersDao.create(cxn, P4, "Derek", "Stone", clan4, bow);
 			Characters Char5 = CharactersDao.create(cxn, P5, "Eva", "Night", clan5, dagger);
 			Characters Char6 = CharactersDao.create(cxn, P6, "Marcus", "Storm", clan7, staff);
-			Characters Char7 = CharactersDao.create(cxn, P7, "Elara", "Moon", clan8, warhammer);
+			Characters Char7 = CharactersDao.create(cxn, P7, "Elara", "Moon", clan8, sword);
 			Characters Char8 = CharactersDao.create(cxn, P8, "Garrick", "Stone", clan9, katana);
 			Characters Char9 = CharactersDao.create(cxn, P9, "Lyra", "Flame", clan10, crossbow);
 			Characters Char10 = CharactersDao.create(cxn, P10, "Thorne", "Night", clan11, scythe);

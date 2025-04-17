@@ -56,7 +56,14 @@ public class WeaponUpdate extends HttpServlet {
                         if (weapon == null) {
                             messages.put(RESPONSE_MESSAGE, "** You do not have " + weaponName + ".");
                         } else {
+                        	Weapons weared = chara.getWeaponWeared();
+                            Inventory inven = InventoryDao.getInventoryByCharactersAndInstance(cxn, chara, weapon.getItemID());
+                            int slot = inven.getSlotID();
+                            
+                            InventoryDao.delete(cxn, inven);
                             CharactersDao.updateWeaponWeared(cxn, chara, weapon);
+                            InventoryDao.create(cxn, chara, slot, weared, 1);
+                            
                             messages.put(RESPONSE_MESSAGE, "Successfully equipped " + weapon.getItemName() +
                                     " for " + chara.getFirstName() + " " + chara.getLastName());
                         }

@@ -69,6 +69,38 @@ public class InventoryDao {
 	    }
 	}
 	
+	public static Inventory getInventoryByCharactersAndInstance( Connection cxn,
+			Characters character,
+	        int instance
+	         ) throws SQLException{
+		
+     String query = """
+             SELECT charID, slotID, instance, quantity
+             FROM Inventory
+             WHERE charID = ? AND instance = ?;
+         """;
+
+	    try (PreparedStatement selectStmt = cxn.prepareStatement(query)) {
+	    	
+	      selectStmt.setInt(1, character.getCharID()); 
+	      selectStmt.setInt(2, instance);  
+
+	      try (ResultSet results = selectStmt.executeQuery()) {
+	        if (results.next()) {
+	          return new Inventory(
+	            results.getInt("charID"),
+	            results.getInt("slotID"),
+	            results.getInt("instance"),
+	            results.getInt("quantity")
+
+	          );
+	        } else {
+	          return null;
+	        }
+	      }
+	    }
+	}
+	
 	
 	public static List<Inventory> getInventoryOnlyByCharacters( Connection cxn,
 			Characters character
